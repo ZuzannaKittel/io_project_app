@@ -92,10 +92,10 @@ class _MenuPage extends StatelessWidget {
                           svgSrc: "assets/icons/Meditation.svg",
                           press: () {
                             //Navigator.push(
-                             // context,
-                             //MaterialPageRoute(builder: (context) {
-                                //return DetailsScreen();
-                              //}),
+                            // context,
+                            //MaterialPageRoute(builder: (context) {
+                            //return DetailsScreen();
+                            //}),
                             //);
                           },
                         ),
