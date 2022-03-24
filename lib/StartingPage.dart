@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'registration.dart';
 import 'package:io_project/HomePage.dart';
 import 'package:io_project/constants.dart';
 
@@ -10,27 +10,11 @@ class startingPage extends StatefulWidget {
   State<startingPage> createState() => _startingPageState();
 }
 
+// ignore: camel_case_types
 class _startingPageState extends State<startingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-            child: Text(
-          "FitApp",
-          style: TextStyle(
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontFamily: "Cairo",
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
-              shadows: [
-                Shadow(
-                    color: Colors.black54, offset: Offset(1, 2), blurRadius: 4)
-              ]),
-        )),
-        elevation: 0,
-        backgroundColor: Color(0xFFF8F8F8),
-      ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -111,7 +95,7 @@ class _startingPageState extends State<startingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => const RegitrationPage(),
                     ),
                   );
                 },
