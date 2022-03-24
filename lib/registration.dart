@@ -95,7 +95,8 @@ class _RegitrationPageState extends State<RegitrationPage> {
                     child: const Text(
                       "Create account",
                       style: TextStyle(
-                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFF8F8F8),
                         fontSize: 18.0,
                       ),
                     ),
