@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:io_project/profile_page.dart';
-import 'package:io_project/HomePage.dart';
+import 'package:io_project/ProfilePage.dart';
+import 'package:io_project/LoginPage.dart';
 import 'package:io_project/constants.dart';
-import 'ProfileScreen.dart';
+import 'LoginFailed.dart';
 
 class RegitrationPage extends StatefulWidget {
   const RegitrationPage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:io_project/constants.dart';
-import 'package:io_project/menu_page.dart';
-import 'package:io_project/profile_page.dart';
+import 'package:io_project/WorkoutPage.dart';
+import 'package:io_project/ProfilePage.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -20,23 +20,27 @@ class BottomNavBar extends StatelessWidget {
         children: <Widget>[
           BottomNavItem(
             title: "Profile",
-            svgScr: "assets/icons/calendar.svg", press: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            );
-          },
+            svgScr: "assets/icons/calendar.svg",
+            press: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
           ),
           BottomNavItem(
             title: "Workout",
             svgScr: "assets/icons/gym.svg",
-            isActive: true, press: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => MenuPage()),
-            );  },
+            isActive: true,
+            press: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MenuPage()),
+              );
+            },
           ),
           BottomNavItem(
             title: "Settings",
-            svgScr: "assets/icons/Settings.svg", press: () {  },
+            svgScr: "assets/icons/Settings.svg",
+            press: () {},
           ),
         ],
       ),

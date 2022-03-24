@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'registration.dart';
-import 'package:io_project/HomePage.dart';
+import 'Registration.dart';
+import 'package:io_project/LoginPage.dart';
 import 'package:io_project/constants.dart';
 
 class startingPage extends StatefulWidget {
