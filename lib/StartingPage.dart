@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:io_project/HomePage.dart';
+import 'package:io_project/constants.dart';
 
 class startingPage extends StatefulWidget {
   const startingPage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class _startingPageState extends State<startingPage> {
           "FitApp",
           style: TextStyle(
               color: Color.fromARGB(255, 255, 255, 255),
+              fontFamily: "Cairo",
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
               shadows: [
@@ -27,7 +29,7 @@ class _startingPageState extends State<startingPage> {
               ]),
         )),
         elevation: 0,
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color(0xFFF8F8F8),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -49,8 +51,8 @@ class _startingPageState extends State<startingPage> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.lightBlue,
-                Colors.blue,
+                mBackgroundColor,
+                Color(0xFF817DC0),
               ],
             ),
           ),
@@ -77,9 +79,9 @@ class _startingPageState extends State<startingPage> {
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
                     ),
-                    boxShadow: [
+                    /*boxShadow: [
                       BoxShadow(
-                        color: Color(0xff42a5f5),
+                        color: Color(0xFF817DC0),
                         offset: Offset(
                           2,
                           4,
@@ -88,16 +90,16 @@ class _startingPageState extends State<startingPage> {
                         spreadRadius: 2,
                       ),
                     ],
+                    */
                     color: Colors.white,
                   ),
                   child: const Text(
                     'Login',
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Color(
-                        0xFF0389F6,
-                      ),
-                    ),
+                        fontFamily: "Cairo",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF817DC0)),
                   ),
                 ),
               ),
@@ -133,6 +135,7 @@ class _startingPageState extends State<startingPage> {
                   child: const Text(
                     'Register now',
                     style: TextStyle(
+                      fontFamily: "Cairo",
                       fontSize: 20,
                       color: Colors.white,
                     ),

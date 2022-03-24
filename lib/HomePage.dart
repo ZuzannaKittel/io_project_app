@@ -84,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
               )),
           const Text("Let's start the workout !!!",
               style: TextStyle(
+                fontFamily: 'Cairo',
                 color: Colors.black,
                 fontSize: 42.0,
                 fontWeight: FontWeight.bold,
