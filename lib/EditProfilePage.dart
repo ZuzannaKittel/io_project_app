@@ -19,12 +19,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   User user = UserPreferences.myUser;
 
   @override
-  Widget build(BuildContext context) =>  Scaffold(
-    appBar: buildAppBar(context),
-    bottomNavigationBar: BottomNavBar(),
+  Widget build(BuildContext context) => Scaffold(
+        appBar: buildAppBar(context),
+        bottomNavigationBar: const BottomNavBar(),
         body: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 32),
-          physics: BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          physics: const BouncingScrollPhysics(),
           children: [
             ProfileWidget(
               imagePath: user.imagePath,
