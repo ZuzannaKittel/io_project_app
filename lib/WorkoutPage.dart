@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/main_workout.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
-
+import 'package:io_project/Workout_Pages/main_workout.dart';
 //void main() => runApp(MyApp());
 
 class MenuPage extends StatelessWidget {
@@ -35,7 +36,7 @@ class _MenuPage extends StatelessWidget {
           Container(
             // Here the height of the container is 45% of our total height
             height: size.height * .45,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFF5CEB8),
               image: DecorationImage(
                 alignment: Alignment.centerLeft,
@@ -55,7 +56,7 @@ class _MenuPage extends StatelessWidget {
                       alignment: Alignment.center,
                       height: 52,
                       width: 52,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xFFF2BEA1),
                         shape: BoxShape.circle,
                       ),
@@ -78,13 +79,18 @@ class _MenuPage extends StatelessWidget {
                       mainAxisSpacing: 20,
                       children: <Widget>[
                         CategoryCard(
-                          title: "Today",
-                          svgSrc: "assets/icons/Hamburger.svg",
-                          press: () {},
+                          title: "Workout",
+                          svgSrc: "assets/icons/Excrecises.svg",
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => Home_workout()),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Week",
-                          svgSrc: "assets/icons/Excrecises.svg",
+                          svgSrc: "assets/icons/Hamburger.svg",
                           press: () {},
                         ),
                         CategoryCard(
