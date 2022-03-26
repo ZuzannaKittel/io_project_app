@@ -52,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontFamily: "Cairo",
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 156, 81, 218)),
+                      color: Colors.black),
                 ),
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(

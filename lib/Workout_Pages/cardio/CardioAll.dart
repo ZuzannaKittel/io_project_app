@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/Workout_Pages/build_ex.dart';
-import 'package:io_project/widget/excercise_button_widget.dart';
+import 'package:io_project/widget/exercise_button_widget.dart';
 
 class CardioAll extends StatefulWidget {
   const CardioAll({Key? key}) : super(key: key);

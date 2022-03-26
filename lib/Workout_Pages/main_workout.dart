@@ -69,7 +69,7 @@ class _WorkoutPage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "NO PAIN NO GAIN !",
+                    "NO PAIN\nNO GAIN!",
                     style: Theme.of(context)
                         .textTheme
                         .displayMedium
