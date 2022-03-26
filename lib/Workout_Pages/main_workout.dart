@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
+import 'cardio/CardioAll.dart';
 import 'russian_twist.dart';
 
 class Home_workout extends StatefulWidget {
@@ -97,7 +98,14 @@ class _WorkoutPage extends StatelessWidget {
                         CategoryCard(
                           title: "CARDIO",
                           svgSrc: "assets/icons/Hamburger.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CardioAll(),
+                              ),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "HIIT",
