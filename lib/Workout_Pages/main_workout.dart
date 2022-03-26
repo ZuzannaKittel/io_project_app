@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
+import 'russian_twist.dart';
 
 class Home_workout extends StatefulWidget {
   const Home_workout({Key? key}) : super(key: key);
@@ -84,7 +85,14 @@ class _WorkoutPage extends StatelessWidget {
                         CategoryCard(
                           title: "STRENGTH",
                           svgSrc: "assets/icons/Excrecises.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RusianTwist(),
+                              ),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "CARDIO",

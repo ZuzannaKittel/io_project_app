@@ -20,7 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: buildAppBar(context),
+        appBar: buildAppBar(context, "Settings"),
         bottomNavigationBar: const BottomNavBar(),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 32),
