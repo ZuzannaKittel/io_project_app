@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
-import 'package:path/path.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
-import 'package:io_project/widget/button_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/widget/textfield_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
+
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }

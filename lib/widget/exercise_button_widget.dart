@@ -13,7 +13,8 @@ class ExButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           onPrimary: Colors.white,
           primary: Color(0xFFF5CEB8),
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),

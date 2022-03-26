@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:io_project/Workout_Pages/main_workout.dart';
+import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
-import 'package:io_project/Workout_Pages/main_workout.dart';
+import 'package:io_project/Workout_Pages/MainWorkout.dart';
 //void main() => runApp(MyApp());
 
 class MenuPage extends StatelessWidget {

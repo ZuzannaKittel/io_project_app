@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/other/OtherAll.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
 import 'cardio/CardioAll.dart';
 import 'russian_twist.dart';
+import 'other/OtherAll.dart';
 
 class Home_workout extends StatefulWidget {
   const Home_workout({Key? key}) : super(key: key);
@@ -122,7 +124,14 @@ class _WorkoutPage extends StatelessWidget {
                         CategoryCard(
                           title: "OTHER",
                           svgSrc: "assets/icons/yoga.svg",
-                          press: () {},
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const OtherAll(),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
