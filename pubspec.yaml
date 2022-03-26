@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.0.3
   flutter_widgets: ^0.1.12
+  timer_button: ^2.0.0
 
   firebase_core: ^1.13.1
   firebase_auth: ^3.3.11

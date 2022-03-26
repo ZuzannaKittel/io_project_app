@@ -1,24 +1,45 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
-import 'package:io_project/widget/category_card.dart';
+import 'package:io_project/widget/button_widget.dart';
 import 'package:io_project/constants.dart';
 
-class JumpingJacks extends StatelessWidget {
+class JumpingJacks extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Menu Page',
-      theme: ThemeData(
-        fontFamily: "Cairo",
-        scaffoldBackgroundColor: kBackgroundColor,
-        textTheme: Theme.of(context).textTheme.apply(displayColor: kTextColor),
-      ),
-      home: _JumpingJacks(),
-    );
-  }
+  _JumpingJacksState createState() => _JumpingJacksState();
 }
+
+class _JumpingJacksState extends State<JumpingJacks> {
+  static const maxSeconds = 60;
+  int seconds = maxSeconds;
+  Timer? timer;
+
+  void resetTimer() => setState(() => seconds = maxSeconds);
+
+  void StartTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+
+    timer = Timer.periodic(Duration(seconds: 1), (_) {
+      if (seconds > 0) {
+        setState(() => seconds--);
+      } else {
+        StopTimer(reset: false);
+      }
+    });
+  }
+
+  void StopTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+    timer?.cancel();
+
+    setState(() => timer?.cancel());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +87,7 @@ class JumpingJacks extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.w900),
                   ),
                   //SearchBar(),
-                  Expanded(
+                  /*Expanded(
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: .55,
@@ -80,6 +101,18 @@ class JumpingJacks extends StatelessWidget {
                     child: Text("obrazek byle jaki na razie",
                         style:
                             const TextStyle(fontSize: 24, fontFamily: "Cairo")),
+                  ),
+                  */
+                  const SizedBox(height: 40),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BuildTimer(),
+                        const SizedBox(height: 80),
+                        BuildButtons(),
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -88,5 +121,64 @@ class JumpingJacks extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget BuildButtons() {
+    final isRunning = timer == null ? false : timer!.isActive;
+    final isCompleted = seconds == maxSeconds || seconds == 0;
+
+    return isRunning || !isCompleted
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimerButtonWidget(
+                text: isRunning ? "Pause" : "Resume",
+                onClicked: () {
+                  if (isRunning) {
+                    StopTimer(reset: false);
+                  } else {
+                    StartTimer(reset: false);
+                  }
+                },
+              ),
+              TimerButtonWidget(
+                text: "Cancel",
+                onClicked: () {
+                  StopTimer();
+                },
+              ),
+            ],
+          )
+        : TimerButtonWidget(
+            text: "Start",
+            onClicked: () {
+              StartTimer();
+            },
+          );
+  }
+
+  Widget BuildTimer() => SizedBox(
+        width: 200,
+        height: 200,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            CircularProgressIndicator(
+              value: seconds / maxSeconds,
+              strokeWidth: 8,
+              valueColor: AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
+            ),
+            Center(child: BuildTime()),
+          ],
+        ),
+      );
+
+  Widget BuildTime() {
+    return Text('$seconds',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 80,
+        ));
   }
 }

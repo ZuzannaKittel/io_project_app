@@ -12,13 +12,37 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
-    style: ElevatedButton.styleFrom(
-      shape: StadiumBorder(),
-      onPrimary: Colors.white,
-      primary: Color(0xFFC7B8F5),
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-    ),
-    child: Text(text),
-    onPressed: onClicked,
-  );
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+          onPrimary: Colors.white,
+          primary: Color(0xFFC7B8F5),
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(text),
+        onPressed: onClicked,
+      );
+}
+
+class TimerButtonWidget extends StatelessWidget {
+  final String text;
+  final VoidCallback onClicked;
+
+  const TimerButtonWidget({
+    Key? key,
+    required this.text,
+    required this.onClicked,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+          onPrimary: Colors.white,
+          primary: Color(0xFF817DC0),
+          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+        ),
+        child: Text(text,
+            style: const TextStyle(fontSize: 18, fontFamily: "Cairo")),
+        onPressed: onClicked,
+      );
 }
