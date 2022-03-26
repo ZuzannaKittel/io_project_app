@@ -27,7 +27,7 @@ class _CardioAllState extends State<OtherAll> {
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => DetailsScreen()),
+                            builder: (context) => MeditationPage()),
                       );
                     },
                   )),

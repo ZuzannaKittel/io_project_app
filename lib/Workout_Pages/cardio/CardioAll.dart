@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/Workout_Pages/build_ex.dart';
 import 'package:io_project/widget/exercise_button_widget.dart';
+import 'TrainingA.dart';
 
 class CardioAll extends StatefulWidget {
   const CardioAll({Key? key}) : super(key: key);
@@ -33,8 +34,13 @@ class _CardioAllState extends State<CardioAll> {
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
-                    onClicked: () {},
+                    text: 'Trening A (obczaj to !)',
+                    onClicked: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => TrainingAPage()),
+                      );
+                    },
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-/*import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';*/
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
-/*import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/pajacykiXD.dart';
 
-FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;*/
-
-class MeditationPage extends StatelessWidget {
-  const MeditationPage({Key? key}) : super(key: key);
+class TrainingAPage extends StatelessWidget {
+  const TrainingAPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +20,7 @@ class MeditationPage extends StatelessWidget {
             decoration: const BoxDecoration(
               color: kBlueLightColor,
               image: DecorationImage(
-                image: AssetImage("assets/images/meditation_bg.png"),
+                image: AssetImage("assets/images/trainingA.png"),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -40,7 +36,7 @@ class MeditationPage extends StatelessWidget {
                       height: size.height * 0.05,
                     ),
                     Text(
-                      "Meditation",
+                      "Training",
                       style: Theme.of(context)
                           .textTheme
                           .displayMedium
@@ -48,14 +44,14 @@ class MeditationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     const Text(
-                      "3-10 MIN Course",
+                      "20 MIN Course",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     SizedBox(
                       width: size.width * .6, // it just take 60% of total width
                       child: const Text(
-                        "Live happier and healthier by learning the fundamentals of meditation and mindfulness",
+                        "A cardio workout increases blood flow and acts as a filter system. It brings nutrients like oxygen, protein, and iron to the muscles that you've been training and helps them recover faster.",
                       ),
                     ),
                     SizedBox(
@@ -66,37 +62,39 @@ class MeditationPage extends StatelessWidget {
                       spacing: 20,
                       runSpacing: 20,
                       children: <Widget>[
-                        SeassionCard(
-                          seassionNum: 1,
+                        Exercise(
+                          exerciseNum: 1,
                           isDone: true,
                           press: () {
-                            /*launch(
-                                'https://www.youtube.com/watch?v=t3joHNOOyYY');*/
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => JumpingJacks()),
+                            );
                           },
                         ),
-                        SeassionCard(
-                          seassionNum: 2,
+                        Exercise(
+                          exerciseNum: 2,
                           press: () {},
                         ),
-                        SeassionCard(
-                          seassionNum: 3,
+                        Exercise(
+                          exerciseNum: 3,
                           press: () {},
                         ),
-                        SeassionCard(
-                          seassionNum: 4,
+                        Exercise(
+                          exerciseNum: 4,
                           press: () {},
                         ),
-                        SeassionCard(
-                          seassionNum: 5,
+                        Exercise(
+                          exerciseNum: 5,
                           press: () {},
                         ),
-                        SeassionCard(
-                          seassionNum: 6,
+                        Exercise(
+                          exerciseNum: 6,
                           press: () {},
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    /*const SizedBox(height: 20),
                     Text(
                       "Meditation",
                       style: Theme.of(context)
@@ -145,7 +143,7 @@ class MeditationPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
+                    )*/
                   ],
                 ),
               ),
@@ -157,13 +155,13 @@ class MeditationPage extends StatelessWidget {
   }
 }
 
-class SeassionCard extends StatelessWidget {
-  final int seassionNum;
+class Exercise extends StatelessWidget {
+  final int exerciseNum;
   final bool isDone;
   final VoidCallback press;
-  const SeassionCard({
+  const Exercise({
     Key? key,
-    required this.seassionNum,
+    required this.exerciseNum,
     this.isDone = false,
     required this.press,
   }) : super(key: key);
@@ -194,7 +192,7 @@ class SeassionCard extends StatelessWidget {
             child: InkWell(
               onTap: press,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -212,7 +210,7 @@ class SeassionCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Session $seassionNum",
+                      "Exercise $exerciseNum",
                       style: Theme.of(context).textTheme.headline6,
                     )
                   ],

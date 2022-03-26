@@ -14,6 +14,6 @@ AppBar buildAppBar(BuildContext context, String content) {
         onPressed: () {},
       ),
     ],*/
-    title: Text(content),
+    title: Text(content, style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
   );
 }

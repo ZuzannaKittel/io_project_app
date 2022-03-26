@@ -20,7 +20,8 @@ class ExButtonWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
           fixedSize: const Size(420, 80),
         ),
-        child: Text(text, style: TextStyle(fontSize: 24)),
+        child: Text(text,
+            style: const TextStyle(fontSize: 24, fontFamily: "Cairo")),
         onPressed: onClicked,
       );
 }
