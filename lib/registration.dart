@@ -3,17 +3,22 @@ import 'package:io_project/ProfilePage.dart';
 import 'package:io_project/LoginPage.dart';
 import 'package:io_project/constants.dart';
 import 'LoginFailed.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class RegitrationPage extends StatefulWidget {
-  const RegitrationPage({Key? key}) : super(key: key);
+class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({Key? key}) : super(key: key);
 
   @override
-  State<RegitrationPage> createState() => _RegitrationPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 //TODO: Podpiecie do bazy danych
 // ignore: camel_case_types
-class _RegitrationPageState extends State<RegitrationPage> {
+class _RegistrationPageState extends State<RegistrationPage> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+  bool showProgress = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +51,12 @@ class _RegitrationPageState extends State<RegitrationPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const TextField(
+              TextField(
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                onChanged: (value) {
+                  email = value;
+                },
+                decoration: const InputDecoration(
                   hintText: "Enter your email",
                   prefixIcon: Icon(Icons.mail, color: Colors.black),
                 ),
@@ -56,22 +64,18 @@ class _RegitrationPageState extends State<RegitrationPage> {
               const SizedBox(
                 height: 20,
               ),
-              const TextField(
+              TextField(
                 obscureText: true,
-                decoration: InputDecoration(
+                onChanged: (value) {
+                  password = value;
+                },
+                decoration: const InputDecoration(
                   hintText: "Enter your password",
                   prefixIcon: Icon(Icons.security, color: Colors.black),
                 ),
               ),
               const SizedBox(
                 height: 20,
-              ),
-              const TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "Enter your username",
-                  prefixIcon: Icon(Icons.account_box, color: Colors.black),
-                ),
               ),
               const SizedBox(
                 height: 40,
@@ -84,13 +88,24 @@ class _RegitrationPageState extends State<RegitrationPage> {
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.circular(12.0)),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProfilePage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      setState(() {
+                        showProgress = true;
+                      });
+                      try {
+                        final newuser =
+                            await _auth.createUserWithEmailAndPassword(
+                                email: email, password: password);
+                        if (newuser != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                          setState(() {
+                            showProgress = false;
+                          });
+                        }
+                      } catch (e) {}
                     },
                     child: const Text(
                       "Create account",

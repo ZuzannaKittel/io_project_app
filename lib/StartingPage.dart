@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Registration.dart';
+import 'registration.dart';
 import 'package:io_project/LoginPage.dart';
 import 'package:io_project/constants.dart';
 
@@ -95,7 +95,7 @@ class _startingPageState extends State<startingPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegitrationPage(),
+                      builder: (context) => const RegistrationPage(),
                     ),
                   );
                 },
