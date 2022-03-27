@@ -4,6 +4,8 @@ import 'package:io_project/LoginPage.dart';
 import 'package:io_project/constants.dart';
 import 'LoginFailed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:io_project/ProfilePage.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -12,12 +14,12 @@ class RegistrationPage extends StatefulWidget {
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
-//TODO: Podpiecie do bazy danych
 // ignore: camel_case_types
 class _RegistrationPageState extends State<RegistrationPage> {
   final _auth = FirebaseAuth.instance;
   late String email;
   late String password;
+  late String username;
   bool showProgress = false;
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                onChanged: (value) {
+                  username = value;
+                },
+                decoration: const InputDecoration(
+                  hintText: "Enter your username",
+                  prefixIcon: Icon(Icons.person_add_alt, color: Colors.black),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (value) {
                   email = value;
@@ -77,9 +91,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 20,
               ),
-              const SizedBox(
-                height: 40,
-              ),
               SizedBox(
                   width: double.infinity,
                   child: RawMaterialButton(
@@ -93,13 +104,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         showProgress = true;
                       });
                       try {
-                        final newuser =
+                        UserCredential newuser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
                         if (newuser != null) {
+                          User? user = newuser.user;
+                          await FirebaseFirestore.instance
+                              .collection('usernames')
+                              .doc(user?.uid)
+                              .set({'username': username});
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()),
                           );
                           setState(() {
                             showProgress = false;

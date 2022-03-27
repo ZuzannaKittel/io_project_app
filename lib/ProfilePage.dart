@@ -19,7 +19,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    const user = UserPreferences.myUser;
+    Users user = UserPreferences.myUser;
 
     return Scaffold(
       appBar: buildAppBar(context, "Profile"),
@@ -48,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(Users user) => Column(
         children: [
           Text(
             user.name,
@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       );
 
-  Widget buildAbout(User user) => Container(
+  Widget buildAbout(Users user) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
