@@ -5,7 +5,7 @@ class Users {
   final String about;
   final bool isDarkMode;
 
-  const Users({
+  Users({
     required this.imagePath,
     required this.name,
     required this.email,

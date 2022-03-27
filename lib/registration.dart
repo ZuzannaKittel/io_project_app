@@ -113,6 +113,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               .collection('usernames')
                               .doc(user?.uid)
                               .set({'username': username});
+                          user?.updateDisplayName(username);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
