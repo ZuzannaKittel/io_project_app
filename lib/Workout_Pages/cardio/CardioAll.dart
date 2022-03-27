@@ -34,7 +34,7 @@ class _CardioAllState extends State<CardioAll> {
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Trening A (obczaj to !)',
+                    text: 'Trening A',
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(

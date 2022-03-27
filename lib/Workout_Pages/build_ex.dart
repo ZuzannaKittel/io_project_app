@@ -14,7 +14,7 @@ class _BuildExeState extends State<BuildExe> {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.7,
         width: MediaQuery.of(context).size.width * 0.95,
-        color: Colors.amber,
+        color: Colors.white,
       ),
     );
   }

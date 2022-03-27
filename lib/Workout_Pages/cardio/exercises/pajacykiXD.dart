@@ -46,7 +46,12 @@ class _JumpingJacksState extends State<JumpingJacks> {
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+      appBar: AppBar(
+        title: Text("Jumping Jacks"),
+        leading: BackButton(),
+        backgroundColor: mBackgroundColor,
+        elevation: 0,
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -79,13 +84,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                       child: SvgPicture.asset("assets/icons/menu.svg"),
                     ),
                   ),
-                  Text(
-                    "Jumping Jacks",
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium
-                        ?.copyWith(fontWeight: FontWeight.w900),
-                  ),
+                  Image.asset("assets/images/JumpingJacks.gif"),
                   //SearchBar(),
                   /*Expanded(
                     child: GridView.count(
@@ -103,13 +102,13 @@ class _JumpingJacksState extends State<JumpingJacks> {
                             const TextStyle(fontSize: 24, fontFamily: "Cairo")),
                   ),
                   */
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 100),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         BuildTimer(),
-                        const SizedBox(height: 80),
+                        const SizedBox(height: 10),
                         BuildButtons(),
                       ],
                     ),
@@ -158,8 +157,8 @@ class _JumpingJacksState extends State<JumpingJacks> {
   }
 
   Widget BuildTimer() => SizedBox(
-        width: 200,
-        height: 200,
+        width: 100,
+        height: 100,
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -175,10 +174,10 @@ class _JumpingJacksState extends State<JumpingJacks> {
 
   Widget BuildTime() {
     return Text('$seconds',
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
-          fontSize: 80,
+          fontSize: 40,
         ));
   }
 }
