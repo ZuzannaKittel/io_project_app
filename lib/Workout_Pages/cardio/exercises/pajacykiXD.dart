@@ -87,7 +87,15 @@ class _JumpingJacksState extends State<JumpingJacks> {
                         color: Color(0xFFF2BEA1),
                         shape: BoxShape.circle,
                       ),
-                      child: SvgPicture.asset("assets/icons/menu.svg"),
+                      //SvgPicture.asset("assets/icons/menu.svg")
+                      child: GestureDetector(
+                        onTap: () {
+                          showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) => ExDescription());
+                        },
+                        child: SvgPicture.asset("assets/icons/menu.svg"),
+                      ),
                     ),
                   ),
                   Image.asset("assets/images/JumpingJacks.gif"),
