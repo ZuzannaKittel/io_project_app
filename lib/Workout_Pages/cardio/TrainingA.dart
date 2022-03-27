@@ -4,6 +4,7 @@ import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/pajacykiXD.dart';
+import 'package:io_project/widget/appbar_widget.dart';
 
 class TrainingAPage extends StatelessWidget {
   const TrainingAPage({Key? key}) : super(key: key);
@@ -12,11 +13,16 @@ class TrainingAPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+      appBar: AppBar(
+        title: Text("Trening A"),
+        leading: BackButton(),
+        backgroundColor: kBlueLightColor,
+        elevation: 0,
+      ),
       body: Stack(
         children: <Widget>[
           Container(
-            height: size.height * .45,
+            height: size.height * .35,
             decoration: const BoxDecoration(
               color: kBlueLightColor,
               image: DecorationImage(
@@ -42,12 +48,12 @@ class TrainingAPage extends StatelessWidget {
                           .displayMedium
                           ?.copyWith(fontWeight: FontWeight.w900),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     const Text(
                       "20 MIN Course",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: size.width * .6, // it just take 60% of total width
                       child: const Text(
@@ -55,14 +61,15 @@ class TrainingAPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: size.width * .5, // it just take the 50% width
-                      child: SearchBar(),
+                      width: size.width * .6,
+                      height: 50, // it just take the 50% width
                     ),
                     Wrap(
                       spacing: 20,
                       runSpacing: 20,
                       children: <Widget>[
                         Exercise(
+                          exerciseName: "Pajacyki",
                           exerciseNum: 1,
                           isDone: true,
                           press: () {
@@ -73,22 +80,27 @@ class TrainingAPage extends StatelessWidget {
                           },
                         ),
                         Exercise(
+                          exerciseName: "Brak",
                           exerciseNum: 2,
                           press: () {},
                         ),
                         Exercise(
+                          exerciseName: "Brak",
                           exerciseNum: 3,
                           press: () {},
                         ),
                         Exercise(
+                          exerciseName: "Brak",
                           exerciseNum: 4,
                           press: () {},
                         ),
                         Exercise(
+                          exerciseName: "Brak",
                           exerciseNum: 5,
                           press: () {},
                         ),
                         Exercise(
+                          exerciseName: "Brak",
                           exerciseNum: 6,
                           press: () {},
                         ),
@@ -156,12 +168,14 @@ class TrainingAPage extends StatelessWidget {
 }
 
 class Exercise extends StatelessWidget {
+  final String exerciseName;
   final int exerciseNum;
   final bool isDone;
   final VoidCallback press;
   const Exercise({
     Key? key,
     required this.exerciseNum,
+    required this.exerciseName,
     this.isDone = false,
     required this.press,
   }) : super(key: key);
@@ -210,7 +224,7 @@ class Exercise extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      "Exercise $exerciseNum",
+                      exerciseName,
                       style: Theme.of(context).textTheme.headline6,
                     )
                   ],
