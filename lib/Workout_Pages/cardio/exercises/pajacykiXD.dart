@@ -89,8 +89,8 @@ class _JumpingJacksState extends State<JumpingJacks> {
                       child: SvgPicture.asset("assets/icons/menu.svg"),
                     ),
                   ),
-                  // Image.asset("assets/images/JumpingJacks.gif"),
-                  Center(
+                  Image.asset("assets/images/JumpingJacks.gif"),
+                  /*Center(
                     //alignment: MainAxisAlignment.center,
                     child:
                         /*Text('Jumping',
@@ -108,7 +108,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                           context: context,
                           builder: (context) => ExDescription());
                     }),
-                  ),
+                  ),*/
                   //SearchBar(),
                   /*Expanded(
                     child: GridView.count(
