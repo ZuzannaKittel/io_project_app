@@ -1,10 +1,16 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/button_widget.dart';
 import 'package:io_project/constants.dart';
+
+import '../../../widget/appbar_widget.dart';
+import 'package:io_project/widget/exercise_card.dart';
+import 'ExDescription.dart';
 
 class JumpingJacks extends StatefulWidget {
   @override
@@ -85,6 +91,25 @@ class _JumpingJacksState extends State<JumpingJacks> {
                     ),
                   ),
                   Image.asset("assets/images/JumpingJacks.gif"),
+                  /* Center(
+                    //alignment: MainAxisAlignment.center,
+                    child:
+                        /*Text('Jumping',
+                          style: const TextStyle(
+                              fontSize: 24, fontFamily: "Cairo")),
+                      Text(
+                        "Jumping\nJacks",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium
+                            ?.copyWith(fontWeight: FontWeight.w900),
+                      ),*/
+                        ExerciseCard(press: () {
+                      showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) => ExDescription());
+                    }),
+                  ),*/
                   //SearchBar(),
                   /*Expanded(
                     child: GridView.count(
