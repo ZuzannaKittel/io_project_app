@@ -35,9 +35,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
               imagePath: user.imagePath,
               isEdit: true,
               onClicked: () async {
-                XFile? xfile =
-                    await ImagePicker().pickImage(source: ImageSource.gallery);
-                file = File(xfile!.path);
+                final picker = ImagePicker();
+                final pickedFile =
+                    await picker.pickImage(source: ImageSource.gallery);
+                setState(() {
+                  file = File(pickedFile!.path);
+                });
               },
             ),
             const SizedBox(height: 24),
