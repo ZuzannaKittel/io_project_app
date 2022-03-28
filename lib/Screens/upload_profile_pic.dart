@@ -7,6 +7,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../widget/appbar_widget.dart';
+
 class ImageUploads extends StatefulWidget {
   ImageUploads({Key? key}) : super(key: key);
 
@@ -66,7 +68,7 @@ class _ImageUploadsState extends State<ImageUploads> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: buildAppBar(context, "Upload your photo"),
       body: Column(
         children: <Widget>[
           SizedBox(
@@ -79,7 +81,7 @@ class _ImageUploadsState extends State<ImageUploads> {
               },
               child: CircleAvatar(
                 radius: 55,
-                backgroundColor: Color(0xffFDCF09),
+                backgroundColor: Color(0xFFE68342) /*Color(0xffFDCF09)*/,
                 child: _photo != null
                     ? ClipRRect(
                         borderRadius: BorderRadius.circular(50),

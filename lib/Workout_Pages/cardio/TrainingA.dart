@@ -14,7 +14,8 @@ class TrainingAPage extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Trening A"),
+        title: Text("Trening A",
+            style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: BackButton(),
         backgroundColor: kBlueLightColor,
         elevation: 0,
