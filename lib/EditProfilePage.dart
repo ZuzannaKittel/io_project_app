@@ -25,7 +25,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   late File file;
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: buildAppBar(context, "Settings"),
+        appBar: buildAppBar(context, "Edit"),
         bottomNavigationBar: const BottomNavBar(),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 32),

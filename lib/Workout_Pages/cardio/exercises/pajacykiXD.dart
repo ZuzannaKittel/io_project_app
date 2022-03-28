@@ -53,7 +53,8 @@ class _JumpingJacksState extends State<JumpingJacks> {
         .size; //this gonna give us total height and with of our device
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jumping Jacks"),
+        title: Text("Jumping Jacks",
+            style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: BackButton(),
         backgroundColor: mBackgroundColor,
         elevation: 0,
