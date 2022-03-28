@@ -6,6 +6,7 @@ import 'LoginFailed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:io_project/ProfilePage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -21,6 +22,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
   late String password;
   late String username;
   bool showProgress = false;
+  Future<void> uploadString(User a) async {
+    String id = a.uid;
+    String dataUrl =
+        'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80';
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref('$id/profilePic')
+          .putString(dataUrl, format: firebase_storage.PutStringFormat.dataUrl);
+    } catch (e) {
+      // e.g, e.code == 'canceled'
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,11 +123,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 email: email, password: password);
                         if (newuser != null) {
                           User? user = newuser.user;
-                          await FirebaseFirestore.instance
-                              .collection('usernames')
-                              .doc(user?.uid)
-                              .set({'username': username});
-                          user?.updateDisplayName(username);
+                          String id = user!.uid;
+                          user.updateDisplayName(username);
+                          uploadString(user);
+                          user.updatePhotoURL(
+                              'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80');
                           Navigator.push(
                             context,
                             MaterialPageRoute(
