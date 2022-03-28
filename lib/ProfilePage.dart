@@ -9,6 +9,8 @@ import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/EditProfilePage.dart';
 
+import 'Screens/preferences.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -65,9 +67,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildUpgradeButton() => ButtonWidget(
         text: 'Preferences',
         onClicked: () {
-          //Navigator.of(context).push(
-          //MaterialPageRoute(builder: (context) => MenuPage()),
-          //);
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => Preferences()),
+          );
         },
       );
 
