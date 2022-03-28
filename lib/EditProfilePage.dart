@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:io_project/Screens/upload_profile_pic.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
@@ -35,12 +35,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
               imagePath: user.imagePath,
               isEdit: true,
               onClicked: () async {
-                final picker = ImagePicker();
+                /*final picker = ImagePicker();
                 final pickedFile =
                     await picker.pickImage(source: ImageSource.gallery);
                 setState(() {
                   file = File(pickedFile!.path);
-                });
+                });*/
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ImageUploads()),
+                );
               },
             ),
             const SizedBox(height: 24),
