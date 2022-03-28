@@ -55,7 +55,7 @@ class _ImageUploadsState extends State<ImageUploads> {
     // final destination = 'gs://io-project-a029c.appspot.com/$fileName';
     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('$id/$fileName')
+          .ref('$id/profilePic')
           .putFile(_photo!);
       //await ref.putFile(_photo!);
     } catch (e) {

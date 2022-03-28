@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:io_project/ProfilePage.dart';
 import 'LoginFailed.dart';
 import 'package:io_project/constants.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -57,6 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       user = userCredential.user;
+      String u_id = user!.uid;
+      /* user.updatePhotoURL(await firebase_storage.FirebaseStorage.instance
+          .ref('$u_id/profilePic')
+          .getDownloadURL());*/
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         print("No User found for this email adress");
