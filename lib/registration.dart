@@ -22,19 +22,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
   late String password;
   late String username;
   bool showProgress = false;
-  Future<void> uploadString(User a) async {
+
+  /*Future<String> uploadString(User a) async {
     String id = a.uid;
-    String dataUrl =
-        'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80';
+    String dataUrl = 'assets/images/profilePic.jpg';
     try {
       await firebase_storage.FirebaseStorage.instance
           .ref('$id/profilePic')
           .putString(dataUrl, format: firebase_storage.PutStringFormat.dataUrl);
+
+      String downloadURL = await firebase_storage.FirebaseStorage.instance
+          .ref('$id/profilePic')
+          .getDownloadURL();
+      return downloadURL;
     } catch (e) {
+      return "XD";
       // e.g, e.code == 'canceled'
     }
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,6 +111,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               const SizedBox(
                 height: 20,
               ),
+              //TWORZENIE KONTA W FIREBASE
               SizedBox(
                   width: double.infinity,
                   child: RawMaterialButton(
@@ -125,13 +132,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           User? user = newuser.user;
                           String id = user!.uid;
                           user.updateDisplayName(username);
-                          uploadString(user);
+                          // String url = uploadString(user) as String;
                           user.updatePhotoURL(
-                              'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80');
+                              'https://firebasestorage.googleapis.com/v0/b/io-project-a029c.appspot.com/o/starting.jpg?alt=media&token=70f2f2d3-df27-46d3-9864-e04bfd700f25');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
                           setState(() {
                             showProgress = false;

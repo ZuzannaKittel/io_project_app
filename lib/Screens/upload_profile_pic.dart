@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:io_project/ProfilePage.dart';
 import '../widget/appbar_widget.dart';
 
 class ImageUploads extends StatefulWidget {
@@ -103,6 +103,34 @@ class _ImageUploadsState extends State<ImageUploads> {
                           color: Colors.grey[800],
                         ),
                       ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          RawMaterialButton(
+            fillColor: const Color(0xFFC7B8F5),
+            elevation: 0.0,
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusDirectional.circular(12.0)),
+            onPressed: () async {
+              User? user = FirebaseAuth.instance.currentUser;
+              final id = user!.uid;
+              String downloadURL = await firebase_storage
+                  .FirebaseStorage.instance
+                  .ref('$id/profilePic')
+                  .getDownloadURL();
+              user.updatePhotoURL(downloadURL);
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
+            child: const Text(
+              "SUBMIT",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
               ),
             ),
           )
