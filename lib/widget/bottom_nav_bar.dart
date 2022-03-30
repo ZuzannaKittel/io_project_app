@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:io_project/Screens/settings.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/WorkoutPage.dart';
 import 'package:io_project/ProfilePage.dart';
@@ -23,7 +24,7 @@ class BottomNavBar extends StatelessWidget {
             svgScr: "assets/icons/calendar.svg",
             press: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
               );
             },
           ),
@@ -40,7 +41,11 @@ class BottomNavBar extends StatelessWidget {
           BottomNavItem(
             title: "Settings",
             svgScr: "assets/icons/Settings.svg",
-            press: () {},
+            press: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const Settings()),
+              );
+            },
           ),
         ],
       ),
