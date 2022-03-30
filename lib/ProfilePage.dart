@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
@@ -8,7 +7,6 @@ import 'package:io_project/widget/button_widget.dart';
 import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/EditProfilePage.dart';
-
 import 'Screens/preferences.dart';
 
 class ProfilePage extends StatefulWidget {

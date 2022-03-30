@@ -123,8 +123,9 @@ class _ImageUploadsState extends State<ImageUploads> {
                   .ref('$id/profilePic')
                   .getDownloadURL();
               user.updatePhotoURL(downloadURL);
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+              user.reload();
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
             },
             child: const Text(
               "SUBMIT",
