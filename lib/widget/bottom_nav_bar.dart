@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:io_project/Screens/settings.dart';
 import 'package:io_project/constants.dart';
-import 'package:io_project/WorkoutPage.dart';
-import 'package:io_project/ProfilePage.dart';
+import 'package:io_project/Workout_Pages/WorkoutPage.dart';
+import 'package:io_project/Profile_Pages/ProfilePage.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({

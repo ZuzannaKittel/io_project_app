@@ -5,7 +5,7 @@ import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
 import 'cardio/CardioAll.dart';
-import 'russian_twist.dart';
+import 'strength/russian_twist.dart';
 import 'other/OtherAll.dart';
 
 class Home_workout extends StatefulWidget {

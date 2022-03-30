@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:io_project/LoginPage.dart';
+import 'package:io_project/Login_Pages/LoginPage.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
