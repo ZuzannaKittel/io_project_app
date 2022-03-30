@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +42,7 @@ class _PreferencesState extends State<Preferences> {
                 setState(() {
                   file = File(pickedFile!.path);
                 });*/
-                uploadingData('jabłko', '18ziko za PiSu', false);
+                setData(170, 50);
               },
             ),
             const SizedBox(height: 24),
@@ -63,6 +64,32 @@ class _PreferencesState extends State<Preferences> {
               maxLines: 5,
               onChanged: (about) {},
             ),
+            const SizedBox(height: 24),
+            TextFieldWidget(
+                text: 'xxx',
+                label: "Height",
+                maxLines: 5,
+                onChanged: (String h) async {
+                  await FirebaseFirestore.instance
+                      .collection("test")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .set({
+                    'height': h,
+                  });
+                }),
+            const SizedBox(height: 24),
+            TextFieldWidget(
+                label: 'Weight',
+                text: 'xxx',
+                maxLines: 5,
+                onChanged: (String w) async {
+                  await FirebaseFirestore.instance
+                      .collection("test")
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .set({
+                    'weight': w,
+                  });
+                }),
           ],
         ),
       );
@@ -97,4 +124,63 @@ class _PreferencesState extends State<Preferences> {
       'isFavourite': _isFavourite,
     });
   }
+
+  ///WAZNEEEEE !!
+  Future<void> setData(int _height, int _weight) async {
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      'height': _height,
+      'weight': _weight,
+    });
+  }
+
+  Future<void> setHeight(int _height) async {
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      'height': _height,
+    });
+  }
+
+  Future<void> getData() async {
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+  }
+  /*
+  Future uploadData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    final id = user!.uid;
+    if (_photo == null) return;
+    final fileName = basename(_photo!.path);
+    // final destination = 'gs://io-project-a029c.appspot.com/$fileName';
+    try {
+      await FirebaseFirestore.instance.ref('$id/profilePic').putFile(_photo!);
+      //await ref.putFile(_photo!);
+    } catch (e) {
+      print('error occured');
+    }
+  }
+  */
+  /*  StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('test')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .snapshots(),
+                builder: ((context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Text('Loading data ... Plesase wait ...');
+                  }
+                  return Column(
+                    children: <Widget>[
+                      Text(snapshot[0]),
+                      Text(snapshot),
+                    ],
+                  );
+                }))
+                */
 }

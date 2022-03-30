@@ -4,6 +4,7 @@ import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
+import '../widget/bottom_nav_bar.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
