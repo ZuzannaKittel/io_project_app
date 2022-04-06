@@ -14,6 +14,9 @@ class Users {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) => {abt = value['about']});
+    if (abt == '') {
+      abt = "Opisz siebie";
+    }
   }
 
   String getImage() {

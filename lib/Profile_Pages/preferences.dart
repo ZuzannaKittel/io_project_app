@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:io_project/Profile_Pages/EditProfilePage.dart';
 import 'package:io_project/Profile_Pages/upload_profile_pic.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
@@ -38,6 +39,15 @@ class _PreferencesState extends State<Preferences> {
             (value) => {_weight = value['weight'], _height = value['height']});
   }
 
+  Future<void> uploadAbout(String abt) async {
+    await FirebaseFirestore.instance
+        .collection("about")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'about': abt,
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: buildAppBar(context, "Preferences"),
@@ -56,6 +66,9 @@ class _PreferencesState extends State<Preferences> {
                 setState(() {
                   file = File(pickedFile!.path);
                 });*/
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ImageUploads()),
+                );
                 setData(170, 50);
               },
             ),
@@ -72,17 +85,15 @@ class _PreferencesState extends State<Preferences> {
               onChanged: (email) {},
             ),
             const SizedBox(height: 24),
-            TextFieldWidget(
-              label: 'About',
-              text: user.getAbt(),
+            TextField(
+              decoration: InputDecoration(
+                  labelText: "Describe yourself",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15))),
               maxLines: 5,
               onChanged: (about) async {
-                await FirebaseFirestore.instance
-                    .collection("about")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .update({
-                  'about': about,
-                });
+                uploadAbout(about);
+                print("Dupa");
               },
             ),
             const SizedBox(height: 24),
