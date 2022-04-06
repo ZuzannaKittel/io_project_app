@@ -27,6 +27,16 @@ class _PreferencesState extends State<Preferences> {
   late File file;
   int _weight = 0;
   int _height = 0;
+  String? _weightS;
+  String? _heightS;
+  Future<void> getData() async {
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then(
+            (value) => {_weight = value['weight'], _height = value['height']});
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -37,7 +47,7 @@ class _PreferencesState extends State<Preferences> {
           physics: const BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: user.imagePath,
+              imagePath: user.getImage(),
               isEdit: true,
               onClicked: () {
                 /*final picker = ImagePicker();
@@ -64,13 +74,13 @@ class _PreferencesState extends State<Preferences> {
             const SizedBox(height: 24),
             TextFieldWidget(
               label: 'About',
-              text: user.about,
+              text: user.getAbt(),
               maxLines: 5,
               onChanged: (about) async {
                 await FirebaseFirestore.instance
                     .collection("about")
                     .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .set({
+                    .update({
                   'about': about,
                 });
               },
@@ -165,12 +175,6 @@ class _PreferencesState extends State<Preferences> {
     });
   }
 
-  Future<void> getData() async {
-    await FirebaseFirestore.instance
-        .collection("test")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-  }
   /*
   Future uploadData() async {
     User? user = FirebaseAuth.instance.currentUser;

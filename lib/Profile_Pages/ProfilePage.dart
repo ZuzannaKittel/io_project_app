@@ -22,13 +22,12 @@ class _ProfilePageState extends State<ProfilePage> {
     Users user = UserPreferences.myUser;
 
     return Scaffold(
-      appBar: buildAppBar(context, "Profile"),
       bottomNavigationBar: const BottomNavBar(),
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
           ProfileWidget(
-            imagePath: user.imagePath,
+            imagePath: user.getImage(),
             onClicked: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => EditProfilePage()),
@@ -82,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 16),
             Text(
-              user.about,
+              user.getAbt(),
               style: const TextStyle(fontSize: 16, height: 1.4),
             ),
           ],

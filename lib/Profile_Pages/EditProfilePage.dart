@@ -32,7 +32,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           physics: const BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: user.imagePath,
+              imagePath: user.getImage(),
               isEdit: true,
               onClicked: () async {
                 /*final picker = ImagePicker();
