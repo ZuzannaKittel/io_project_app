@@ -131,13 +131,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         if (newuser != null) {
                           User? user = newuser.user;
                           String id = user!.uid;
+                          await FirebaseFirestore.instance
+                              .collection('about')
+                              .doc(id)
+                              .set({
+                            'about': '',
+                          });
                           user.updateDisplayName(username);
                           // String url = uploadString(user) as String;
                           user.updatePhotoURL(
                               'https://firebasestorage.googleapis.com/v0/b/io-project-a029c.appspot.com/o/starting.jpg?alt=media&token=70f2f2d3-df27-46d3-9864-e04bfd700f25');
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
                           );
                           setState(() {
                             showProgress = false;

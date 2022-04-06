@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:io_project/Profile_Pages/upload_profile_pic.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
@@ -24,6 +25,9 @@ class Preferences extends StatefulWidget {
 class _PreferencesState extends State<Preferences> {
   Users user = UserPreferences.myUser;
   late File file;
+  int _weight = 0;
+  int _height = 0;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: buildAppBar(context, "Preferences"),
@@ -62,34 +66,50 @@ class _PreferencesState extends State<Preferences> {
               label: 'About',
               text: user.about,
               maxLines: 5,
-              onChanged: (about) {},
+              onChanged: (about) async {
+                await FirebaseFirestore.instance
+                    .collection("about")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .set({
+                  'about': about,
+                });
+              },
             ),
             const SizedBox(height: 24),
-            TextFieldWidget(
-                text: 'xxx',
-                label: "Height",
-                maxLines: 5,
-                onChanged: (String h) async {
-                  await FirebaseFirestore.instance
-                      .collection("test")
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .set({
-                    'height': h,
-                  });
-                }),
+            TextField(
+              decoration: InputDecoration(labelText: "Enter your height"),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              onChanged: (height) async {
+                /*await FirebaseFirestore.instance
+                    .collection("test")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .set({
+                  'height': h,
+                });*/
+                _height = int.parse(height);
+              },
+            ),
             const SizedBox(height: 24),
-            TextFieldWidget(
-                label: 'Weight',
-                text: 'xxx',
-                maxLines: 5,
-                onChanged: (String w) async {
-                  await FirebaseFirestore.instance
-                      .collection("test")
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .set({
-                    'weight': w,
-                  });
-                }),
+            TextField(
+              decoration: InputDecoration(labelText: "Enter your weight"),
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
+              onChanged: (weight) async {
+                _weight = int.parse(weight);
+                await FirebaseFirestore.instance
+                    .collection("test")
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .set({
+                  'height': _height,
+                  'weight': _weight,
+                });
+              },
+            ),
           ],
         ),
       );
@@ -117,11 +137,11 @@ class _PreferencesState extends State<Preferences> {
   }
 
   Future<void> uploadingData(
-      String _productName, String _productPrice, bool _isFavourite) async {
+      String _productName, String _productPrice, bool _isFavorite) async {
     await FirebaseFirestore.instance.collection("products").add({
       'productName': _productName,
       'productPrice': _productPrice,
-      'isFavourite': _isFavourite,
+      'isFavourite': _isFavorite,
     });
   }
 

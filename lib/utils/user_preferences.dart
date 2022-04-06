@@ -8,14 +8,23 @@ String? a = user!.displayName;
 String? b = user!.email;
 String? c = user!.uid;
 String? downloadURL = user!.photoURL;
+String? about = "";
+Future<void> getAbout() async {
+  await FirebaseFirestore.instance
+      .collection('about')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get()
+      .then((value) => {about = value as String});
+}
+
+String sd = getAbout() as String;
 
 class UserPreferences {
   static final myUser = Users(
     name: a!,
     imagePath: downloadURL!,
     email: b!,
-    about:
-        'Certified Personal Trainer and Nutritionist with years of experience in creating effective diets and training plans focused on achieving individual customers goals in a smooth way.',
+    about: about!,
     isDarkMode: false,
   );
 }
