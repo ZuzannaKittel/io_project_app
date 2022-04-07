@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:io_project/Profile_Pages/EditProfilePage.dart';
 import 'package:io_project/Profile_Pages/upload_profile_pic.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
@@ -15,6 +13,7 @@ import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/widget/textfield_widget.dart';
 import 'package:path/path.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class Preferences extends StatefulWidget {
   const Preferences({Key? key}) : super(key: key);
@@ -93,7 +92,6 @@ class _PreferencesState extends State<Preferences> {
               maxLines: 5,
               onChanged: (about) async {
                 uploadAbout(about);
-                print("Dupa");
               },
             ),
             const SizedBox(height: 24),
