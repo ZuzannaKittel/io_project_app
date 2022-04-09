@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/button_widget.dart';
@@ -15,6 +16,11 @@ import 'ExDescription.dart';
 class JumpingJacks extends StatefulWidget {
   @override
   _JumpingJacksState createState() => _JumpingJacksState();
+}
+
+bool isDone = false;
+bool getState() {
+  return isDone;
 }
 
 class _JumpingJacksState extends State<JumpingJacks> {
@@ -53,7 +59,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
         .size; //this gonna give us total height and with of our device
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jumping Jacks",
+        title: const Text("Jumping Jacks",
             style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: BackButton(),
         backgroundColor: mBackgroundColor,
@@ -159,7 +165,9 @@ class _JumpingJacksState extends State<JumpingJacks> {
   Widget BuildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
     final isCompleted = seconds == maxSeconds || seconds == 0;
-
+    if (isCompleted) {
+      isDone = true;
+    }
     return isRunning || !isCompleted
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -174,6 +182,9 @@ class _JumpingJacksState extends State<JumpingJacks> {
                   }
                 },
               ),
+              const SizedBox(
+                width: 10,
+              ),
               TimerButtonWidget(
                 text: "Cancel",
                 onClicked: () {
@@ -182,11 +193,28 @@ class _JumpingJacksState extends State<JumpingJacks> {
               ),
             ],
           )
-        : TimerButtonWidget(
-            text: "Start",
-            onClicked: () {
-              StartTimer();
-            },
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimerButtonWidget(
+                text: "Start",
+                onClicked: () {
+                  StartTimer();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              TimerButtonWidget(
+                text: "Next",
+                onClicked: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => BackAndForthSquats()),
+                  );
+                },
+              ),
+            ],
           );
   }
 
@@ -199,7 +227,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
             CircularProgressIndicator(
               value: seconds / maxSeconds,
               strokeWidth: 8,
-              valueColor: AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
+              valueColor: const AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
             ),
             Center(child: BuildTime()),
           ],

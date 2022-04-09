@@ -20,9 +20,9 @@ class TrainingAPage extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Trening A",
+        title: const Text("Trening A",
             style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
-        leading: BackButton(),
+        leading: const BackButton(),
         backgroundColor: kBlueLightColor,
         elevation: 0,
       ),
@@ -78,7 +78,7 @@ class TrainingAPage extends StatelessWidget {
                         Exercise(
                           exerciseName: "Pajacyki",
                           exerciseNum: 1,
-                          isDone: true,
+                          isDone: getState(),
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -89,6 +89,7 @@ class TrainingAPage extends StatelessWidget {
                         Exercise(
                           exerciseName: "Squats 1",
                           exerciseNum: 2,
+                          isDone: false,
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
