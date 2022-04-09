@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/ButtKicks.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/pajacykiXD.dart';
 import 'package:io_project/widget/appbar_widget.dart';
+
+import 'exercises/BackAndForthSquats.dart';
+import 'exercises/HighKnees.dart';
+import 'exercises/JumpingSquats.dart';
 
 class TrainingAPage extends StatelessWidget {
   const TrainingAPage({Key? key}) : super(key: key);
@@ -81,29 +87,54 @@ class TrainingAPage extends StatelessWidget {
                           },
                         ),
                         Exercise(
-                          exerciseName: "Brak",
+                          exerciseName: "Squats 1",
                           exerciseNum: 2,
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => BackAndForthSquats()),
+                            );
+                          },
                         ),
                         Exercise(
-                          exerciseName: "Brak",
+                          exerciseName: "Jogging",
                           exerciseNum: 3,
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => JoggingInPlace()),
+                            );
+                          },
                         ),
                         Exercise(
-                          exerciseName: "Brak",
+                          exerciseName: "Squats 2",
                           exerciseNum: 4,
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => JumpingSquats()),
+                            );
+                          },
                         ),
                         Exercise(
-                          exerciseName: "Brak",
+                          exerciseName: "HighKnees",
                           exerciseNum: 5,
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => HighKnees()),
+                            );
+                          },
                         ),
                         Exercise(
-                          exerciseName: "Brak",
+                          exerciseName: "ButtKicks",
                           exerciseNum: 6,
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => ButtKicks()),
+                            );
+                          },
                         ),
                       ],
                     ),

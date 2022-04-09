@@ -12,12 +12,12 @@ import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 import 'ExDescription.dart';
 
-class JumpingJacks extends StatefulWidget {
+class ButtKicks extends StatefulWidget {
   @override
-  _JumpingJacksState createState() => _JumpingJacksState();
+  _ButtKicksState createState() => _ButtKicksState();
 }
 
-class _JumpingJacksState extends State<JumpingJacks> {
+class _ButtKicksState extends State<ButtKicks> {
   static const maxSeconds = 60; //*mnożnik dla konkretnego użytkownika
   int seconds = maxSeconds;
   Timer? timer;
@@ -53,7 +53,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
         .size; //this gonna give us total height and with of our device
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jumping Jacks",
+        title: Text("Butt Kicks",
             style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: BackButton(),
         backgroundColor: mBackgroundColor,
@@ -99,7 +99,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                       ),
                     ),
                   ),
-                  Image.asset("assets/images/JumpingJacks.gif"),
+                  Image.asset("assets/images/ButtKicks.gif"),
                   /* Center(
                     //alignment: MainAxisAlignment.center,
                     child:
