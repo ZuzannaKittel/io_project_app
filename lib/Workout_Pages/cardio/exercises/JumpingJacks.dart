@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
-import 'package:io_project/widget/button_widget.dart';
+import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
 
 import '../../../widget/appbar_widget.dart';
@@ -152,6 +152,17 @@ class _JumpingJacksState extends State<JumpingJacks> {
                         BuildButtons(),
                       ],
                     ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: SmallButtonWidget(
+                      onClicked: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => BackAndForthSquats()),
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
@@ -205,7 +216,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
               const SizedBox(
                 width: 10,
               ),
-              TimerButtonWidget(
+              /*TimerButtonWidget(
                 text: "Next",
                 onClicked: () {
                   Navigator.of(context).push(
@@ -214,6 +225,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                   );
                 },
               ),
+              */
             ],
           );
   }

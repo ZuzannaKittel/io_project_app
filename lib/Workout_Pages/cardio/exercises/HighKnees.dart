@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
-import 'package:io_project/widget/button_widget.dart';
+import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
 
 import '../../../widget/appbar_widget.dart';

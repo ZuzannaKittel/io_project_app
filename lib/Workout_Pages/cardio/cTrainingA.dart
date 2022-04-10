@@ -5,15 +5,15 @@ import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/pajacykiXD.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/JumpingJacks.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 
 import 'exercises/BackAndForthSquats.dart';
 import 'exercises/HighKnees.dart';
 import 'exercises/JumpingSquats.dart';
 
-class TrainingAPage extends StatelessWidget {
-  const TrainingAPage({Key? key}) : super(key: key);
+class cTrainingAPage extends StatelessWidget {
+  const cTrainingAPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

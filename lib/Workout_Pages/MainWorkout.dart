@@ -4,6 +4,7 @@ import 'package:io_project/Workout_Pages/other/OtherAll.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
+import 'HIIT/HIITAll.dart';
 import 'cardio/CardioAll.dart';
 import 'strength/russian_twist.dart';
 import 'other/OtherAll.dart';
@@ -113,12 +114,12 @@ class _WorkoutPage extends StatelessWidget {
                           title: "HIIT",
                           svgSrc: "assets/icons/Meditation.svg",
                           press: () {
-                            //Navigator.push(
-                            // context,
-                            //MaterialPageRoute(builder: (context) {
-                            //return DetailsScreen();
-                            //}),
-                            //);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HIITAll(),
+                              ),
+                            );
                           },
                         ),
                         CategoryCard(

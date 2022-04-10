@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/Workout_Pages/build_ex.dart';
 import 'package:io_project/widget/exercise_button_widget.dart';
-import 'cTrainingA.dart';
 
-class CardioAll extends StatefulWidget {
-  const CardioAll({Key? key}) : super(key: key);
+import 'hTrainingA.dart';
+
+class HIITAll extends StatefulWidget {
+  const HIITAll({Key? key}) : super(key: key);
 
   @override
-  State<CardioAll> createState() => _CardioAllState();
+  State<HIITAll> createState() => _HIITAllState();
 }
 
-class _CardioAllState extends State<CardioAll> {
+class _HIITAllState extends State<HIITAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(context, "Cardio Workouts"),
+        appBar: buildAppBar(context, "HIIT Workouts"),
         body: ListView(
             physics: const BouncingScrollPhysics(),
             addAutomaticKeepAlives: true,
@@ -23,7 +24,7 @@ class _CardioAllState extends State<CardioAll> {
               Padding(
                   padding: EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'b',
                     onClicked: () {
                       /*Navigator.of(context).push(
                         MaterialPageRoute(
@@ -38,38 +39,38 @@ class _CardioAllState extends State<CardioAll> {
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => cTrainingAPage()),
+                            builder: (context) => hTrainingAPage()),
                       );
                     },
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'x',
                     onClicked: () {},
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'x',
                     onClicked: () {},
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'x',
                     onClicked: () {},
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'x',
                     onClicked: () {},
                   )),
               Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'x',
                     onClicked: () {},
                   )),
             ]));

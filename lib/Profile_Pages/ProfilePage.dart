@@ -3,7 +3,7 @@ import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
-import 'package:io_project/widget/button_widget.dart';
+import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/Profile_Pages/EditProfilePage.dart';
