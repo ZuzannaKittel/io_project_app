@@ -94,7 +94,8 @@ class _BackAndForthSquatsState extends State<BackAndForthSquats> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) => ExDescription(
+                                  exercise: "ButtAndForth Squats"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),

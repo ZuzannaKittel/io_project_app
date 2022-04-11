@@ -99,7 +99,9 @@ class _JumpingJacksState extends State<JumpingJacks> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) => ExDescription(
+                                    exercise: 'Jumping Jacks',
+                                  ));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),

@@ -3,19 +3,32 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
 
 import '../../../constants.dart';
 import '../../../widget/appbar_widget.dart';
 
 class ExDescription extends StatefulWidget {
-  const ExDescription({Key? key}) : super(key: key);
+  late String exercise;
+
+  ExDescription({Key? key, required this.exercise}) : super(key: key);
 
   @override
   _ExDescriptionState createState() => _ExDescriptionState();
 }
 
+// ignore: must_be_immutable
 class _ExDescriptionState extends State<ExDescription> {
+  //final String exercise;
+  //String exe = Exercise;
   late String exDescription;
+  //late String idk;
+
+  String get exercise {
+    return exercise;
+  }
+
+  set exercise(exercise) {}
 
   Future<void> getExDescription(String ex) async {
     await FirebaseFirestore.instance
@@ -26,9 +39,11 @@ class _ExDescriptionState extends State<ExDescription> {
   }
 
   String stringGetExDescription() {
-    getExDescription("Jumping Jacks");
+    getExDescription(exercise);
     return exDescription;
   }
+
+  //String idk = stringGetExDescription();
 
   //funckja wywlujaca poyzsza i zwracajaca string exDscirpiton i wtedy wywolywac te funckje  w Text
 
@@ -51,6 +66,7 @@ class _ExDescriptionState extends State<ExDescription> {
                 /*Text('ExDescription',
                     style: Theme.of(context).textTheme.headline6),*/
                 Image.asset("assets/images/jj.png"),
+                //stringGetExDescription(),
                 Text(
                   exDescription,
                   style: const TextStyle(

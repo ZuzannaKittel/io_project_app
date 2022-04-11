@@ -94,7 +94,8 @@ class _ButtKicksState extends State<ButtKicks> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) =>
+                                  ExDescription(exercise: "ButtKicks"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),

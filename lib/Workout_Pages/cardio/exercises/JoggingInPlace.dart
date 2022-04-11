@@ -94,7 +94,8 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) =>
+                                  ExDescription(exercise: "JoggingInPlace"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),

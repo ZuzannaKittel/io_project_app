@@ -94,7 +94,8 @@ class _HighKneesState extends State<HighKnees> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) =>
+                                  ExDescription(exercise: "HighKnees"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),

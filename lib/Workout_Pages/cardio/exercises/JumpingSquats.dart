@@ -95,7 +95,8 @@ class _JumpingSquatsState extends State<JumpingSquats> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => ExDescription());
+                              builder: (context) =>
+                                  ExDescription(exercise: "JumpingSquats"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),
