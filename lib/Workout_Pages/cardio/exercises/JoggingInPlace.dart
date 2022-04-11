@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/JumpingSquats.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
@@ -75,8 +76,8 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -145,6 +146,17 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
                         const SizedBox(height: 10),
                         BuildButtons(),
                       ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: SmallButtonWidget(
+                      onClicked: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => JumpingSquats()),
+                        );
+                      },
                     ),
                   )
                 ],

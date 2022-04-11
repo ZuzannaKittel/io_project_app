@@ -10,6 +10,7 @@ import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
+import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/widget/textfield_widget.dart';
 import 'package:path/path.dart';
@@ -27,6 +28,7 @@ class _PreferencesState extends State<Preferences> {
   late File file;
   int _weight = 0;
   int _height = 0;
+  int BMI = 0;
   String? _weightS;
   String? _heightS;
   Future<void> getData() async {
@@ -129,6 +131,12 @@ class _PreferencesState extends State<Preferences> {
                 });
               },
             ),
+            const SizedBox(height: 24),
+            ButtonWidget(
+                text: "Set BMI",
+                onClicked: () {
+                  setBMI(_height, _weight);
+                }),
           ],
         ),
       );
@@ -181,6 +189,16 @@ class _PreferencesState extends State<Preferences> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({
       'height': _height,
+    });
+  }
+
+  Future<void> setBMI(int _height, int _weight) async {
+    BMI = ((_weight) / (_height) * (_height)) as int;
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      'BMI': BMI,
     });
   }
 
