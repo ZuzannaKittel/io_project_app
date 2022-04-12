@@ -1,54 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:io_project/constants.dart';
+import 'package:io_project/widget/appbar_widget.dart';
 import 'dart:ui';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
+String exDescription = '';
 
-import '../../../constants.dart';
-import '../../../widget/appbar_widget.dart';
+// ignore: camel_case_types
+class buildExDesc extends StatelessWidget {
+  late String exName;
+  buildExDesc({Key? key, required this.exName}) : super(key: key);
 
-class ExDescription extends StatefulWidget {
-  late String exercise;
-
-  ExDescription({Key? key, required this.exercise}) : super(key: key);
-
-  @override
-  _ExDescriptionState createState() => _ExDescriptionState();
-}
-
-// ignore: must_be_immutable
-class _ExDescriptionState extends State<ExDescription> {
-  //final String exercise;
-  //String exe = Exercise;
-  late String exDescription;
-  //late String idk;
-
-  String get exercise {
-    return exercise;
-  }
-
-  set exercise(exercise) {}
-
-  Future<void> getExDescription(String ex) async {
+  void getExDescription(String name) async {
     await FirebaseFirestore.instance
         .collection("workouts")
-        .doc(ex)
+        .doc(name)
         .get()
         .then((value) => {exDescription = value['tip']});
   }
 
-  String stringGetExDescription() {
-    getExDescription(exercise);
-    return exDescription;
-  }
-
-  //String idk = stringGetExDescription();
-
-  //funckja wywlujaca poyzsza i zwracajaca string exDscirpiton i wtedy wywolywac te funckje  w Text
-
   @override
   Widget build(BuildContext context) {
+    getExDescription(exName);
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context, "Exercise Description"),
@@ -77,16 +50,4 @@ class _ExDescriptionState extends State<ExDescription> {
           )),
     );
   }
-
-  /*
-  Future<String> getExDescription(String ex) async {
-    String exDescription;
-    await FirebaseFirestore.instance
-        .collection("about")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((value) => {ex = value['tip']});
-    return exDescription;
-  }
-  */
 }

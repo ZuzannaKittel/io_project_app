@@ -12,6 +12,7 @@ import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
+import 'package:io_project/widget/slider.dart';
 import 'package:io_project/widget/textfield_widget.dart';
 import 'package:path/path.dart';
 import 'package:numberpicker/numberpicker.dart';

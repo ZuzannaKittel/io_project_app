@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
+import 'package:io_project/Screens/empty.dart';
 import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
@@ -52,7 +53,7 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegistrationPage(),
+                      builder: (context) => const Test(),
                     ),
                   );
                 },

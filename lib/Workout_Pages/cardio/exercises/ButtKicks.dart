@@ -4,14 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/ExDescription.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
 
 import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
-import 'ExDescription.dart';
 
 class ButtKicks extends StatefulWidget {
   @override
@@ -95,7 +94,7 @@ class _ButtKicksState extends State<ButtKicks> {
                           showCupertinoModalPopup(
                               context: context,
                               builder: (context) =>
-                                  ExDescription(exercise: "ButtKicks"));
+                                  buildExDesc(exName: "ButtKicks"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),
