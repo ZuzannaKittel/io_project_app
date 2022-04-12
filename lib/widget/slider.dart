@@ -41,3 +41,41 @@ class _SliderLevelState extends State<SliderLevel> {
     );
   }
 }
+
+class SliderBodyType extends StatefulWidget {
+  SliderBodyType({Key? key}) : super(key: key);
+
+  @override
+  State<SliderBodyType> createState() => _SliderBodyTypeState();
+}
+
+String BodyTypeDesc(double value) {
+  if (value < 1) {
+    return "Slim";
+  } else if (value >= 1 && value < 2) {
+    return "Medium";
+  } else {
+    return "Fat";
+  }
+}
+
+class _SliderBodyTypeState extends State<SliderBodyType> {
+  double _currentBodyType = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+      activeColor: Color(0xFF817DC0),
+      min: 0,
+      max: 3,
+      divisions: 100,
+      value: _currentBodyType,
+      label: BodyTypeDesc(_currentBodyType),
+      onChanged: (double value) {
+        setState(() {
+          _currentBodyType = value;
+        });
+      },
+    );
+  }
+}

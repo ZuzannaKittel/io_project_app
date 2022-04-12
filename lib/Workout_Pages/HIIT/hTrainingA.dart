@@ -21,7 +21,7 @@ class hTrainingAPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Trening A",
-            style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
+            style: TextStyle(fontSize: 20, fontFamily: "Cairo")),
         leading: const BackButton(),
         backgroundColor: kBlueLightColor,
         elevation: 0,

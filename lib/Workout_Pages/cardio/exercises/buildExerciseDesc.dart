@@ -31,19 +31,29 @@ class buildExDesc extends StatelessWidget {
           child: Center(
             child: Container(
               width: MediaQuery.of(context).size.width - 20,
-              height: 320,
-              color: kBlueLightColor,
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
+              height: 600,
+              color: Colors.grey.shade200,
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child:
                   ListView(physics: const BouncingScrollPhysics(), children: [
                 /*Text('ExDescription',
                     style: Theme.of(context).textTheme.headline6),*/
-                Image.asset("assets/images/jj.png"),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text("Jesli dane sie nie zaladowaly - odswiez strone",
+                    textAlign: TextAlign.left),
+                const SizedBox(
+                  height: 50,
+                ),
+                //Image.asset("assets/images/jj.png"),
                 //stringGetExDescription(),
                 Text(
                   exDescription,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 24),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      fontFamily: "Cairo"),
                 ),
               ]),
             ),
