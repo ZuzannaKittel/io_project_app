@@ -22,7 +22,7 @@ String LevelDesc(double value) {
 }
 
 class _SliderLevelState extends State<SliderLevel> {
-  double _currentLevel = 0;
+  double _currentLevel = 5;
 
   @override
   Widget build(BuildContext context) {
