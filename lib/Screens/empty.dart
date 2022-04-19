@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/buttons_widget.dart';
@@ -24,6 +25,11 @@ int heightValue = 170;
 bool male = false;
 bool fmale = false;
 
+DateTime now = new DateTime.now();
+DateTime date = new DateTime(now.year, now.month, now.day);
+
+String Date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+
 void setData(int _height, int _weight) async {
   double BMI; //liczenie BNI jeszcze nie dobre
   BMI = ((_weight) / (_height) * (_height));
@@ -34,6 +40,25 @@ void setData(int _height, int _weight) async {
     'height': _height,
     'weight': _weight,
     'BMI': BMI,
+  });
+}
+
+void addData(int _height, int _weight) async {
+  await FirebaseFirestore.instance
+      .collection('test')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .set({'height ' + Date: _height, 'weight ' + Date: _weight},
+          SetOptions(merge: true)).then((value) {
+    //Do your stuff.
+  });
+}
+
+Future<void> uploadingData(
+    String _productName, String _productPrice, bool _isFavorite) async {
+  await FirebaseFirestore.instance.collection("products").add({
+    'productName': _productName,
+    'productPrice': _productPrice,
+    'isFavourite': _isFavorite,
   });
 }
 
@@ -165,7 +190,8 @@ class _TestState extends State<Test> {
                 ButtonWidget(
                     text: "Submit",
                     onClicked: () {
-                      setData(heightValue as int, weightValue as int);
+                      //setData(heightValue as int, weightValue as int);
+                      addData(heightValue as int, weightValue as int);
                     }),
               ],
             )),
