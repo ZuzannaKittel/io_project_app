@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/other/OtherAll.dart';
+import 'package:io_project/Workout_Pages/strength/StrengthAll.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
 import 'HIIT/HIITAll.dart';
 import 'cardio/CardioAll.dart';
-import 'strength/russian_twist.dart';
 import 'other/OtherAll.dart';
 
 class Home_workout extends StatefulWidget {
@@ -93,7 +93,7 @@ class _WorkoutPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const RusianTwist(),
+                                builder: (context) => const StrengthAll(),
                               ),
                             );
                           },

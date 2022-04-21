@@ -32,6 +32,22 @@ class buildExDesc extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width - 20,
               height: 600,
+              /*
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(5),
+                ),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white,
+                    //Color(0xFF817DC0),
+                    Colors.grey,
+                  ],
+                ),
+              ),
+              */
               color: Colors.grey.shade200,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child:

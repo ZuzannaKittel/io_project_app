@@ -9,3 +9,5 @@ const kBlueColor = Color(0xFF817DC0);
 const kShadowColor = Color(0xFFE6E6E6);
 const mBackgroundColor = Color(0xFFF5CEB8);
 const neonBlue = Color(0xFF07D2E0);
+
+const sthidk = Color(0xFFEFE4CF);

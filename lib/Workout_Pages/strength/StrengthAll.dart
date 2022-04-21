@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Workout_Pages/strength/sTrainingA.dart';
 import 'package:io_project/widget/appbar_widget.dart';
-import 'package:io_project/Workout_Pages/build_ex.dart';
 import 'package:io_project/widget/exercise_button_widget.dart';
 import '../../widget/bottom_nav_bar.dart';
-import 'cTrainingA.dart';
 
-class CardioAll extends StatefulWidget {
-  const CardioAll({Key? key}) : super(key: key);
+class StrengthAll extends StatefulWidget {
+  const StrengthAll({Key? key}) : super(key: key);
 
   @override
-  State<CardioAll> createState() => _CardioAllState();
+  State<StrengthAll> createState() => _StrengthAllState();
 }
 
-class _CardioAllState extends State<CardioAll> {
+class _StrengthAllState extends State<StrengthAll> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(context, "Cardio Workouts"),
+        appBar: buildAppBar(context, "Strength Workouts"),
         bottomNavigationBar: BottomNavBar(),
         body: ListView(
             physics: const BouncingScrollPhysics(),
@@ -40,7 +39,7 @@ class _CardioAllState extends State<CardioAll> {
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => cTrainingAPage()),
+                            builder: (context) => sTrainingAPage()),
                       );
                     },
                   )),

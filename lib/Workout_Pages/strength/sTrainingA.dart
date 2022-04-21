@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ButtKicks.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
+import 'package:io_project/Workout_Pages/strength/exercises/Deadlift.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/JumpingJacks.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 
-import 'exercises/BackAndForthSquats.dart';
-import 'exercises/HighKnees.dart';
-import 'exercises/JumpingSquats.dart';
+import '../cardio/exercises/BackAndForthSquats.dart';
+import '../cardio/exercises/HighKnees.dart';
+import '../cardio/exercises/JumpingSquats.dart';
 
-class cTrainingAPage extends StatelessWidget {
-  const cTrainingAPage({Key? key}) : super(key: key);
+import 'package:io_project/Workout_Pages/strength/exercises/Deadlift.dart';
+
+class sTrainingAPage extends StatelessWidget {
+  const sTrainingAPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,6 @@ class cTrainingAPage extends StatelessWidget {
         backgroundColor: kBlueLightColor,
         elevation: 0,
       ),
-      bottomNavigationBar: BottomNavBar(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -34,7 +35,7 @@ class cTrainingAPage extends StatelessWidget {
             decoration: const BoxDecoration(
               color: kBlueLightColor,
               image: DecorationImage(
-                image: AssetImage("assets/images/trainingA.png"),
+                image: AssetImage("assets/images/hTrainingA.png"),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -65,7 +66,7 @@ class cTrainingAPage extends StatelessWidget {
                     SizedBox(
                       width: size.width * .6, // it just take 60% of total width
                       child: const Text(
-                        "A cardio workout increases blood flow and acts as a filter system. It brings nutrients like oxygen, protein, and iron to the muscles that you've been training and helps them recover faster.",
+                        "HIIT stands for “high intensity interval training.” Like the name suggests, it’s a super demanding workout that mixes rest periods with short bursts of maximum effort activity.",
                       ),
                     ),
                     SizedBox(
@@ -77,13 +78,13 @@ class cTrainingAPage extends StatelessWidget {
                       runSpacing: 20,
                       children: <Widget>[
                         Exercise(
-                          exerciseName: "Pajacyki",
+                          exerciseName: "Deadlift",
                           exerciseNum: 1,
                           isDone: getState(),
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => JumpingJacks()),
+                                  builder: (context) => Deadlift()),
                             );
                           },
                         ),

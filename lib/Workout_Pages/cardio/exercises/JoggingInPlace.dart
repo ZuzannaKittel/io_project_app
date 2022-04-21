@@ -99,7 +99,7 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
                       ),
                     ),
                   ),
-                  Image.asset("assets/images/2.gif"),
+                  Image.asset("assets/images/JoggingInPlace.gif"),
                   /* Center(
                     //alignment: MainAxisAlignment.center,
                     child:
@@ -136,7 +136,7 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
                             const TextStyle(fontSize: 24, fontFamily: "Cairo")),
                   ),
                   */
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 20),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

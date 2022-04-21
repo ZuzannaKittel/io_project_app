@@ -136,7 +136,7 @@ class _BackAndForthSquatsState extends State<BackAndForthSquats> {
                             const TextStyle(fontSize: 24, fontFamily: "Cairo")),
                   ),
                   */
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 20),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
