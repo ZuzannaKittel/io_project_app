@@ -6,12 +6,24 @@ import 'package:intl/intl.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/buttons_widget.dart';
+import 'package:io_project/widget/ch_bdy_tp.dart';
+import 'package:io_project/widget/choose_bdy_tp_wm.dart';
 import 'package:io_project/widget/slider.dart';
 import 'package:numberpicker/numberpicker.dart';
-
+import 'dart:math';
 import '../Login_Pages/registration.dart';
 import '../widget/appbar_widget.dart';
 import '../widget/bottom_nav_bar.dart';
+
+String tp = 'avg';
+double? diffLvl = 5;
+void changeType(String type) {
+  tp = type;
+}
+
+void changeDiflvl(double lvl) {
+  diffLvl = lvl;
+}
 
 class Test extends StatefulWidget {
   const Test({Key? key}) : super(key: key);
@@ -23,43 +35,30 @@ class Test extends StatefulWidget {
 int weightValue = 65;
 int heightValue = 170;
 bool male = false;
-bool fmale = false;
+bool fmale = true;
 
-DateTime now = new DateTime.now();
-DateTime date = new DateTime(now.year, now.month, now.day);
+var now = DateTime.now().toUtc().add(Duration(hours: 2));
 
-String Date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+String date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
-void setData(int _height, int _weight) async {
+void setData(int _height, int _weight, String sex) async {
   double BMI; //liczenie BNI jeszcze nie dobre
-  BMI = ((_weight) / (_height) * (_height));
+  BMI = ((_weight) / ((_height) * (_height))) * 10000;
   await FirebaseFirestore.instance
       .collection("test")
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set({
-    'height': _height,
-    'weight': _weight,
-    'BMI': BMI,
-  });
+      .update({'BMI': BMI, 'level ': diffLvl, 'Sex': sex});
 }
 
-void addData(int _height, int _weight) async {
+void addData(int _height, int _weight, String type) async {
   await FirebaseFirestore.instance
       .collection('test')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set({'height ' + Date: _height, 'weight ' + Date: _weight},
-          SetOptions(merge: true)).then((value) {
-    //Do your stuff.
-  });
-}
-
-Future<void> uploadingData(
-    String _productName, String _productPrice, bool _isFavorite) async {
-  await FirebaseFirestore.instance.collection("products").add({
-    'productName': _productName,
-    'productPrice': _productPrice,
-    'isFavourite': _isFavorite,
-  });
+      .set({
+    'height ' + date: _height,
+    'weight ' + date: _weight,
+    'type ' + date: type,
+  }, SetOptions(merge: true)).then((value) {});
 }
 
 class _TestState extends State<Test> {
@@ -96,56 +95,16 @@ class _TestState extends State<Test> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/images/body-types.png"),
+                if (male) ChooseBodyTypeMan() else ChooseBodyTypeWomen(),
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
+                /* Text(
                   "Choose your body type",
                   textAlign: TextAlign
                       .left, /*style: TextStyle(color: kBackgroundColor)*/
                 ),
-                SliderBodyType(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Text("Select difficulty level", textAlign: TextAlign.left),
-                SliderLevel(),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        Text('Weight'),
-                        NumberPicker(
-                            minValue: 20,
-                            maxValue: 150,
-                            value: weightValue,
-                            onChanged: (value) => setState(() {
-                                  weightValue = value;
-                                })),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text('Height'),
-                        NumberPicker(
-                            minValue: 120,
-                            maxValue: 220,
-                            value: heightValue,
-                            onChanged: (value) => setState(() {
-                                  heightValue = value;
-                                })),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                 SliderBodyType(),*/
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -184,14 +143,60 @@ class _TestState extends State<Test> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
+                  height: 20,
+                ),
+                Text("Select difficulty level", textAlign: TextAlign.left),
+                SliderLevel(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Text('Weight'),
+                        NumberPicker(
+                            minValue: 20,
+                            maxValue: 150,
+                            value: weightValue,
+                            onChanged: (value) => setState(() {
+                                  weightValue = value;
+                                })),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text('Height'),
+                        NumberPicker(
+                            minValue: 120,
+                            maxValue: 220,
+                            value: heightValue,
+                            onChanged: (value) => setState(() {
+                                  heightValue = value;
+                                })),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
                   height: 20,
                 ),
                 ButtonWidget(
                     text: "Submit",
                     onClicked: () {
-                      //setData(heightValue as int, weightValue as int);
-                      addData(heightValue as int, weightValue as int);
+                      String sex;
+                      if (male) {
+                        sex = 'Male';
+                      } else {
+                        sex = 'Female';
+                      }
+                      addData(heightValue, weightValue, tp);
+                      setData(heightValue, weightValue, sex);
                     }),
               ],
             )),

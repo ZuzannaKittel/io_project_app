@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Screens/empty.dart';
 
 class SliderLevel extends StatefulWidget {
   SliderLevel({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _SliderLevelState extends State<SliderLevel> {
       onChanged: (double value) {
         setState(() {
           _currentLevel = value;
+          changeDiflvl(value);
         });
       },
     );
