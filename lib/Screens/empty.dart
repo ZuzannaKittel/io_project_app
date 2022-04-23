@@ -17,12 +17,32 @@ import '../widget/bottom_nav_bar.dart';
 
 String tp = 'avg';
 double? diffLvl = 5;
+double? multp;
+double? BMI;
 void changeType(String type) {
   tp = type;
 }
 
 void changeDiflvl(double lvl) {
   diffLvl = lvl;
+}
+
+void bmi(int _height, int _weight) {
+  BMI = ((_weight) / ((_height) * (_height))) * 10000;
+  BMI = ((BMI! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
+}
+
+void setMultiplier(double? diffLvl, double? bmi, String sex, String type) {
+  double bmiScale = 0.5;
+  if (bmi! > 18.5 && bmi < 29 && type == 'average' || type == 'muscular') {
+    bmiScale = 1;
+  }
+  if (sex == "Male") {
+    multp = (diffLvl! / 10) + bmiScale;
+  } else if (sex == 'Female') {
+    multp = (diffLvl! / 15) + bmiScale;
+  }
+  multp = ((multp! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
 }
 
 class Test extends StatefulWidget {
@@ -42,12 +62,12 @@ var now = DateTime.now().toUtc().add(Duration(hours: 2));
 String date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
 void setData(int _height, int _weight, String sex) async {
-  double BMI; //liczenie BNI jeszcze nie dobre
-  BMI = ((_weight) / ((_height) * (_height))) * 10000;
+  //liczenie BNI jeszcze nie dobre
+
   await FirebaseFirestore.instance
       .collection("test")
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({'BMI': BMI, 'level ': diffLvl, 'Sex': sex});
+      .update({'BMI': BMI, 'level ': diffLvl, 'Sex': sex, 'Difficulty': multp});
 }
 
 void addData(int _height, int _weight, String type) async {
@@ -195,6 +215,8 @@ class _TestState extends State<Test> {
                       } else {
                         sex = 'Female';
                       }
+                      bmi(heightValue, weightValue);
+                      setMultiplier(diffLvl, BMI, sex, tp);
                       addData(heightValue, weightValue, tp);
                       setData(heightValue, weightValue, sex);
                     }),

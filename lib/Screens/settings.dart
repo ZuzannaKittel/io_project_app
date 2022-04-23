@@ -75,7 +75,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'Sth',
+                    'Update',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
