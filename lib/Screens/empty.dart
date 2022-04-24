@@ -77,7 +77,7 @@ void addData(int _height, int _weight, String type) async {
       .set({
     'height ' + date: _height,
     'weight ' + date: _weight,
-    'type ' + date: type,
+    'body type ' + date: type,
   }, SetOptions(merge: true)).then((value) {});
 }
 
@@ -199,9 +199,6 @@ class _TestState extends State<Test> {
                       ],
                     )
                   ],
-                ),
-                const SizedBox(
-                  height: 20,
                 ),
                 const SizedBox(
                   height: 20,
