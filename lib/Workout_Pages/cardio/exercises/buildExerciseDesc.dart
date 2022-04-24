@@ -64,12 +64,22 @@ class buildExDesc extends StatelessWidget {
                 ),
                 //Image.asset("assets/images/jj.png"),
                 //stringGetExDescription(),
-                Text(
-                  exDescription,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      fontFamily: "Cairo"),
+                Container(
+                  padding: EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade400,
+                      width: 3.0,
+                    ),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Text(
+                    exDescription,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontFamily: "Cairo"),
+                  ),
                 ),
               ]),
             ),

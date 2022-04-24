@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Screens/empty.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
@@ -22,7 +23,8 @@ bool getState() {
 }
 
 class _JumpingJacksState extends State<JumpingJacks> {
-  static const maxSeconds = 60; //*mnożnik dla konkretnego użytkownika
+  static const maxSeconds = 60;
+  //int maxSeconds = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
   int seconds = maxSeconds;
   Timer? timer;
 
