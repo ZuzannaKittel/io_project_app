@@ -77,7 +77,7 @@ class cTrainingAPage extends StatelessWidget {
                       runSpacing: 20,
                       children: <Widget>[
                         Exercise(
-                          exerciseName: "Pajacyki",
+                          exerciseName: "Jacks",
                           exerciseNum: 1,
                           isDone: getState(),
                           press: () {
@@ -119,7 +119,7 @@ class cTrainingAPage extends StatelessWidget {
                           },
                         ),
                         Exercise(
-                          exerciseName: "HighKnees",
+                          exerciseName: "Knees",
                           exerciseNum: 5,
                           press: () {
                             Navigator.of(context).push(

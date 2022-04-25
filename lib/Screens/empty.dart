@@ -132,7 +132,7 @@ class _TestState extends State<Test> {
                       children: [
                         Text("Man"),
                         Checkbox(
-                          activeColor: neonBlue,
+                          activeColor: neonGreen,
                           //hoverColor: kLightOrangeColor,
                           //mouseCursor: kLightOrangeColor,
                           //shape: RoundRangeSliderThumbShape,
@@ -150,7 +150,7 @@ class _TestState extends State<Test> {
                       children: [
                         Text("Woman"),
                         Checkbox(
-                          activeColor: neonBlue,
+                          activeColor: neonGreen,
                           value: fmale,
                           onChanged: (bool? value) {
                             setState(() {

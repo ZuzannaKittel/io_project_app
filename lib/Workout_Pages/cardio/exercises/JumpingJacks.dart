@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,6 +14,8 @@ import 'package:io_project/constants.dart';
 import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 
+double Multp = 1;
+
 class JumpingJacks extends StatefulWidget {
   @override
   _JumpingJacksState createState() => _JumpingJacksState();
@@ -22,10 +26,19 @@ bool getState() {
   return isDone;
 }
 
+void getExDescription() async {
+  print(Multp);
+  await FirebaseFirestore.instance
+      .collection("test")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get()
+      .then((value) => {Multp = value['Difficulty']});
+}
+
 class _JumpingJacksState extends State<JumpingJacks> {
-  static const maxSeconds = 60;
+  static const maxSeconds = 60; //*Multp;
   //int maxSeconds = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
-  int seconds = maxSeconds;
+  int seconds = maxSeconds as int;
   Timer? timer;
 
   void resetTimer() => setState(() => seconds = maxSeconds);

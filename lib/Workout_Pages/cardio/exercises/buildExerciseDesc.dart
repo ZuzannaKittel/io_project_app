@@ -77,7 +77,7 @@ class buildExDesc extends StatelessWidget {
                     exDescription,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
+                        fontSize: 22,
                         fontFamily: "Cairo"),
                   ),
                 ),
