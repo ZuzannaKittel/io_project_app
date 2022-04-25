@@ -14,7 +14,7 @@ import 'package:io_project/constants.dart';
 import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 
-double Multp = 1;
+double multiplier = 1;
 
 class JumpingJacks extends StatefulWidget {
   @override
@@ -26,22 +26,24 @@ bool getState() {
   return isDone;
 }
 
-void getExDescription() async {
-  print(Multp);
+void getDifficulty() async {
   await FirebaseFirestore.instance
       .collection("test")
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .get()
-      .then((value) => {Multp = value['Difficulty']});
+      .then((value) => {multiplier = value['Difficulty']});
 }
 
+var maxSecond = 60;
+
 class _JumpingJacksState extends State<JumpingJacks> {
-  static const maxSeconds = 60; //*Multp;
-  //int maxSeconds = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
-  int seconds = maxSeconds as int;
+  //*Multp;
+  //int maxSec = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
+  int seconds = (maxSecond * multiplier).round();
+  int maxSec = (maxSecond * multiplier).round();
   Timer? timer;
 
-  void resetTimer() => setState(() => seconds = maxSeconds);
+  void resetTimer() => setState(() => seconds = maxSec);
 
   void StartTimer({bool reset = true}) {
     if (reset) {
@@ -68,6 +70,8 @@ class _JumpingJacksState extends State<JumpingJacks> {
 
   @override
   Widget build(BuildContext context) {
+    getDifficulty();
+    print(multiplier);
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
@@ -190,7 +194,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
 
   Widget BuildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
-    final isCompleted = seconds == maxSeconds || seconds == 0;
+    final isCompleted = seconds == maxSec || seconds == 0;
     if (isCompleted) {
       isDone = true;
     }
@@ -252,7 +256,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
           fit: StackFit.expand,
           children: [
             CircularProgressIndicator(
-              value: seconds / maxSeconds,
+              value: seconds / maxSec,
               strokeWidth: 8,
               valueColor: const AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
             ),
