@@ -88,7 +88,7 @@ class _WorkoutPage extends StatelessWidget {
                       children: <Widget>[
                         CategoryCard(
                           title: "STRENGTH",
-                          svgSrc: "assets/icons/Excrecises.svg",
+                          svgSrc: "assets/images/strength.png",
                           press: () {
                             Navigator.push(
                               context,
@@ -100,7 +100,7 @@ class _WorkoutPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "CARDIO",
-                          svgSrc: "assets/icons/Hamburger.svg",
+                          svgSrc: "assets/images/cardio.png",
                           press: () {
                             Navigator.push(
                               context,
@@ -112,7 +112,7 @@ class _WorkoutPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "HIIT",
-                          svgSrc: "assets/icons/Meditation.svg",
+                          svgSrc: "assets/images/HIIT.png",
                           press: () {
                             Navigator.push(
                               context,
@@ -124,7 +124,7 @@ class _WorkoutPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "OTHER",
-                          svgSrc: "assets/icons/yoga.svg",
+                          svgSrc: "assets/images/other.png",
                           press: () {
                             Navigator.push(
                               context,

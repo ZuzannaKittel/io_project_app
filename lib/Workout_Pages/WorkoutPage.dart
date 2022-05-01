@@ -80,7 +80,7 @@ class _MenuPage extends StatelessWidget {
                       children: <Widget>[
                         CategoryCard(
                           title: "Workout",
-                          svgSrc: "assets/icons/Excrecises.svg",
+                          svgSrc: "assets/images/workout.jpg",
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -90,12 +90,12 @@ class _MenuPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Week",
-                          svgSrc: "assets/icons/Hamburger.svg",
+                          svgSrc: "assets/images/week.jpg",
                           press: () {},
                         ),
                         CategoryCard(
                           title: "Calendar",
-                          svgSrc: "assets/icons/Meditation.svg",
+                          svgSrc: "assets/images/calendar.jpg",
                           press: () {
                             //Navigator.push(
                             // context,
@@ -107,7 +107,7 @@ class _MenuPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Summary",
-                          svgSrc: "assets/icons/yoga.svg",
+                          svgSrc: "assets/images/summary.jpg",
                           press: () {},
                         ),
                       ],
