@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("FitApp",
+            const Text("FittApp",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 28.0,

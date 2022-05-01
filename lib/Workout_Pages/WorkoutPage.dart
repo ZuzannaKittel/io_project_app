@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
+import 'package:io_project/Workout_Pages/calendar.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
 import 'package:io_project/constants.dart';
@@ -84,7 +85,7 @@ class _MenuPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => Home_workout()),
+                                  builder: (context) => const Home_workout()),
                             );
                           },
                         ),
@@ -97,12 +98,10 @@ class _MenuPage extends StatelessWidget {
                           title: "Calendar",
                           svgSrc: "assets/images/calendar.jpg",
                           press: () {
-                            //Navigator.push(
-                            // context,
-                            //MaterialPageRoute(builder: (context) {
-                            //return DetailsScreen();
-                            //}),
-                            //);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const CalendarPage()),
+                            );
                           },
                         ),
                         CategoryCard(

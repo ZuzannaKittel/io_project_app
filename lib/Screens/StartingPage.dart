@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../Login_Pages/registration.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class startingPage extends StatefulWidget {
   const startingPage({Key? key}) : super(key: key);
@@ -76,7 +79,11 @@ class _FirstPageState extends State<FirstPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
+              Image.asset("assets/images/logoPNG.png"),
+              const SizedBox(
+                height: 20,
+              ),
               InkWell(
                 onTap: () {
                   Navigator.push(
