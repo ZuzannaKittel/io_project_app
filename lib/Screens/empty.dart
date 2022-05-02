@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
@@ -19,12 +20,20 @@ String tp = 'avg';
 double? diffLvl = 5;
 double? multp;
 double? BMI;
+int workoutsAmount = 2;
 void changeType(String type) {
   tp = type;
 }
 
 void changeDiflvl(double lvl) {
   diffLvl = lvl;
+}
+
+void changeAmount(String am) {
+  if (am as int <= 7 && am as int >= 1) {
+    print(am);
+    workoutsAmount = am as int;
+  }
 }
 
 void bmi(int _height, int _weight) {
@@ -56,18 +65,26 @@ int weightValue = 65;
 int heightValue = 170;
 bool male = false;
 bool fmale = true;
+bool gainMuscles = false;
+bool looseWeight = false;
+bool improveCondition = true;
+//int workoutsAmount = 2;
 
 var now = DateTime.now().toUtc().add(Duration(hours: 2));
 
 String date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
-void setData(int _height, int _weight, String sex) async {
-  //liczenie BNI jeszcze nie dobre
-
+void setData(String sex, int _amount) async {
   await FirebaseFirestore.instance
       .collection("test")
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({'BMI': BMI, 'level ': diffLvl, 'Sex': sex, 'Difficulty': multp});
+      .update({
+    'BMI': BMI,
+    'level ': diffLvl,
+    'sex': sex,
+    'difficulty': multp,
+    'workouts amount': _amount
+  });
 }
 
 void addData(int _height, int _weight, String type) async {
@@ -90,7 +107,7 @@ class _TestState extends State<Test> {
       body: SingleChildScrollView(
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            height: MediaQuery.of(context).size.height,
+            height: 1050,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
@@ -166,7 +183,9 @@ class _TestState extends State<Test> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text("Select difficulty level", textAlign: TextAlign.left),
+                Text("Select difficulty level",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
                 SliderLevel(),
                 const SizedBox(
                   height: 20,
@@ -203,6 +222,96 @@ class _TestState extends State<Test> {
                 const SizedBox(
                   height: 20,
                 ),
+                Column(
+                  children: [
+                    Text("Amount of workouts per week",
+                        style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                    TextField(
+                        decoration:
+                            InputDecoration(labelText: "Type here the number"),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        onChanged: (String amount) async {
+                          changeAmount(amount);
+                        }),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Text("What do you want to achieve?",
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text("Gain Muscles"),
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: gainMuscles,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    gainMuscles = value!;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text("Loose Weight"),
+                              Checkbox(
+                                activeColor: neonGreen,
+                                value: looseWeight,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    looseWeight = value!;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text("Better Condition"),
+                              Checkbox(
+                                activeColor: neonGreen,
+                                value: improveCondition,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    improveCondition = value!;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 ButtonWidget(
                     text: "Submit",
                     onClicked: () {
@@ -215,7 +324,7 @@ class _TestState extends State<Test> {
                       bmi(heightValue, weightValue);
                       setMultiplier(diffLvl, BMI, sex, tp);
                       addData(heightValue, weightValue, tp);
-                      setData(heightValue, weightValue, sex);
+                      setData(sex, workoutsAmount);
                     }),
               ],
             )),

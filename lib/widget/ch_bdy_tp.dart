@@ -84,7 +84,7 @@ class _ChooseBodyTypeManState extends State<ChooseBodyTypeMan> {
         ),
         Text(
           retType(type),
-          style: const TextStyle(fontFamily: 'cairo', fontSize: 20),
+          style: const TextStyle(fontFamily: 'cairo', fontSize: 18),
         )
       ],
     );

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:io_project/widget/buttons_widget.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -107,15 +108,11 @@ class _ImageUploadsState extends State<ImageUploads> {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 20,
           ),
-          RawMaterialButton(
-            fillColor: const Color(0xFFC7B8F5),
-            elevation: 0.0,
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadiusDirectional.circular(12.0)),
-            onPressed: () async {
+          ButtonWidget(
+            text: 'Submit',
+            onClicked: () async {
               User? user = FirebaseAuth.instance.currentUser;
               final id = user!.uid;
               String downloadURL = await firebase_storage
@@ -127,13 +124,6 @@ class _ImageUploadsState extends State<ImageUploads> {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
             },
-            child: const Text(
-              "SUBMIT",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-              ),
-            ),
           )
         ],
       ),

@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:horizontal_picker/horizontal_picker.dart';
 import 'package:io_project/Profile_Pages/upload_profile_pic.dart';
+import 'package:io_project/Screens/empty.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
@@ -15,31 +17,17 @@ import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/widget/slider.dart';
 import 'package:io_project/widget/textfield_widget.dart';
 import 'package:path/path.dart';
-import 'package:numberpicker/numberpicker.dart';
 
-class Preferences extends StatefulWidget {
-  const Preferences({Key? key}) : super(key: key);
+class EditProfile extends StatefulWidget {
+  const EditProfile({Key? key}) : super(key: key);
 
   @override
-  _PreferencesState createState() => _PreferencesState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _PreferencesState extends State<Preferences> {
+class _EditProfileState extends State<EditProfile> {
   Users user = UserPreferences.myUser;
   late File file;
-  int _weight = 0;
-  int _height = 0;
-  int BMI = 0;
-  String? _weightS;
-  String? _heightS;
-  Future<void> getData() async {
-    await FirebaseFirestore.instance
-        .collection("test")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then(
-            (value) => {_weight = value['weight'], _height = value['height']});
-  }
 
   Future<void> uploadAbout(String abt) async {
     await FirebaseFirestore.instance
@@ -52,7 +40,7 @@ class _PreferencesState extends State<Preferences> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: buildAppBar(context, "Preferences"),
+        appBar: buildAppBar(context, "Edit Profile"),
         bottomNavigationBar: const BottomNavBar(),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -71,16 +59,15 @@ class _PreferencesState extends State<Preferences> {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => ImageUploads()),
                 );
-                setData(170, 50);
               },
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             TextFieldWidget(
               label: 'Full Name',
               text: user.name,
               onChanged: (name) {},
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             TextFieldWidget(
               label: 'Email',
               text: user.email,
@@ -97,47 +84,7 @@ class _PreferencesState extends State<Preferences> {
                 uploadAbout(about);
               },
             ),
-            const SizedBox(height: 24),
-            TextField(
-              decoration: InputDecoration(labelText: "Enter your height"),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: (height) async {
-                /*await FirebaseFirestore.instance
-                    .collection("test")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .set({
-                  'height': h,
-                });*/
-                _height = int.parse(height);
-              },
-            ),
-            const SizedBox(height: 24),
-            TextField(
-              decoration: InputDecoration(labelText: "Enter your weight"),
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: (weight) async {
-                _weight = int.parse(weight);
-                await FirebaseFirestore.instance
-                    .collection("test")
-                    .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .set({
-                  'height': _height,
-                  'weight': _weight,
-                });
-              },
-            ),
-            const SizedBox(height: 24),
-            ButtonWidget(
-                text: "Set BMI",
-                onClicked: () {
-                  setBMI(_height, _weight);
-                }),
+            const SizedBox(height: 20),
           ],
         ),
       );
@@ -164,6 +111,7 @@ class _PreferencesState extends State<Preferences> {
     return taskSnapshot.ref.getDownloadURL();
   }
 
+/*
   Future<void> uploadingData(
       String _productName, String _productPrice, bool _isFavorite) async {
     await FirebaseFirestore.instance.collection("products").add({
@@ -203,7 +151,7 @@ class _PreferencesState extends State<Preferences> {
     });
   }
 
-  /*
+  
   Future uploadData() async {
     User? user = FirebaseAuth.instance.currentUser;
     final id = user!.uid;
@@ -217,8 +165,8 @@ class _PreferencesState extends State<Preferences> {
       print('error occured');
     }
   }
-  */
-  /*  StreamBuilder(
+  
+    StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('test')
                     .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -234,5 +182,5 @@ class _PreferencesState extends State<Preferences> {
                     ],
                   );
                 }))
-                */
+   */
 }

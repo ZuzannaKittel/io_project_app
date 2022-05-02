@@ -1,26 +1,58 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class NumbersWidget extends StatelessWidget {
+class NumbersWidget extends StatefulWidget {
+  const NumbersWidget({Key? key}) : super(key: key);
+
+  @override
+  State<NumbersWidget> createState() => _NumbersWidgetState();
+}
+
+double height = 0;
+double weight = 0;
+double BMI = 0;
+
+void getB() async {
+  await FirebaseFirestore.instance
+      .collection("test")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get()
+      .then((value) => {BMI = value['BMI']});
+  if (BMI == 0) {
+    BMI = 00;
+  }
+}
+
+double getBMI() {
+  getB();
+  return BMI;
+}
+
+class _NumbersWidgetState extends State<NumbersWidget> {
   @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      buildButton(context, '4.8', 'Ranking'),
-      buildDivider(),
-      buildButton(context, '35', 'Following'),
-      buildDivider(),
-      buildButton(context, '50', 'Followers'),
-    ],
-  );
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          buildButton(context, '4.8', 'Ranking'),
+          buildDivider(),
+          buildButton(context, '35', 'Following'),
+          buildDivider(),
+          buildButton(context, BMI.toString(), 'BMI'),
+        ],
+      );
   Widget buildDivider() => Container(
-    height: 24,
-    child: VerticalDivider(),
-  );
+        height: 24,
+        child: VerticalDivider(),
+      );
 
   Widget buildButton(BuildContext context, String value, String text) =>
       MaterialButton(
         padding: EdgeInsets.symmetric(vertical: 4),
-        onPressed: () {},
+        onPressed: () {
+          BMI = getBMI();
+          print(BMI);
+        },
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Column(
           mainAxisSize: MainAxisSize.min,

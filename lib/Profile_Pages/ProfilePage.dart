@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Screens/empty.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
@@ -6,8 +7,7 @@ import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
-import 'package:io_project/Profile_Pages/EditProfilePage.dart';
-import 'preferences.dart';
+import 'package:io_project/Profile_Pages/EditProfile.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
             imagePath: user.getImage(),
             onClicked: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => EditProfilePage()),
+                MaterialPageRoute(builder: (context) => const EditProfile()),
               );
             },
           ),
@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
         text: 'Preferences',
         onClicked: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => Preferences()),
+            MaterialPageRoute(builder: (context) => Test()),
           );
         },
       );

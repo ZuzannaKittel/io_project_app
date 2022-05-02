@@ -83,7 +83,7 @@ class _ChooseBodyTypeWomenState extends State<ChooseBodyTypeWomen> {
         ),
         Text(
           retType(type),
-          style: const TextStyle(fontFamily: 'cairo', fontSize: 20),
+          style: const TextStyle(fontFamily: 'cairo', fontSize: 18),
         )
       ],
     );
