@@ -68,8 +68,20 @@ class BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
+    return ElevatedButton(
+      style: ButtonStyle(
+        //elevation:
+        //shape: MaterialStateProperty.all(CircleBorder()),
+        //padding: MaterialStateProperty.all(EdgeInsets.all(18)),
+        elevation: MaterialStateProperty.all(0),
+        backgroundColor:
+            MaterialStateProperty.all(Colors.white), // <-- Button color
+        overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+          if (states.contains(MaterialState.pressed))
+            return Color(0xFFE6E6E6); // <-- Splash color
+        }),
+      ),
+      onPressed: press,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[

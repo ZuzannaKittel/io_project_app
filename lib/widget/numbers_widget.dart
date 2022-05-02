@@ -29,6 +29,22 @@ double getBMI() {
   return BMI;
 }
 
+void getH() async {
+  await FirebaseFirestore.instance
+      .collection("test")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get()
+      .then((value) => {height = value['height']});
+  if (height == 0) {
+    height = 00;
+  }
+}
+
+double getHeight() {
+  getH();
+  return height;
+}
+
 class _NumbersWidgetState extends State<NumbersWidget> {
   @override
   Widget build(BuildContext context) => Row(
@@ -36,7 +52,7 @@ class _NumbersWidgetState extends State<NumbersWidget> {
         children: <Widget>[
           buildButton(context, '4.8', 'Ranking'),
           buildDivider(),
-          buildButton(context, '35', 'Following'),
+          buildButton(context, height.toString(), 'Height'),
           buildDivider(),
           buildButton(context, BMI.toString(), 'BMI'),
         ],
@@ -50,7 +66,9 @@ class _NumbersWidgetState extends State<NumbersWidget> {
       MaterialButton(
         padding: EdgeInsets.symmetric(vertical: 4),
         onPressed: () {
+          height = getHeight();
           BMI = getBMI();
+          print(height);
           print(BMI);
         },
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
