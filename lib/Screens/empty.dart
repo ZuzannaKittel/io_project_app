@@ -85,6 +85,9 @@ void setData(String sex, int _amount, int _height) async {
     'difficulty': multp,
     'workouts amount': _amount,
     'height': _height,
+    'gain muscles': gainMuscles,
+    'loose weight': looseWeight,
+    'improve condition': improveCondition,
   });
 }
 

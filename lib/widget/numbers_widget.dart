@@ -9,8 +9,8 @@ class NumbersWidget extends StatefulWidget {
   State<NumbersWidget> createState() => _NumbersWidgetState();
 }
 
-double height = 0;
-double weight = 0;
+int height = 0;
+int weight = 0;
 double BMI = 0;
 
 void getB() async {
@@ -40,7 +40,7 @@ void getH() async {
   }
 }
 
-double getHeight() {
+int getHeight() {
   getH();
   return height;
 }
@@ -50,7 +50,7 @@ class _NumbersWidgetState extends State<NumbersWidget> {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          buildButton(context, '4.8', 'Ranking'),
+          buildButton(context, '???', 'Weight'),
           buildDivider(),
           buildButton(context, height.toString(), 'Height'),
           buildDivider(),

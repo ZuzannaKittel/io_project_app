@@ -6,6 +6,7 @@ import 'package:io_project/Workout_Pages/Calendar.dart';
 import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
+import '../Profile_Pages/WeightPage.dart';
 import '../widget/bottom_nav_bar.dart';
 
 class Settings extends StatefulWidget {
@@ -93,7 +94,7 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CalendarPage(),
+                      builder: (context) => const WeightPage(),
                     ),
                   );
                 },
@@ -115,7 +116,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'Calendar Test',
+                    'Test',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
