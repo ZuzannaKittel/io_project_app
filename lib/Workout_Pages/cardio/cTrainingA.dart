@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ButtKicks.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
+import 'package:io_project/Workout_Pages/strength/exercises/Deadlift.dart';
 import 'package:io_project/constants.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/search_bar.dart';
@@ -79,13 +80,15 @@ class cTrainingAPage extends StatelessWidget {
                         Exercise(
                           exerciseName: "Jacks",
                           exerciseNum: 1,
-                          isDone: getState(),
+                          //isDone: getState(),
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => JumpingJacks()),
+                                  builder: (context) =>
+                                      JumpingJacks(isDone: false)),
                             );
                           },
+                          isDone: false,
                         ),
                         Exercise(
                           exerciseName: "Squats 1",

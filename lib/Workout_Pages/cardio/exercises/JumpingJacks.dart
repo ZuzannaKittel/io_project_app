@@ -17,21 +17,25 @@ import 'package:io_project/widget/exercise_card.dart';
 double multiplier = 1;
 
 class JumpingJacks extends StatefulWidget {
+  final bool isDone;
+  const JumpingJacks({Key? key, required this.isDone}) : super(key: key);
   @override
   _JumpingJacksState createState() => _JumpingJacksState();
 }
 
+/*
 bool isDone = false;
 bool getState() {
   return isDone;
 }
+*/
 
 void getDifficulty() async {
   await FirebaseFirestore.instance
       .collection("test")
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .get()
-      .then((value) => {multiplier = value['Difficulty']});
+      .then((value) => {multiplier = value['difficulty']});
 }
 
 var maxSecond = 60;
@@ -39,8 +43,10 @@ var maxSecond = 60;
 class _JumpingJacksState extends State<JumpingJacks> {
   //*Multp;
   //int maxSec = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
+
   int seconds = (maxSecond * multiplier).round();
   int maxSec = (maxSecond * multiplier).round();
+
   Timer? timer;
 
   void resetTimer() => setState(() => seconds = maxSec);
@@ -196,7 +202,9 @@ class _JumpingJacksState extends State<JumpingJacks> {
     final isRunning = timer == null ? false : timer!.isActive;
     final isCompleted = seconds == maxSec || seconds == 0;
     if (isCompleted) {
-      isDone = true;
+      setState(() {
+        //JumpingJacks.isDone=true;
+      });
     }
     return isRunning || !isCompleted
         ? Row(

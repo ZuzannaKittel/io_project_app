@@ -78,11 +78,12 @@ class hTrainingAPage extends StatelessWidget {
                         Exercise(
                           exerciseName: "Pajacyki",
                           exerciseNum: 1,
-                          isDone: getState(),
+                          isDone: false,
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => JumpingJacks()),
+                                  builder: (context) =>
+                                      JumpingJacks(isDone: false)),
                             );
                           },
                         ),
