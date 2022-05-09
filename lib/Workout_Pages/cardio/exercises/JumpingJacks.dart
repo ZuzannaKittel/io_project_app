@@ -104,8 +104,10 @@ class _JumpingJacksState extends State<JumpingJacks> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                //Column
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,

@@ -1,26 +1,54 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/HighKnees.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
+import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
-
-import '../../../widget/appbar_widget.dart';
+import '../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 
-class JumpingSquats extends StatefulWidget {
+double multiplier = 1;
+
+class buildExercise extends StatefulWidget {
+  final String exName;
+  final String imagePath;
+  //final String nextExName;
+
+  const buildExercise({
+    Key? key,
+    required this.exName,
+    required this.imagePath,
+  }) : super(key: key);
   @override
-  _JumpingSquatsState createState() => _JumpingSquatsState();
+  _buildExerciseState createState() => _buildExerciseState();
 }
 
-class _JumpingSquatsState extends State<JumpingSquats> {
+void getDifficulty() async {
+  await FirebaseFirestore.instance
+      .collection("test")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get()
+      .then((value) => {multiplier = value['difficulty']});
+}
+
+//var maxSecond = 60;
+
+class _buildExerciseState extends State<buildExercise> {
   static const maxSeconds = 60; //*mnożnik dla konkretnego użytkownika
   int seconds = maxSeconds;
+  //*Multp;
+  //int maxSec = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
+
+  //int seconds = (maxSecond * multiplier).round();
+  //int maxSec = (maxSecond * multiplier).round();
+
   Timer? timer;
 
   void resetTimer() => setState(() => seconds = maxSeconds);
@@ -50,11 +78,13 @@ class _JumpingSquatsState extends State<JumpingSquats> {
 
   @override
   Widget build(BuildContext context) {
+    getDifficulty();
+    print(multiplier);
     var size = MediaQuery.of(context)
         .size; //this gonna give us total height and with of our device
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jumping Squats",
+        title: Text(widget.exName,
             style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: BackButton(),
         backgroundColor: mBackgroundColor,
@@ -77,7 +107,9 @@ class _JumpingSquatsState extends State<JumpingSquats> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView(
-                physics: const BouncingScrollPhysics(),
+                //Column
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -94,14 +126,15 @@ class _JumpingSquatsState extends State<JumpingSquats> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) =>
-                                  buildExDesc(exName: "JumpingSquats"));
+                              builder: (context) => buildExDesc(
+                                    exName: widget.exName,
+                                  ));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),
                     ),
                   ),
-                  Image.asset("assets/images/squat-jump.gif"),
+                  Image.asset(widget.imagePath),
                   /* Center(
                     //alignment: MainAxisAlignment.center,
                     child:
@@ -154,7 +187,8 @@ class _JumpingSquatsState extends State<JumpingSquats> {
                     child: SmallButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => HighKnees()),
+                          MaterialPageRoute(
+                              builder: (context) => cTrainingAPage()),
                         );
                       },
                     ),
@@ -171,7 +205,11 @@ class _JumpingSquatsState extends State<JumpingSquats> {
   Widget BuildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
     final isCompleted = seconds == maxSeconds || seconds == 0;
-
+    if (isCompleted) {
+      setState(() {
+        //JumpingJacks.isDone=true;
+      });
+    }
     return isRunning || !isCompleted
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -186,6 +224,9 @@ class _JumpingSquatsState extends State<JumpingSquats> {
                   }
                 },
               ),
+              const SizedBox(
+                width: 10,
+              ),
               TimerButtonWidget(
                 text: "Cancel",
                 onClicked: () {
@@ -194,11 +235,29 @@ class _JumpingSquatsState extends State<JumpingSquats> {
               ),
             ],
           )
-        : TimerButtonWidget(
-            text: "Start",
-            onClicked: () {
-              StartTimer();
-            },
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TimerButtonWidget(
+                text: "Start",
+                onClicked: () {
+                  StartTimer();
+                },
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              /*TimerButtonWidget(
+                text: "Next",
+                onClicked: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (context) => BackAndForthSquats()),
+                  );
+                },
+              ),
+              */
+            ],
           );
   }
 
@@ -211,7 +270,7 @@ class _JumpingSquatsState extends State<JumpingSquats> {
             CircularProgressIndicator(
               value: seconds / maxSeconds,
               strokeWidth: 8,
-              valueColor: AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
+              valueColor: const AlwaysStoppedAnimation(Color(0xFFC7B8F5)),
             ),
             Center(child: BuildTime()),
           ],

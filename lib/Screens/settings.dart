@@ -2,12 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/Screens/empty.dart';
-import 'package:io_project/Workout_Pages/Calendar.dart';
+import 'package:io_project/Workout_Pages/buildExercise.dart';
 import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
 import '../Profile_Pages/WeightPage.dart';
 import '../widget/bottom_nav_bar.dart';
+import '../Workout_Pages/buildExercise.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -116,7 +117,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'Test',
+                    'weight history test',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
@@ -133,7 +134,10 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RegistrationPage(),
+                      builder: (context) => const buildExercise(
+                        exName: "Jakies cw",
+                        imagePath: "assets/images/MJumpingJacks.gif",
+                      ),
                     ),
                   );
                 },
@@ -155,7 +159,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'Sth',
+                    'buildExercise test',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
