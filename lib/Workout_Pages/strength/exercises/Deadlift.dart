@@ -11,7 +11,7 @@ import 'package:io_project/constants.dart';
 import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 
-import '../../cardio/exercises/testExDesc.dart';
+import '../../buildExDescription.dart';
 
 class Deadlift extends StatefulWidget {
   @override

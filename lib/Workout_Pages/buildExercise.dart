@@ -6,19 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
-import 'package:io_project/widget/bottom_nav_bar.dart';
+import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
-import '../widget/appbar_widget.dart';
-import 'package:io_project/widget/exercise_card.dart';
 
 double multiplier = 1;
 
 class buildExercise extends StatefulWidget {
   final String exName;
   final String imagePath;
+
   //final String nextExName;
 
   const buildExercise({
@@ -38,18 +36,17 @@ void getDifficulty() async {
       .then((value) => {multiplier = value['difficulty']});
 }
 
-//var maxSecond = 60;
+var maxSecond = 60;
 
 class _buildExerciseState extends State<buildExercise> {
-  static const maxSeconds = 60; //*mnożnik dla konkretnego użytkownika
-  int seconds = maxSeconds;
-  //*Multp;
-  //int maxSec = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
+  late bool isCompleted = false;
 
-  //int seconds = (maxSecond * multiplier).round();
-  //int maxSec = (maxSecond * multiplier).round();
+  int seconds = (maxSecond * multiplier).round();
+  int maxSeconds = (maxSecond * multiplier).round();
 
   Timer? timer;
+
+  late bool isDone;
 
   void resetTimer() => setState(() => seconds = maxSeconds);
 
@@ -58,7 +55,7 @@ class _buildExerciseState extends State<buildExercise> {
       resetTimer();
     }
 
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {
@@ -85,8 +82,8 @@ class _buildExerciseState extends State<buildExercise> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.exName,
-            style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
-        leading: BackButton(),
+            style: const TextStyle(fontSize: 24, fontFamily: "Cairo")),
+        leading: const BackButton(),
         backgroundColor: mBackgroundColor,
         elevation: 0,
       ),
@@ -109,7 +106,7 @@ class _buildExerciseState extends State<buildExercise> {
               child: ListView(
                 //Column
                 //crossAxisAlignment: CrossAxisAlignment.start,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -126,7 +123,7 @@ class _buildExerciseState extends State<buildExercise> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => buildExDesc(
+                              builder: (context) => BuilderOfDescription(
                                     exName: widget.exName,
                                   ));
                         },
@@ -135,42 +132,6 @@ class _buildExerciseState extends State<buildExercise> {
                     ),
                   ),
                   Image.asset(widget.imagePath),
-                  /* Center(
-                    //alignment: MainAxisAlignment.center,
-                    child:
-                        /*Text('Jumping',
-                          style: const TextStyle(
-                              fontSize: 24, fontFamily: "Cairo")),
-                      Text(
-                        "Jumping\nJacks",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(fontWeight: FontWeight.w900),
-                      ),*/
-                        ExerciseCard(press: () {
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) => ExDescription());
-                    }),
-                  ),*/
-                  //SearchBar(),
-                  /*Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: .55,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      children: <Widget>[Image.asset("assets/images/jj.png")],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text("obrazek byle jaki na razie",
-                        style:
-                            const TextStyle(fontSize: 24, fontFamily: "Cairo")),
-                  ),
-                  */
                   const SizedBox(height: 20),
                   Center(
                     child: Column(
@@ -182,17 +143,19 @@ class _buildExerciseState extends State<buildExercise> {
                       ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
-                      onClicked: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => cTrainingAPage()),
-                        );
-                      },
-                    ),
-                  )
+                  if (isCompleted == true && seconds != maxSeconds)
+                    //const Text("Done?"),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: SmallButtonWidget(
+                        onClicked: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const cTrainingAPage()),
+                          );
+                        },
+                      ),
+                    )
                 ],
               ),
             ),
@@ -204,12 +167,8 @@ class _buildExerciseState extends State<buildExercise> {
 
   Widget BuildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
-    final isCompleted = seconds == maxSeconds || seconds == 0;
-    if (isCompleted) {
-      setState(() {
-        //JumpingJacks.isDone=true;
-      });
-    }
+    isCompleted = seconds == maxSeconds || seconds == 0;
+
     return isRunning || !isCompleted
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
