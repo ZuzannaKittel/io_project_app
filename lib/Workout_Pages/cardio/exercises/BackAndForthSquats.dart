@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
+import 'package:io_project/Workout_Pages/cardio/exercises/testExDesc.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
@@ -92,8 +93,8 @@ class _BackAndForthSquatsState extends State<BackAndForthSquats> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) =>
-                                  buildExDesc(exName: "ButtAndForth Squats"));
+                              builder: (context) => BuilderOfDescription(
+                                  exName: "BackAndForthSquats"));
                         },
                         child: SvgPicture.asset("assets/icons/menu.svg"),
                       ),
