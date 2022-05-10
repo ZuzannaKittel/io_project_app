@@ -11,6 +11,8 @@ import 'package:io_project/constants.dart';
 import '../../../widget/appbar_widget.dart';
 import 'package:io_project/widget/exercise_card.dart';
 
+import '../../cardio/exercises/testExDesc.dart';
+
 class Deadlift extends StatefulWidget {
   @override
   _DeadliftState createState() => _DeadliftState();
@@ -79,7 +81,8 @@ class _DeadliftState extends State<Deadlift> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListView( //Column
+              child: ListView(
+                //Column
                 //crossAxisAlignment: CrossAxisAlignment.start,
                 physics: BouncingScrollPhysics(),
                 children: <Widget>[
@@ -98,7 +101,7 @@ class _DeadliftState extends State<Deadlift> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => buildExDesc(
+                              builder: (context) => BuilderOfDescription(
                                     exName: 'Deadlift',
                                   ));
                         },
