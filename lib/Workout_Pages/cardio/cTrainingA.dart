@@ -85,8 +85,8 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'Jumping Jacks',
+                                  builder: (context) => const buildExercise(
+                                        exName: 'JumpingJacks',
                                         imagePath:
                                             "assets/images/JumpingJacks.gif",
                                       )),
@@ -101,7 +101,7 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
+                                  builder: (context) => const buildExercise(
                                         exName: 'BackAndForthSquats',
                                         imagePath:
                                             "assets/images/JumpingJacks.gif",
@@ -115,7 +115,7 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
+                                  builder: (context) => const buildExercise(
                                         exName: 'Jogging in Place',
                                         imagePath:
                                             "assets/images/JoggingInPlace.gif",
@@ -129,7 +129,7 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
+                                  builder: (context) => const buildExercise(
                                         exName: 'JumpingSquats',
                                         imagePath:
                                             "assets/images/squat-jump.gif",
@@ -143,7 +143,7 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
+                                  builder: (context) => const buildExercise(
                                         exName: 'HighKnees',
                                         imagePath:
                                             "assets/images/HighKnees.gif",
@@ -157,7 +157,7 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
+                                  builder: (context) => const buildExercise(
                                         exName: 'ButtKicks',
                                         imagePath:
                                             "assets/images/ButtKicks.gif",

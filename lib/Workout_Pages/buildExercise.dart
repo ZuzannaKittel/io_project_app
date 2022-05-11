@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
 import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
@@ -36,52 +35,42 @@ void getDifficulty() async {
       .then((value) => {multiplier = value['difficulty']});
 }
 
-var maxSecond = 60;
+var duration = 60;
+late String name;
+//int licznik = 0;
 
 class _buildExerciseState extends State<buildExercise> {
   late bool isCompleted = false;
-
-  int seconds = (maxSecond * multiplier).round();
-  int maxSeconds = (maxSecond * multiplier).round();
-
-  Timer? timer;
-
-  late bool isDone;
-
-  void resetTimer() => setState(() => seconds = maxSeconds);
-
-  void StartTimer({bool reset = true}) {
-    if (reset) {
-      resetTimer();
-    }
-
-    timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (seconds > 0) {
-        setState(() => seconds--);
-      } else {
-        StopTimer(reset: false);
-      }
-    });
-  }
-
-  void StopTimer({bool reset = true}) {
-    if (reset) {
-      resetTimer();
-    }
-    timer?.cancel();
-
-    setState(() => timer?.cancel());
-  }
+  late int licznik = 0;
 
   @override
   Widget build(BuildContext context) {
     getDifficulty();
     print(multiplier);
-    var size = MediaQuery.of(context)
-        .size; //this gonna give us total height and with of our device
+    var size = MediaQuery.of(context).size;
+    if (licznik == 0) {
+      return FutureBuilder(
+          future: FirebaseFirestore.instance
+              .collection("workouts")
+              .doc(widget.exName)
+              .get(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text("Something went wrong");
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              name = snapshot.data?.get('name');
+              duration = snapshot.data?.get('duration');
+              //licznik = 1;
+            }
+            return Text('Error');
+          });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.exName,
+        title: Text(name,
             style: const TextStyle(fontSize: 24, fontFamily: "Cairo")),
         leading: const BackButton(),
         backgroundColor: mBackgroundColor,
@@ -149,6 +138,7 @@ class _buildExerciseState extends State<buildExercise> {
                       alignment: Alignment.bottomRight,
                       child: SmallButtonWidget(
                         onClicked: () {
+                          //licznik = 0;
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => const cTrainingAPage()),
@@ -163,6 +153,38 @@ class _buildExerciseState extends State<buildExercise> {
         ],
       ),
     );
+  }
+
+  int seconds = (duration * multiplier).round();
+  int maxSeconds = (duration * multiplier).round();
+
+  Timer? timer;
+
+  late bool isDone;
+
+  void resetTimer() => setState(() => seconds = maxSeconds);
+
+  void StartTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (seconds > 0) {
+        setState(() => seconds--);
+      } else {
+        StopTimer(reset: false);
+      }
+    });
+  }
+
+  void StopTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+    timer?.cancel();
+
+    setState(() => timer?.cancel());
   }
 
   Widget BuildButtons() {
