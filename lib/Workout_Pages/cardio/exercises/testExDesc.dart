@@ -74,7 +74,7 @@ class _BuilderOfDescriptionState extends State<BuilderOfDescription> {
                   )),
             );
           }
-          return Text('Error 404');
+          return Text('');
         });
   }
 }
