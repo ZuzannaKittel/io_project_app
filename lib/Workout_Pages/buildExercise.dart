@@ -37,11 +37,11 @@ void getDifficulty() async {
 
 var duration = 60;
 late String name;
-//int licznik = 0;
+late int licznik = 0;
 
 class _buildExerciseState extends State<buildExercise> {
   late bool isCompleted = false;
-  late int licznik = 0;
+  //int licznik = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _buildExerciseState extends State<buildExercise> {
             if (snapshot.connectionState == ConnectionState.done) {
               name = snapshot.data?.get('name');
               duration = snapshot.data?.get('duration');
-              //licznik = 1;
+              licznik = 1;
             }
             return Text('Error');
           });
@@ -138,7 +138,7 @@ class _buildExerciseState extends State<buildExercise> {
                       alignment: Alignment.bottomRight,
                       child: SmallButtonWidget(
                         onClicked: () {
-                          //licznik = 0;
+                          licznik = 0;
                           Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => const cTrainingAPage()),
