@@ -6,19 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
-import 'package:io_project/widget/bottom_nav_bar.dart';
+import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
-import '../widget/appbar_widget.dart';
-import 'package:io_project/widget/exercise_card.dart';
 
 double multiplier = 1;
 
 class buildExercise extends StatefulWidget {
   final String exName;
   final String imagePath;
+
   //final String nextExName;
 
   const buildExercise({
@@ -38,55 +35,44 @@ void getDifficulty() async {
       .then((value) => {multiplier = value['difficulty']});
 }
 
-//var maxSecond = 60;
+var duration = 60;
+late String name;
+//int licznik = 0;
 
 class _buildExerciseState extends State<buildExercise> {
-  static const maxSeconds = 60; //*mnożnik dla konkretnego użytkownika
-  int seconds = maxSeconds;
-  //*Multp;
-  //int maxSec = (60 * multp!) as int; //*mnożnik dla konkretnego użytkownika
-
-  //int seconds = (maxSecond * multiplier).round();
-  //int maxSec = (maxSecond * multiplier).round();
-
-  Timer? timer;
-
-  void resetTimer() => setState(() => seconds = maxSeconds);
-
-  void StartTimer({bool reset = true}) {
-    if (reset) {
-      resetTimer();
-    }
-
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
-      if (seconds > 0) {
-        setState(() => seconds--);
-      } else {
-        StopTimer(reset: false);
-      }
-    });
-  }
-
-  void StopTimer({bool reset = true}) {
-    if (reset) {
-      resetTimer();
-    }
-    timer?.cancel();
-
-    setState(() => timer?.cancel());
-  }
+  late bool isCompleted = false;
+  late int licznik = 0;
 
   @override
   Widget build(BuildContext context) {
     getDifficulty();
     print(multiplier);
-    var size = MediaQuery.of(context)
-        .size; //this gonna give us total height and with of our device
+    var size = MediaQuery.of(context).size;
+    if (licznik == 0) {
+      return FutureBuilder(
+          future: FirebaseFirestore.instance
+              .collection("workouts")
+              .doc(widget.exName)
+              .get(),
+          builder:
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text("Something went wrong");
+            }
+            if (snapshot.connectionState == ConnectionState.done) {
+              name = snapshot.data?.get('name');
+              duration = snapshot.data?.get('duration');
+              //licznik = 1;
+            }
+            return Text('Error');
+          });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.exName,
-            style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
-        leading: BackButton(),
+        title: Text(name,
+            style: const TextStyle(fontSize: 24, fontFamily: "Cairo")),
+        leading: const BackButton(),
         backgroundColor: mBackgroundColor,
         elevation: 0,
       ),
@@ -109,7 +95,7 @@ class _buildExerciseState extends State<buildExercise> {
               child: ListView(
                 //Column
                 //crossAxisAlignment: CrossAxisAlignment.start,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -126,7 +112,7 @@ class _buildExerciseState extends State<buildExercise> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => buildExDesc(
+                              builder: (context) => BuilderOfDescription(
                                     exName: widget.exName,
                                   ));
                         },
@@ -135,42 +121,6 @@ class _buildExerciseState extends State<buildExercise> {
                     ),
                   ),
                   Image.asset(widget.imagePath),
-                  /* Center(
-                    //alignment: MainAxisAlignment.center,
-                    child:
-                        /*Text('Jumping',
-                          style: const TextStyle(
-                              fontSize: 24, fontFamily: "Cairo")),
-                      Text(
-                        "Jumping\nJacks",
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium
-                            ?.copyWith(fontWeight: FontWeight.w900),
-                      ),*/
-                        ExerciseCard(press: () {
-                      showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) => ExDescription());
-                    }),
-                  ),*/
-                  //SearchBar(),
-                  /*Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      childAspectRatio: .55,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      children: <Widget>[Image.asset("assets/images/jj.png")],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text("obrazek byle jaki na razie",
-                        style:
-                            const TextStyle(fontSize: 24, fontFamily: "Cairo")),
-                  ),
-                  */
                   const SizedBox(height: 20),
                   Center(
                     child: Column(
@@ -182,17 +132,20 @@ class _buildExerciseState extends State<buildExercise> {
                       ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
-                      onClicked: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => cTrainingAPage()),
-                        );
-                      },
-                    ),
-                  )
+                  if (isCompleted == true && seconds != maxSeconds)
+                    //const Text("Done?"),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: SmallButtonWidget(
+                        onClicked: () {
+                          //licznik = 0;
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const cTrainingAPage()),
+                          );
+                        },
+                      ),
+                    )
                 ],
               ),
             ),
@@ -202,14 +155,42 @@ class _buildExerciseState extends State<buildExercise> {
     );
   }
 
+  int seconds = (duration * multiplier).round();
+  int maxSeconds = (duration * multiplier).round();
+
+  Timer? timer;
+
+  late bool isDone;
+
+  void resetTimer() => setState(() => seconds = maxSeconds);
+
+  void StartTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (seconds > 0) {
+        setState(() => seconds--);
+      } else {
+        StopTimer(reset: false);
+      }
+    });
+  }
+
+  void StopTimer({bool reset = true}) {
+    if (reset) {
+      resetTimer();
+    }
+    timer?.cancel();
+
+    setState(() => timer?.cancel());
+  }
+
   Widget BuildButtons() {
     final isRunning = timer == null ? false : timer!.isActive;
-    final isCompleted = seconds == maxSeconds || seconds == 0;
-    if (isCompleted) {
-      setState(() {
-        //JumpingJacks.isDone=true;
-      });
-    }
+    isCompleted = seconds == maxSeconds || seconds == 0;
+
     return isRunning || !isCompleted
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,

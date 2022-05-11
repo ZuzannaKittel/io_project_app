@@ -8,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Screens/empty.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
-import 'package:io_project/Workout_Pages/cardio/exercises/testExDesc.dart';
+import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
@@ -57,7 +57,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
       resetTimer();
     }
 
-    timer = Timer.periodic(Duration(seconds: 1), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (seconds > 0) {
         setState(() => seconds--);
       } else {
@@ -85,7 +85,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
       appBar: AppBar(
         title: const Text("Jumping Jacks",
             style: TextStyle(fontSize: 24, fontFamily: "Cairo")),
-        leading: BackButton(),
+        leading: const BackButton(),
         backgroundColor: mBackgroundColor,
         elevation: 0,
       ),
@@ -108,7 +108,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
               child: ListView(
                 //Column
                 //crossAxisAlignment: CrossAxisAlignment.start,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 children: <Widget>[
                   Align(
                     alignment: Alignment.topRight,
@@ -125,7 +125,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                         onTap: () {
                           showCupertinoModalPopup(
                               context: context,
-                              builder: (context) => BuilderOfDescription(
+                              builder: (context) => buildExDesc(
                                     exName: 'Jumping Jacks',
                                   ));
                         },

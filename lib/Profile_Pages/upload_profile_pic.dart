@@ -123,6 +123,21 @@ class _ImageUploadsState extends State<ImageUploads> {
               user.reload();
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (_) => const ProfilePage()));
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('Submit',
+                      style: TextStyle(fontSize: 18, fontFamily: "Cairo")),
+                  content: const Text('Your changes have been saved correctly',
+                      style: TextStyle(fontSize: 18, fontFamily: "Cairo")),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
             },
           )
         ],

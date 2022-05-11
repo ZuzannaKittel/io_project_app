@@ -318,6 +318,25 @@ class _TestState extends State<Test> {
                 ButtonWidget(
                     text: "Submit",
                     onClicked: () {
+                      //const Text('tescior');
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Submit',
+                              style:
+                                  TextStyle(fontSize: 18, fontFamily: "Cairo")),
+                          content: const Text(
+                              'Your preferences have been saved correctly',
+                              style:
+                                  TextStyle(fontSize: 18, fontFamily: "Cairo")),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
                       String sex;
                       if (male) {
                         sex = 'Male';
