@@ -14,9 +14,15 @@ import 'exercises/BackAndForthSquats.dart';
 import 'exercises/HighKnees.dart';
 import 'exercises/JumpingSquats.dart';
 
-class cTrainingAPage extends StatelessWidget {
+class cTrainingAPage extends StatefulWidget {
   const cTrainingAPage({Key? key}) : super(key: key);
 
+  @override
+  State<cTrainingAPage> createState() => _cTrainingAPageState();
+}
+
+class _cTrainingAPageState extends State<cTrainingAPage> {
+  late bool issDone = false;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -28,7 +34,7 @@ class cTrainingAPage extends StatelessWidget {
         backgroundColor: kBlueLightColor,
         elevation: 0,
       ),
-      bottomNavigationBar: BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(),
       body: Stack(
         children: <Widget>[
           Container(
@@ -85,14 +91,15 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'JumpingJacks',
                                         imagePath:
                                             "assets/images/JumpingJacks.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
-                          isDone: getState(),
+                          isDone: false,
                         ),
                         Exercise(
                           exerciseName: "Squats 1",
@@ -101,10 +108,11 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'BackAndForthSquats',
                                         imagePath:
                                             "assets/images/JumpingJacks.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
@@ -115,10 +123,11 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'Jogging in Place',
                                         imagePath:
                                             "assets/images/JoggingInPlace.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
@@ -129,10 +138,11 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'JumpingSquats',
                                         imagePath:
                                             "assets/images/squat-jump.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
@@ -143,10 +153,11 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'HighKnees',
                                         imagePath:
                                             "assets/images/HighKnees.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
@@ -157,10 +168,11 @@ class cTrainingAPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => const buildExercise(
+                                  builder: (context) => buildExercise(
                                         exName: 'ButtKicks',
                                         imagePath:
                                             "assets/images/ButtKicks.gif",
+                                        isDone: false,
                                       )),
                             );
                           },
