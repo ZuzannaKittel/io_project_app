@@ -87,6 +87,7 @@ class _WorkoutPage extends StatelessWidget {
                       mainAxisSpacing: 20,
                       children: <Widget>[
                         CategoryCard(
+                          //TODO: changing images depending on user's sex
                           title: "STRENGTH",
                           svgSrc: "assets/images/strength.png",
                           press: () {

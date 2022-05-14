@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Workout_Pages/TrainingSummary.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
 import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
@@ -55,7 +56,7 @@ class _buildExerciseState extends State<buildExercise> {
           builder:
               (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text("Something went wrong");
+              return const Text("Something went wrong");
             }
             if (snapshot.connectionState == ConnectionState.done) {
               name = snapshot.data?.get('name');
@@ -152,7 +153,7 @@ class _buildExerciseState extends State<buildExercise> {
                 ),
               );
             }
-            return Text('Error 404');
+            return const Text('Error 404');
           });
     } else {
       return Scaffold(

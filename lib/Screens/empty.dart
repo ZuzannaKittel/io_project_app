@@ -70,7 +70,7 @@ bool looseWeight = false;
 bool improveCondition = true;
 //int workoutsAmount = 2;
 
-var now = DateTime.now().toUtc().add(Duration(hours: 2));
+var now = DateTime.now().toUtc().add(const Duration(hours: 2));
 
 String date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
 
@@ -135,7 +135,7 @@ class _TestState extends State<Test> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (male) ChooseBodyTypeMan() else ChooseBodyTypeWomen(),
+                if (male) ChooseBodyTypeMan() else const ChooseBodyTypeWomen(),
                 const SizedBox(
                   height: 20,
                 ),
@@ -150,7 +150,7 @@ class _TestState extends State<Test> {
                   children: [
                     Column(
                       children: [
-                        Text("Man"),
+                        const Text("Man"),
                         Checkbox(
                           activeColor: neonGreen,
                           //hoverColor: kLightOrangeColor,
@@ -168,7 +168,7 @@ class _TestState extends State<Test> {
                     ),
                     Column(
                       children: [
-                        Text("Woman"),
+                        const Text("Woman"),
                         Checkbox(
                           activeColor: neonGreen,
                           value: fmale,
@@ -186,7 +186,7 @@ class _TestState extends State<Test> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text("Select difficulty level",
+                const Text("Select difficulty level",
                     textAlign: TextAlign.left,
                     style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
                 SliderLevel(),
@@ -198,7 +198,7 @@ class _TestState extends State<Test> {
                   children: [
                     Column(
                       children: [
-                        Text('Weight'),
+                        const Text('Weight'),
                         NumberPicker(
                             minValue: 20,
                             maxValue: 150,
@@ -210,7 +210,7 @@ class _TestState extends State<Test> {
                     ),
                     Column(
                       children: [
-                        Text('Height'),
+                        const Text('Height'),
                         NumberPicker(
                             minValue: 120,
                             maxValue: 220,
@@ -227,11 +227,11 @@ class _TestState extends State<Test> {
                 ),
                 Column(
                   children: [
-                    Text("Amount of workouts per week",
+                    const Text("Amount of workouts per week",
                         style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
                     TextField(
-                        decoration:
-                            InputDecoration(labelText: "Type here the number"),
+                        decoration: const InputDecoration(
+                            labelText: "Type here the number"),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.digitsOnly
@@ -246,16 +246,17 @@ class _TestState extends State<Test> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: const BorderRadius.all(
+                    borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                   child: Column(
                     children: [
-                      Text("What do you want to achieve?",
-                          style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                      const Text("What do you want to achieve?",
+                          style: const TextStyle(
+                              fontFamily: 'Cairo', fontSize: 18)),
                       const SizedBox(
                         height: 20,
                       ),
@@ -264,7 +265,7 @@ class _TestState extends State<Test> {
                         children: [
                           Column(
                             children: [
-                              Text("Gain Muscles"),
+                              const Text("Gain Muscles"),
                               Checkbox(
                                 activeColor: neonGreen,
                                 //hoverColor: kLightOrangeColor,
@@ -281,7 +282,7 @@ class _TestState extends State<Test> {
                           ),
                           Column(
                             children: [
-                              Text("Loose Weight"),
+                              const Text("Loose Weight"),
                               Checkbox(
                                 activeColor: neonGreen,
                                 value: looseWeight,
@@ -295,7 +296,7 @@ class _TestState extends State<Test> {
                           ),
                           Column(
                             children: [
-                              Text("Better Condition"),
+                              const Text("Better Condition"),
                               Checkbox(
                                 activeColor: neonGreen,
                                 value: improveCondition,
@@ -322,6 +323,7 @@ class _TestState extends State<Test> {
                       showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
+                          contentPadding: EdgeInsets.all(30),
                           title: const Text('Submit',
                               style:
                                   TextStyle(fontSize: 18, fontFamily: "Cairo")),
@@ -332,7 +334,11 @@ class _TestState extends State<Test> {
                           actions: <Widget>[
                             TextButton(
                               onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
+                              child: const Text('OK',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Cairo',
+                                      fontSize: 18)),
                             ),
                           ],
                         ),
