@@ -89,14 +89,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseNum: 1,
                           //isDone: getState(),
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'JumpingJacks',
-                                        imagePath:
-                                            "assets/images/JumpingJacks.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'JumpingJacks',
+                                      imagePath:
+                                          "assets/images/JumpingJacks.gif")),
                             );
                           },
                           isDone: false,
@@ -106,14 +105,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseNum: 2,
                           isDone: false,
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'BackAndForthSquats',
-                                        imagePath:
-                                            "assets/images/JumpingJacks.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'BackAndForthSquats',
+                                      imagePath:
+                                          "assets/images/JumpingJacks.gif")),
                             );
                           },
                         ),
@@ -121,14 +119,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseName: "Jogging",
                           exerciseNum: 3,
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'Jogging in Place',
-                                        imagePath:
-                                            "assets/images/JoggingInPlace.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'Jogging in Place',
+                                      imagePath:
+                                          "assets/images/JoggingInPlace.gif")),
                             );
                           },
                         ),
@@ -136,14 +133,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseName: "Squats 2",
                           exerciseNum: 4,
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'JumpingSquats',
-                                        imagePath:
-                                            "assets/images/squat-jump.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'JumpingSquats',
+                                      imagePath:
+                                          "assets/images/squat-jump.gif")),
                             );
                           },
                         ),
@@ -151,14 +147,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseName: "Knees",
                           exerciseNum: 5,
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'HighKnees',
-                                        imagePath:
-                                            "assets/images/HighKnees.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'HighKnees',
+                                      imagePath:
+                                          "assets/images/HighKnees.gif")),
                             );
                           },
                         ),
@@ -166,14 +161,13 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                           exerciseName: "ButtKicks",
                           exerciseNum: 6,
                           press: () {
+                            licznik = 0;
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => buildExercise(
-                                        exName: 'ButtKicks',
-                                        imagePath:
-                                            "assets/images/ButtKicks.gif",
-                                        isDone: false,
-                                      )),
+                                  builder: (context) => const buildExercise(
+                                      exName: 'ButtKicks',
+                                      imagePath:
+                                          "assets/images/ButtKicks.gif")),
                             );
                           },
                         ),
