@@ -6,6 +6,8 @@ import 'package:io_project/widget/appbar_widget.dart';
 
 import '../widget/bottom_nav_bar.dart';
 
+List<dynamic>? list;
+
 class WeightPage extends StatefulWidget {
   const WeightPage({Key? key}) : super(key: key);
 
@@ -14,45 +16,23 @@ class WeightPage extends StatefulWidget {
 }
 
 class _WeightPageState extends State<WeightPage> {
-  final Stream<QuerySnapshot> _weightsStream =
-      FirebaseFirestore.instance.collection('test').snapshots();
-  //.doc(FirebaseAuth.instance.currentUser!.uid);
-  //.snapshots();
+  final dane = FirebaseFirestore.instance
+      .collection("Weights")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get()
+      .then((value) => {list = value["array"]});
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: buildAppBar(context, "Weight History"),
-        bottomNavigationBar: const BottomNavBar(),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          physics: const BouncingScrollPhysics(),
-          children: [
-            StreamBuilder<QuerySnapshot>(
-              stream: _weightsStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text("Something went wrong");
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Loading");
-                }
-
-                return ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return ListTile(
-                      title: Text(data['Sex']),
-                      //subtitle: Text(data['BMI'].toString()),
-                    );
-                  }).toList(),
-                );
-              },
-            ),
-          ],
-        ),
-      );
+      appBar: buildAppBar(context, "Weight History"),
+      bottomNavigationBar: const BottomNavBar(),
+      body: ListView.builder(
+          itemCount: list?.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            if (list?.length == 0) {
+              return Text("Brak danych");
+            } else {
+              return Text(list?[index]);
+            }
+          }));
 }

@@ -29,13 +29,6 @@ void changeDiflvl(double lvl) {
   diffLvl = lvl;
 }
 
-void changeAmount(String am) {
-  if (am as int <= 7 && am as int >= 1) {
-    print(am);
-    workoutsAmount = am as int;
-  }
-}
-
 void bmi(int _height, int _weight) {
   BMI = ((_weight) / ((_height) * (_height))) * 10000;
   BMI = ((BMI! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
@@ -68,11 +61,18 @@ bool fmale = true;
 bool gainMuscles = false;
 bool looseWeight = false;
 bool improveCondition = true;
+bool mon = false;
+bool tue = false;
+bool wed = false;
+bool thur = false;
+bool fri = false;
+bool sat = false;
+bool sun = false;
 //int workoutsAmount = 2;
 
 var now = DateTime.now().toUtc().add(const Duration(hours: 2));
 
-String date = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+String date = DateFormat('yyyy-MM-dd').format(now);
 
 void setData(String sex, int _amount, int _height) async {
   await FirebaseFirestore.instance
@@ -93,12 +93,11 @@ void setData(String sex, int _amount, int _height) async {
 
 void addData(int _weight, String type) async {
   await FirebaseFirestore.instance
-      .collection('test')
+      .collection('Weights')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set({
-    'weight ' + date: _weight,
-    'body type ' + date: type,
-  }, SetOptions(merge: true)).then((value) {});
+      .update({
+    'array': FieldValue.arrayUnion(['$_weight kg, $date'])
+  });
 }
 
 class _TestState extends State<Test> {
@@ -223,22 +222,135 @@ class _TestState extends State<Test> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Column(
                   children: [
-                    const Text("Amount of workouts per week",
-                        style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
-                    TextField(
-                        decoration: const InputDecoration(
-                            labelText: "Type here the number"),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        onChanged: (String amount) async {
-                          changeAmount(amount);
-                        }),
+                    Text("Select when you want to exercise"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: mon,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  mon = value!;
+                                });
+                              },
+                            ),
+                            const Text("Mon"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: tue,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  tue = value!;
+                                });
+                              },
+                            ),
+                            const Text("Tue"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: wed,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  wed = value!;
+                                });
+                              },
+                            ),
+                            const Text("Wed"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: thur,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  thur = value!;
+                                });
+                              },
+                            ),
+                            const Text("Thur"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: fri,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  fri = value!;
+                                });
+                              },
+                            ),
+                            const Text("Fri"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: sat,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  sat = value!;
+                                });
+                              },
+                            ),
+                            const Text("Sat"),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Checkbox(
+                              activeColor: neonGreen,
+                              //hoverColor: kLightOrangeColor,
+                              //mouseCursor: kLightOrangeColor,
+                              //shape: RoundRangeSliderThumbShape,
+                              value: sun,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  sun = value!;
+                                });
+                              },
+                            ),
+                            const Text("Sun"),
+                          ],
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(
