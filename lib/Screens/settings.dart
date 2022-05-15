@@ -134,9 +134,10 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const buildExercise(
+                      builder: (context) => buildExercise(
                         exName: "Jakies cw",
                         imagePath: "assets/images/MJumpingJacks.gif",
+                        isDone: false,
                       ),
                     ),
                   );
