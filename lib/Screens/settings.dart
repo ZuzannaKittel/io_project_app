@@ -7,6 +7,7 @@ import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
 import '../Profile_Pages/WeightPage.dart';
+import '../Workout_Pages/TrainingSummary.dart';
 import '../widget/bottom_nav_bar.dart';
 import '../Workout_Pages/buildExercise.dart';
 
@@ -161,6 +162,47 @@ class _SettingsState extends State<Settings> {
                   ),
                   child: const Text(
                     'buildExercise test',
+                    style: TextStyle(
+                      fontFamily: "Cairo",
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const TrainingSummary(
+                              trainingName: "Training A",
+                              trainingType: 'cardio',
+                            )),
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 13,
+                  ),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(
+                        15,
+                      ),
+                    ),
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                  ),
+                  child: const Text(
+                    'rating training test',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,

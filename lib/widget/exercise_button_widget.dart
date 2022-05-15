@@ -14,11 +14,11 @@ class ExButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           onPrimary: Colors.white,
           primary: Color(0xFFF5CEB8),
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-          fixedSize: const Size(420, 80),
+          fixedSize: const Size(420, 100),
         ),
         child: Text(text,
             style: const TextStyle(fontSize: 24, fontFamily: "Cairo")),

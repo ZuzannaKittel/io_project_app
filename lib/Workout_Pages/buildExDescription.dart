@@ -60,11 +60,13 @@ class _BuilderOfDescriptionState extends State<BuilderOfDescription> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 30),
                           child: ListView(
+                              padding: const EdgeInsets.symmetric(vertical: 50),
                               physics: const BouncingScrollPhysics(),
                               children: [
-                                const SizedBox(
+                                /*const SizedBox(
                                   height: 50,
                                 ),
+                                */
                                 Container(
                                   padding: EdgeInsets.all(20.0),
                                   decoration: BoxDecoration(
