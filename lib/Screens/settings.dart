@@ -138,7 +138,6 @@ class _SettingsState extends State<Settings> {
                       builder: (context) => buildExercise(
                         exName: "Jakies cw",
                         imagePath: "assets/images/MJumpingJacks.gif",
-                        isDone: false,
                       ),
                     ),
                   );
