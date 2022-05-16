@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:horizontal_picker/horizontal_picker.dart';
 import 'package:io_project/Profile_Pages/upload_profile_pic.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
@@ -39,55 +39,60 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: buildAppBar(context, "Edit Profile"),
-        bottomNavigationBar: const BottomNavBar(),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          physics: const BouncingScrollPhysics(),
-          children: [
-            ProfileWidget(
-              imagePath: user.getImage(),
-              isEdit: true,
-              onClicked: () {
-                /*final picker = ImagePicker();
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: buildAppBar(context, "Edit Profile"),
+      bottomNavigationBar: const BottomNavBar(),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        physics: const BouncingScrollPhysics(),
+        children: [
+          SizedBox(height: size.height * 0.05),
+          ProfileWidget(
+            imagePath: user.getImage(),
+            isEdit: true,
+            onClicked: () {
+              /*final picker = ImagePicker();
                 final pickedFile =
                     await picker.pickImage(source: ImageSource.gallery);
                 setState(() {
                   file = File(pickedFile!.path);
                 });*/
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ImageUploads()),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            TextFieldWidget(
-              label: 'Full Name',
-              text: user.name,
-              onChanged: (name) {},
-            ),
-            const SizedBox(height: 20),
-            TextFieldWidget(
-              label: 'Email',
-              text: user.email,
-              onChanged: (email) {},
-            ),
-            const SizedBox(height: 24),
-            TextField(
-              decoration: InputDecoration(
-                  labelText: "Describe yourself",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-              maxLines: 5,
-              onChanged: (about) async {
-                uploadAbout(about);
-              },
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      );
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => ImageUploads()),
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+          TextFieldWidget(
+            label: 'Full Name',
+            text: user.name,
+            onChanged: (name) {},
+          ),
+          const SizedBox(height: 20),
+          TextFieldWidget(
+            label: 'Email',
+            text: user.email,
+            onChanged: (email) {},
+          ),
+          const SizedBox(height: 24),
+          TextField(
+            decoration: InputDecoration(
+                labelText: "Describe yourself",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
+            maxLines: 5,
+            onChanged: (about) async {
+              uploadAbout(about);
+            },
+          ),
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
   updateProfile(BuildContext context) async {
     Map<String, dynamic> map = Map();
     if (file != null) {

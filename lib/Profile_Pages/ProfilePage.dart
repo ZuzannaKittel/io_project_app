@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/Preferences.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
@@ -23,6 +23,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     Users user = UserPreferences.myUser;
 
     return FutureBuilder(
@@ -109,7 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
         text: 'Preferences',
         onClicked: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => Test()),
+            MaterialPageRoute(builder: (context) => const Preferences()),
           );
         },
       );

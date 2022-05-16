@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ButtKicks.dart';
@@ -166,7 +166,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                                           .push(
                                                         MaterialPageRoute(
                                                             builder: (context) =>
-                                                                const Test()),
+                                                                const PersonalData()),
                                                       );
                                                     },
                                                     child: const Text('yes',
