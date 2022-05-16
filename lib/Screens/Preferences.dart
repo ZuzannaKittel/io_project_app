@@ -99,7 +99,7 @@ class PreferencesState extends State<Preferences> {
                 child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 40),
-                    height: size.height * 1,
+                    height: 800,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(
                         Radius.circular(5),
