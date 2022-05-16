@@ -74,24 +74,27 @@ var now = DateTime.now().toUtc().add(const Duration(hours: 2));
 
 String date = DateFormat('yyyy-MM-dd').format(now);
 
-void setData(String sex, int _amount, int _height) async {
+void setData(
+    String sex, int _amount, int _height, String type, int _weight) async {
   await FirebaseFirestore.instance
-      .collection("test")
+      .collection("UsersPref")
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({
+      .set({
     'BMI': BMI,
-    'level': diffLvl,
+    'evel': diffLvl,
     'sex': sex,
     'difficulty': multp,
-    'workouts amount': _amount,
+    'workouts amount': [mon, tue, wed, thur, fri, sat, sun],
     'height': _height,
+    'weight': _weight,
     'gain muscles': gainMuscles,
     'loose weight': looseWeight,
     'improve condition': improveCondition,
+    'Type': type
   });
 }
 
-void addData(int _weight, String type) async {
+void addData(int _weight) async {
   await FirebaseFirestore.instance
       .collection('Weights')
       .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -463,8 +466,9 @@ class _TestState extends State<Test> {
                       }
                       bmi(heightValue, weightValue);
                       setMultiplier(diffLvl, BMI, sex, tp);
-                      addData(weightValue, tp);
-                      setData(sex, workoutsAmount, heightValue);
+                      addData(weightValue);
+                      setData(
+                          sex, workoutsAmount, heightValue, tp, weightValue);
                     }),
               ],
             )),

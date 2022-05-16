@@ -8,6 +8,10 @@ import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/Profile_Pages/EditProfile.dart';
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -21,30 +25,70 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     Users user = UserPreferences.myUser;
 
-    return Scaffold(
-      bottomNavigationBar: const BottomNavBar(),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: user.getImage(),
-            onClicked: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const EditProfile()),
-              );
-            },
-          ),
-          const SizedBox(height: 24),
-          buildName(user),
-          const SizedBox(height: 24),
-          Center(child: buildUpgradeButton()),
-          const SizedBox(height: 24),
-          NumbersWidget(),
-          const SizedBox(height: 48),
-          buildAbout(user),
-        ],
-      ),
-    );
+    return FutureBuilder(
+        future: FirebaseFirestore.instance
+            .collection("about")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Text("Something went wrong");
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Scaffold(
+              bottomNavigationBar: const BottomNavBar(),
+              body: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath: user.getImage(),
+                    onClicked: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfile()),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(user),
+                  const SizedBox(height: 24),
+                  Center(child: buildUpgradeButton()),
+                  const SizedBox(height: 24),
+                  NumbersWidget(),
+                  const SizedBox(height: 48),
+                  buildAbout(snapshot.data?.get('about')),
+                ],
+              ),
+            );
+          } else {
+            return Scaffold(
+              bottomNavigationBar: const BottomNavBar(),
+              body: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath: user.getImage(),
+                    onClicked: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const EditProfile()),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(user),
+                  const SizedBox(height: 24),
+                  Center(child: buildUpgradeButton()),
+                  const SizedBox(height: 24),
+                  NumbersWidget(),
+                  const SizedBox(height: 48),
+                  buildAbout("Loading"),
+                ],
+              ),
+            );
+          }
+        });
   }
 
   Widget buildName(Users user) => Column(
@@ -70,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       );
 
-  Widget buildAbout(Users user) => Container(
+  Widget buildAbout(String about) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 48),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 16),
             Text(
-              user.getAbt(),
+              about,
               style: const TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
