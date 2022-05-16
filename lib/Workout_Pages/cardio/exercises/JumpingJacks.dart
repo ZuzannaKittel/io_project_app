@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/BackAndForthSquats.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/buildExerciseDesc.dart';
 import 'package:io_project/Workout_Pages/buildExDescription.dart';

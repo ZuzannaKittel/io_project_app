@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/PersonalDataPage.dart';
 
 int type = 1;
 

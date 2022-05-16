@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/Preferences.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
@@ -8,6 +8,7 @@ import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/widget/numbers_widget.dart';
 import 'package:io_project/widget/profile_widget.dart';
 import 'package:io_project/Profile_Pages/EditProfile.dart';
+import 'package:io_project/Screens/Preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     Users user = UserPreferences.myUser;
 
     return Scaffold(
@@ -26,6 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: ListView(
         physics: const BouncingScrollPhysics(),
         children: [
+          SizedBox(height: size.height * 0.1),
           ProfileWidget(
             imagePath: user.getImage(),
             onClicked: () {
@@ -39,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 24),
           Center(child: buildUpgradeButton()),
           const SizedBox(height: 24),
-          NumbersWidget(),
+          const NumbersWidget(),
           const SizedBox(height: 48),
           buildAbout(user),
         ],
@@ -65,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
         text: 'Preferences',
         onClicked: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => Test()),
+            MaterialPageRoute(builder: (context) => const Preferences()),
           );
         },
       );

@@ -42,7 +42,7 @@ class _BuilderOfDescriptionState extends State<BuilderOfDescription> {
                       Center(
                         child: Container(
                           width: MediaQuery.of(context).size.width - 20,
-                          height: 600,
+                          height: size.height * 0.80,
                           padding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
                           decoration: BoxDecoration(

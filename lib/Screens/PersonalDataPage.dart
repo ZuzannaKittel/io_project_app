@@ -47,11 +47,11 @@ void setMultiplier(double? diffLvl, double? bmi, String sex, String type) {
   multp = ((multp! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
 }
 
-class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
+class PersonalData extends StatefulWidget {
+  const PersonalData({Key? key}) : super(key: key);
 
   @override
-  State<Test> createState() => _TestState();
+  State<PersonalData> createState() => PersonalDataState();
 }
 
 int weightValue = 65;
@@ -100,16 +100,17 @@ void addData(int _weight, String type) async {
   });
 }
 
-class _TestState extends State<Test> {
+class PersonalDataState extends State<PersonalData> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context, "Your Preferences"),
       bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            height: 1050,
+            height: size.height * 1.30,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
@@ -185,10 +186,23 @@ class _TestState extends State<Test> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text("Select difficulty level",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
-                SliderLevel(),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text("Select difficulty level",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                      SliderLevel(),
+                    ],
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -222,136 +236,146 @@ class _TestState extends State<Test> {
                   ],
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
-                Column(
-                  children: [
-                    Text("Select when you want to exercise"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: mon,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  mon = value!;
-                                });
-                              },
-                            ),
-                            const Text("Mon"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: tue,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  tue = value!;
-                                });
-                              },
-                            ),
-                            const Text("Tue"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: wed,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  wed = value!;
-                                });
-                              },
-                            ),
-                            const Text("Wed"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: thur,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  thur = value!;
-                                });
-                              },
-                            ),
-                            const Text("Thur"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: fri,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  fri = value!;
-                                });
-                              },
-                            ),
-                            const Text("Fri"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: sat,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  sat = value!;
-                                });
-                              },
-                            ),
-                            const Text("Sat"),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Checkbox(
-                              activeColor: neonGreen,
-                              //hoverColor: kLightOrangeColor,
-                              //mouseCursor: kLightOrangeColor,
-                              //shape: RoundRangeSliderThumbShape,
-                              value: sun,
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  sun = value!;
-                                });
-                              },
-                            ),
-                            const Text("Sun"),
-                          ],
-                        ),
-                      ],
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
                     ),
-                  ],
+                  ),
+                  child: Column(
+                    children: [
+                      const Text("Select when you want to exercise",
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: mon,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    mon = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Mon"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: tue,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    tue = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Tue"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: wed,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    wed = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Wed"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: thur,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    thur = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Thur"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: fri,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    fri = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Fri"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: sat,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    sat = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Sat"),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Checkbox(
+                                activeColor: neonGreen,
+                                //hoverColor: kLightOrangeColor,
+                                //mouseCursor: kLightOrangeColor,
+                                //shape: RoundRangeSliderThumbShape,
+                                value: sun,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    sun = value!;
+                                  });
+                                },
+                              ),
+                              const Text("Sun"),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -435,7 +459,7 @@ class _TestState extends State<Test> {
                       showDialog<String>(
                         context: context,
                         builder: (BuildContext context) => AlertDialog(
-                          contentPadding: EdgeInsets.all(30),
+                          contentPadding: const EdgeInsets.all(30),
                           title: const Text('Submit',
                               style:
                                   TextStyle(fontSize: 18, fontFamily: "Cairo")),

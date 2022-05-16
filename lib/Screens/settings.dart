@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
-import 'package:io_project/Screens/empty.dart';
+import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
 import 'package:io_project/constants.dart';
 
@@ -57,7 +57,7 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Test(),
+                      builder: (context) => const PersonalData(),
                     ),
                   );
                 },
@@ -79,7 +79,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'Update',
+                    'Personal Data Update',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
