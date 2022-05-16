@@ -242,7 +242,7 @@ class PersonalDataState extends State<PersonalData> {
                   height: 20,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(5.0),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(
