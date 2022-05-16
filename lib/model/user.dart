@@ -20,7 +20,7 @@ class Users {
   }
 
   String getImage() {
-    String? downloadURL = FirebaseAuth.instance.currentUser!.photoURL;
+    String? downloadURL = FirebaseAuth.instance.currentUser?.photoURL;
     String a = downloadURL!;
     return a;
   }

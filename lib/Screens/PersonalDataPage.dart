@@ -81,7 +81,7 @@ void setData(
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .set({
     'BMI': BMI,
-    'evel': diffLvl,
+    'level': diffLvl,
     'sex': sex,
     'difficulty': multp,
     'workouts amount': [mon, tue, wed, thur, fri, sat, sun],

@@ -28,8 +28,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return FutureBuilder(
         future: FirebaseFirestore.instance
-            .collection("about")
-            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("UsersPref")
+            .doc(FirebaseAuth.instance.currentUser?.uid)
             .get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -56,7 +56,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 24),
                   Center(child: buildUpgradeButton()),
                   const SizedBox(height: 24),
-                  NumbersWidget(),
+                  NumbersWidget(
+                    weight: snapshot.data?.get('weight').toString(),
+                    height: snapshot.data?.get('height') as int,
+                    bmi: snapshot.data?.get('BMI') as double,
+                  ),
                   const SizedBox(height: 48),
                   buildAbout(snapshot.data?.get('about')),
                 ],
@@ -82,7 +86,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(height: 24),
                   Center(child: buildUpgradeButton()),
                   const SizedBox(height: 24),
-                  NumbersWidget(),
+                  NumbersWidget(
+                    weight: '1',
+                    height: 1,
+                    bmi: 1,
+                  ),
                   const SizedBox(height: 48),
                   buildAbout("Loading"),
                 ],

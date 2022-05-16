@@ -2,47 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class NumbersWidget extends StatefulWidget {
-  const NumbersWidget({Key? key}) : super(key: key);
-
+  String? weight;
+  int? height;
+  double? bmi;
+  NumbersWidget({Key? key, this.weight, this.height, this.bmi})
+      : super(key: key);
   @override
   State<NumbersWidget> createState() => _NumbersWidgetState();
-}
-
-int height = 0;
-int weight = 0;
-double BMI = 0;
-
-void getB() async {
-  await FirebaseFirestore.instance
-      .collection("test")
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .get()
-      .then((value) => {BMI = value['BMI']});
-  if (BMI == 0) {
-    BMI = 00;
-  }
-}
-
-double getBMI() {
-  getB();
-  return BMI;
-}
-
-void getH() async {
-  await FirebaseFirestore.instance
-      .collection("test")
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .get()
-      .then((value) => {height = value['height']});
-  if (height == 0) {
-    height = 00;
-  }
-}
-
-int getHeight() {
-  getH();
-  return height;
 }
 
 class _NumbersWidgetState extends State<NumbersWidget> {
@@ -50,26 +18,23 @@ class _NumbersWidgetState extends State<NumbersWidget> {
   Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          buildButton(context, '???', 'Weight'),
+          buildButton(context, widget.weight.toString(), 'Weight'),
           buildDivider(),
-          buildButton(context, height.toString(), 'Height'),
+          buildButton(context, widget.height.toString(), 'Height'),
           buildDivider(),
-          buildButton(context, BMI.toString(), 'BMI'),
+          buildButton(context, widget.bmi.toString(), 'BMI'),
         ],
       );
   Widget buildDivider() => Container(
         height: 24,
-        child: VerticalDivider(),
+        child: const VerticalDivider(),
       );
 
   Widget buildButton(BuildContext context, String value, String text) =>
       MaterialButton(
-        padding: EdgeInsets.symmetric(vertical: 4),
+        padding: const EdgeInsets.symmetric(vertical: 4),
         onPressed: () {
-          height = getHeight();
-          BMI = getBMI();
-          print(height);
-          print(BMI);
+          print(widget.height);
         },
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         child: Column(
@@ -78,12 +43,12 @@ class _NumbersWidgetState extends State<NumbersWidget> {
           children: <Widget>[
             Text(
               value,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            SizedBox(height: 2),
+            const SizedBox(height: 2),
             Text(
               text,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
         ),

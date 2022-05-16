@@ -31,7 +31,7 @@ class _EditProfileState extends State<EditProfile> {
 
   Future<void> uploadAbout(String abt) async {
     await FirebaseFirestore.instance
-        .collection("about")
+        .collection("UsersPref")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({
       'about': abt,
