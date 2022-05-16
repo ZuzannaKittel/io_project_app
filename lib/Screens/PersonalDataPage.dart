@@ -79,7 +79,7 @@ void setData(
   await FirebaseFirestore.instance
       .collection("UsersPref")
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .set({
+      .update({
     'BMI': BMI,
     'level': diffLvl,
     'sex': sex,
