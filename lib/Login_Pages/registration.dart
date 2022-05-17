@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Login_Pages/RegistrationSetPref.dart';
 import 'package:io_project/Profile_Pages/ProfilePage.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/constants.dart';
+import '../Screens/PersonalDataPage.dart';
 import 'LoginFailed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -132,11 +134,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           User? user = newuser.user;
                           String id = user!.uid;
                           await FirebaseFirestore.instance
-                              .collection('about')
+                              .collection('UsersPref')
                               .doc(id)
                               .set({
                             'about': '',
                           });
+                          await FirebaseFirestore.instance
+                              .collection('Weights')
+                              .doc(id)
+                              .set({});
                           user.updateDisplayName(username);
                           // String url = uploadString(user) as String;
                           user.updatePhotoURL(
@@ -144,7 +150,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomePage()),
+                                builder: (context) => const PersonalDataReg()),
                           );
                           setState(() {
                             showProgress = false;

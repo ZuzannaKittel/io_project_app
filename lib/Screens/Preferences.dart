@@ -149,7 +149,7 @@ class PreferencesState extends State<Preferences> {
                           height: 20,
                         ),
                         Container(
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.all(5.0),
                           decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(
@@ -402,7 +402,10 @@ class PreferencesState extends State<Preferences> {
               ),
             );
           }
-          return const Text('Error 404');
+          return Scaffold(
+            appBar: buildAppBar(context, "Your Preferences"),
+            bottomNavigationBar: const BottomNavBar(),
+          );
         });
   }
 }
