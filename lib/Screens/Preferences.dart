@@ -32,7 +32,7 @@ void updateDifficulty() {
 
 void setDifficulty() async {
   await FirebaseFirestore.instance
-      .collection("test")
+      .collection("UsersPref")
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
     'difficulty': multp,
@@ -64,7 +64,7 @@ String date = DateFormat('yyyy-MM-dd').format(now);
 
 void setData(int _amount) async {
   await FirebaseFirestore.instance
-      .collection("test")
+      .collection("UsersPref")
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
     'level': diffLvl,
