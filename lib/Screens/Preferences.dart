@@ -82,7 +82,7 @@ class PreferencesState extends State<Preferences> {
     var size = MediaQuery.of(context).size;
     return FutureBuilder(
         future: FirebaseFirestore.instance
-            .collection("test")
+            .collection("UsersPref")
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .get(),
         builder:
