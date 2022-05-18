@@ -1,14 +1,21 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 import 'package:io_project/utils/user_preferences.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 
 import '../constants.dart';
 import '../widget/bottom_nav_bar.dart';
+
+import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
+
+import '../widget/buttons_widget.dart';
 
 List<dynamic>? list;
 
@@ -36,6 +43,21 @@ class _WeightsData {
   final int yValue;
 }
 
+int newWeight = 76;
+
+var now = DateTime.now().toUtc().add(const Duration(hours: 2));
+
+String date = DateFormat('yyyy-MM-dd').format(now);
+
+void addWeight(double _weight) async {
+  await FirebaseFirestore.instance
+      .collection('Weights')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .update({
+    'array': FieldValue.arrayUnion(['$_weight kg, $date'])
+  });
+}
+
 class _WeightPageState extends State<WeightPage> {
   /*final dane = FirebaseFirestore.instance
       .collection("Weights")
@@ -45,8 +67,18 @@ class _WeightPageState extends State<WeightPage> {
   List<_WeightsData> chartData = <_WeightsData>[];
   List<int> xValues = [1, 2, 3, 4, 5];
   List<int> yValues = [35, 28, 34, 32, 40];
+  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
   String calkiemDlugiString = ' ';
+
+  final myController = TextEditingController();
+
   @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) => FutureBuilder(
       future: FirebaseFirestore.instance
           .collection("Weights")
@@ -55,7 +87,7 @@ class _WeightPageState extends State<WeightPage> {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("Error");
+          return const Text("Error");
         }
         if (snapshot.connectionState == ConnectionState.done) {
           list = snapshot.data?.get("array");
@@ -106,18 +138,100 @@ class _WeightPageState extends State<WeightPage> {
                                   child: Text(calkiemDlugiString,
                                       style: const TextStyle(
                                           fontFamily: 'Cairo', fontSize: 18)))),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: myController,
+                            decoration: InputDecoration(
+                                labelText: "Enter your weight",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            maxLines: 1,
+                          ),
+                          const SizedBox(height: 20),
+                          ButtonWidget(
+                              text: "Submit",
+                              onClicked: () {
+                                //const Text('tescior');
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    contentPadding: const EdgeInsets.all(30),
+                                    title: const Text('Submit',
+                                        style: TextStyle(
+                                            fontSize: 18, fontFamily: "Cairo")),
+                                    content: const Text(
+                                        'Your preferences have been saved correctly',
+                                        style: TextStyle(
+                                            fontSize: 18, fontFamily: "Cairo")),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Cairo',
+                                                fontSize: 18)),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                print(myController.text);
+                                addWeight(double.parse(myController.text));
+                              }),
                         ],
                       ))));
         } else {
           return Scaffold(
-            appBar: buildAppBar(context, "Weight History"),
-            bottomNavigationBar: const BottomNavBar(),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("Loading")],
-            ),
-          );
+              appBar: buildAppBar(context, "Weight History"),
+              bottomNavigationBar: const BottomNavBar(),
+              body: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  height: 800,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: const Offset(2, 4),
+                        blurRadius: 5,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        mBackgroundColor,
+                        Color(0xFF817DC0),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                          padding: const EdgeInsets.all(12.0),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Center(
+                              child: const Text('Loading',
+                                  style: TextStyle(
+                                      fontFamily: 'Cairo', fontSize: 20)))),
+                    ],
+                  )));
         }
       });
 }
