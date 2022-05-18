@@ -8,6 +8,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../Profile_Pages/ProfilePage.dart';
+
 class startingPage extends StatefulWidget {
   const startingPage({Key? key}) : super(key: key);
 
@@ -48,6 +50,14 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+  void innitState() {
+    super.initState();
+    if (FirebaseAuth.instance.currentUser != null) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const ProfilePage()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
