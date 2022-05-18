@@ -58,6 +58,17 @@ void addWeight(double _weight) async {
   });
 }
 
+void deleteWeight() async {
+  await FirebaseFirestore.instance
+      .collection('Weights')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .update({
+    'array': FieldValue.arrayRemove(["67 kg, 2022-05-17"])
+  }).whenComplete(() {
+    print('Field Deleted');
+  });
+}
+
 class _WeightPageState extends State<WeightPage> {
   /*final dane = FirebaseFirestore.instance
       .collection("Weights")
@@ -182,7 +193,8 @@ class _WeightPageState extends State<WeightPage> {
                                   ),
                                 );
                                 print(myController.text);
-                                addWeight(double.parse(myController.text));
+                                //addWeight(double.parse(myController.text));
+                                deleteWeight();
                               }),
                         ],
                       ))));
