@@ -151,7 +151,7 @@ class _BackAndForthSquatsState extends State<BackAndForthSquats> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: DeleteButtonWidget(
+                    child: EditButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

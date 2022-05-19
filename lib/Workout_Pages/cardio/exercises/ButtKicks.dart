@@ -150,7 +150,7 @@ class _ButtKicksState extends State<ButtKicks> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: DeleteButtonWidget(
+                    child: EditButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

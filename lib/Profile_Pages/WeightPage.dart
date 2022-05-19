@@ -150,15 +150,21 @@ class _WeightPageState extends State<WeightPage> {
                                       Container(
                                         alignment: Alignment.center,
                                         padding: const EdgeInsets.all(5.0),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(10),
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(
+                                              15,
+                                            ),
+                                          ),
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 2,
                                           ),
                                         ),
                                         width: 250,
                                         child: Text(list?[index],
                                             style: const TextStyle(
+                                                color: Colors.white,
                                                 fontFamily: 'Cairo',
                                                 fontSize: 18)),
                                       ),

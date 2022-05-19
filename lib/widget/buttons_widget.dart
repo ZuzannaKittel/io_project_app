@@ -115,3 +115,37 @@ class DeleteButtonWidget extends StatelessWidget {
         onPressed: onClicked,
       );
 }
+
+class EditButtonWidget extends StatelessWidget {
+  final VoidCallback onClicked;
+
+  const EditButtonWidget({
+    Key? key,
+    required this.onClicked,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(const CircleBorder()),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
+          backgroundColor:
+              MaterialStateProperty.all(neonGreen), // <-- Button color
+          overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(MaterialState.pressed))
+              return neonBlue; // <-- Splash color
+          }),
+        ),
+        /* style: ElevatedButton.styleFrom(
+          shape: CircleBorder(),
+          onPrimary: Colors.white,
+          primary: kLightOrangeColor,
+          padding: EdgeInsets.all(20),
+        ),*/
+        child: const Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
+        onPressed: onClicked,
+      );
+}
