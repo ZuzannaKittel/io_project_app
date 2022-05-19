@@ -149,7 +149,7 @@ class _HighKneesState extends State<HighKnees> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
+                    child: DeleteButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => ButtKicks()),

@@ -151,7 +151,7 @@ class _JumpingSquatsState extends State<JumpingSquats> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
+                    child: DeleteButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => HighKnees()),

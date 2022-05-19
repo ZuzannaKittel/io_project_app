@@ -183,7 +183,7 @@ class _JumpingJacksState extends State<JumpingJacks> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
+                    child: DeleteButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

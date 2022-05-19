@@ -14,10 +14,10 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
+          shape: const StadiumBorder(),
           onPrimary: Colors.white,
-          primary: Color(0xFFC7B8F5),
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          primary: const Color(0xFFC7B8F5),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         ),
         child: Text(text),
         onPressed: onClicked,
@@ -37,10 +37,10 @@ class TimerButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
         style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
+          shape: const StadiumBorder(),
           onPrimary: Colors.white,
-          primary: Color(0xFF817DC0),
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          primary: const Color(0xFF817DC0),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         ),
         child: Text(text,
             style: const TextStyle(fontSize: 18, fontFamily: "Cairo")),
@@ -59,8 +59,8 @@ class SmallButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ElevatedButton(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all(CircleBorder()),
-          padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+          shape: MaterialStateProperty.all(const CircleBorder()),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
           backgroundColor:
               MaterialStateProperty.all(kLightOrangeColor), // <-- Button color
           overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
@@ -74,8 +74,42 @@ class SmallButtonWidget extends StatelessWidget {
           primary: kLightOrangeColor,
           padding: EdgeInsets.all(20),
         ),*/
-        child: Icon(
+        child: const Icon(
           Icons.arrow_forward_ios_rounded,
+          color: Colors.white,
+        ),
+        onPressed: onClicked,
+      );
+}
+
+class DeleteButtonWidget extends StatelessWidget {
+  final VoidCallback onClicked;
+
+  const DeleteButtonWidget({
+    Key? key,
+    required this.onClicked,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => ElevatedButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all(const CircleBorder()),
+          padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
+          backgroundColor:
+              MaterialStateProperty.all(neonBlue), // <-- Button color
+          overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(MaterialState.pressed))
+              return neonGreen; // <-- Splash color
+          }),
+        ),
+        /* style: ElevatedButton.styleFrom(
+          shape: CircleBorder(),
+          onPrimary: Colors.white,
+          primary: kLightOrangeColor,
+          padding: EdgeInsets.all(20),
+        ),*/
+        child: const Icon(
+          Icons.delete,
           color: Colors.white,
         ),
         onPressed: onClicked,

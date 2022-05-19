@@ -149,7 +149,7 @@ class _JoggingInPlaceState extends State<JoggingInPlace> {
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: SmallButtonWidget(
+                    child: DeleteButtonWidget(
                       onClicked: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(

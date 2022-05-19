@@ -58,12 +58,12 @@ void addWeight(double _weight) async {
   });
 }
 
-void deleteWeight() async {
+void deleteWeight(String toDelete) async {
   await FirebaseFirestore.instance
       .collection('Weights')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .update({
-    'array': FieldValue.arrayRemove(["67 kg, 2022-05-17"])
+    'array': FieldValue.arrayRemove([toDelete])
   }).whenComplete(() {
     print('Field Deleted');
   });
@@ -108,96 +108,171 @@ class _WeightPageState extends State<WeightPage> {
           return Scaffold(
               appBar: buildAppBar(context, "Weight History"),
               bottomNavigationBar: const BottomNavBar(),
-              body: SingleChildScrollView(
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 40),
-                      height: 800,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(5),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade200,
-                            offset: const Offset(2, 4),
-                            blurRadius: 5,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                        gradient: const LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            mBackgroundColor,
-                            Color(0xFF817DC0),
-                          ],
-                        ),
+              body: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                  height: 800,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade200,
+                        offset: const Offset(2, 4),
+                        blurRadius: 5,
+                        spreadRadius: 2,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: const EdgeInsets.all(12.0),
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: Center(
-                                  child: Text(calkiemDlugiString,
-                                      style: const TextStyle(
-                                          fontFamily: 'Cairo', fontSize: 18)))),
-                          const SizedBox(height: 20),
-                          TextField(
-                            controller: myController,
-                            decoration: InputDecoration(
-                                labelText: "Enter your weight",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            maxLines: 1,
-                          ),
-                          const SizedBox(height: 20),
-                          ButtonWidget(
-                              text: "Submit",
-                              onClicked: () {
-                                //const Text('tescior');
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                    contentPadding: const EdgeInsets.all(30),
-                                    title: const Text('Submit',
-                                        style: TextStyle(
-                                            fontSize: 18, fontFamily: "Cairo")),
-                                    content: const Text(
-                                        'Your preferences have been saved correctly',
-                                        style: TextStyle(
-                                            fontSize: 18, fontFamily: "Cairo")),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'OK'),
-                                        child: const Text('OK',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        mBackgroundColor,
+                        Color(0xFF817DC0),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: list?.length,
+                            itemBuilder: (BuildContext ctxt, int index) {
+                              if (list?.length == 0) {
+                                return Text("Brak danych");
+                              } else {
+                                return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.all(5.0),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(10),
+                                          ),
+                                        ),
+                                        width: 250,
+                                        child: Text(list?[index],
+                                            style: const TextStyle(
                                                 fontFamily: 'Cairo',
                                                 fontSize: 18)),
                                       ),
-                                    ],
-                                  ),
-                                );
-                                print(myController.text);
-                                //addWeight(double.parse(myController.text));
-                                deleteWeight();
-                              }),
+                                      //SizedBox(width: 50),
+                                      DeleteButtonWidget(onClicked: () {
+                                        showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: const Text('Alert',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Cairo")),
+                                            content: const Text(
+                                                'Do you really want to delete this record?',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Cairo")),
+                                            actions: <Widget>[
+                                              Center(
+                                                child: Row(
+                                                  children: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            deleteWeight(
+                                                                list?[index]);
+                                                          });
+                                                        },
+                                                        child: const Text('yes',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontFamily:
+                                                                    'Cairo',
+                                                                fontSize: 16))),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context, 'OK'),
+                                                      child: const Text('no',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontFamily:
+                                                                  'Cairo',
+                                                              fontSize: 16)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      })
+                                    ]);
+                              }
+                            }),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: myController,
+                        decoration: InputDecoration(
+                            labelText: "Enter your weight",
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
                         ],
-                      ))));
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 20),
+                      ButtonWidget(
+                          text: "Submit",
+                          onClicked: () {
+                            //const Text('tescior');
+                            /* showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                contentPadding: const EdgeInsets.all(30),
+                                title: const Text('Submit',
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: "Cairo")),
+                                content: const Text(
+                                    'Your preferences have been saved correctly',
+                                    style: TextStyle(
+                                        fontSize: 18, fontFamily: "Cairo")),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'OK'),
+                                    child: const Text('OK',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Cairo',
+                                            fontSize: 18)),
+                                  ),
+                                ],
+                              ),
+                            
+                            );
+                            */
+                            print(myController.text);
+                            setState(() {
+                              addWeight(double.parse(myController.text));
+                            });
+
+                            //deleteWeight();
+                          }),
+                    ],
+                  )));
         } else {
           return Scaffold(
               appBar: buildAppBar(context, "Weight History"),
@@ -247,3 +322,7 @@ class _WeightPageState extends State<WeightPage> {
         }
       });
 }
+
+/* Text(calkiemDlugiString,
+                                      style: const TextStyle(
+                                          fontFamily: 'Cairo', fontSize: 18)))*/

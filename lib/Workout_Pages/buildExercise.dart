@@ -134,7 +134,7 @@ class _buildExerciseState extends State<buildExercise> {
                               //const Text("Done?"),
                               Align(
                                 alignment: Alignment.bottomRight,
-                                child: SmallButtonWidget(
+                                child: DeleteButtonWidget(
                                   onClicked: () {
                                     licznik = 0;
                                     Navigator.of(context).push(
@@ -224,7 +224,7 @@ class _buildExerciseState extends State<buildExercise> {
                       //const Text("Done?"),
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: SmallButtonWidget(
+                        child: DeleteButtonWidget(
                           onClicked: () {
                             licznik = 0;
                             Navigator.of(context).push(
