@@ -42,6 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
               body: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [
+                  const SizedBox(height: 24),
                   ProfileWidget(
                     imagePath: user.getImage(),
                     onClicked: () {

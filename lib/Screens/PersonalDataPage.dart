@@ -139,8 +139,8 @@ class PersonalDataState extends State<PersonalData> {
       bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            height: 1200,
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+            height: 1025,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
