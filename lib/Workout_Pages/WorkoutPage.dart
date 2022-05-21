@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Screens/weeklyTraining.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/calendar.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
@@ -92,7 +93,12 @@ class _MenuPage extends StatelessWidget {
                         CategoryCard(
                           title: "Week",
                           svgSrc: "assets/images/week.jpg",
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const WeeklyTraining()),
+                            );
+                          },
                         ),
                         CategoryCard(
                           title: "Calendar",

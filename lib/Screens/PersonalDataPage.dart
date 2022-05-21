@@ -20,7 +20,23 @@ String tp = 'avg';
 double? diffLvl = 5;
 double? multp;
 double? BMI;
+
 int workoutsAmount = 2;
+int weightValue = 65;
+int heightValue = 170;
+bool male = false;
+bool fmale = true;
+bool gainMuscles = false;
+bool looseWeight = false;
+bool improveCondition = true;
+bool mon = false;
+bool tue = false;
+bool wed = false;
+bool thur = false;
+bool fri = false;
+bool sat = false;
+bool sun = false;
+
 void changeType(String type) {
   tp = type;
 }
@@ -47,6 +63,33 @@ void setMultiplier(double? diffLvl, double? bmi, String sex, String type) {
   multp = ((multp! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
 }
 
+void getData() async {
+  final data = await FirebaseFirestore.instance
+      .collection('UsersPref')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  Map<String, dynamic>? map = data.data();
+  weightValue = map?['weight'];
+  heightValue = map?['height'];
+  if (map?['sex'] == "Male") {
+    male = true;
+    fmale = false;
+  } else {
+    male = false;
+    fmale = true;
+  }
+  gainMuscles = map?['gain muscles'];
+  looseWeight = map?['loose weight'];
+  improveCondition = map?['improve condition'];
+  mon = map?['workouts amount'][0];
+  tue = map?['workouts amount'][1];
+  wed = map?['workouts amount'][2];
+  thur = map?['workouts amount'][3];
+  fri = map?['workouts amount'][4];
+  sat = map?['workouts amount'][5];
+  sun = map?['workouts amount'][6];
+}
+
 class PersonalData extends StatefulWidget {
   const PersonalData({Key? key}) : super(key: key);
 
@@ -54,20 +97,6 @@ class PersonalData extends StatefulWidget {
   State<PersonalData> createState() => PersonalDataState();
 }
 
-int weightValue = 65;
-int heightValue = 170;
-bool male = false;
-bool fmale = true;
-bool gainMuscles = false;
-bool looseWeight = false;
-bool improveCondition = true;
-bool mon = false;
-bool tue = false;
-bool wed = false;
-bool thur = false;
-bool fri = false;
-bool sat = false;
-bool sun = false;
 //int workoutsAmount = 2;
 
 var now = DateTime.now().toUtc().add(const Duration(hours: 2));
@@ -103,34 +132,13 @@ void addData(int _weight) async {
   });
 }
 
-void getData() async {
-  final data = await FirebaseFirestore.instance
-      .collection('UsersPref')
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .get();
-  Map<String, dynamic>? map = data.data();
-  weightValue = map?['weight'];
-  heightValue = map?['height'];
-  if (map?['sex'] == "Male") {
-    male = true;
-    fmale = false;
-  } else {
-    male = false;
-    fmale = true;
-  }
-  gainMuscles = map?['gain muscles'];
-  looseWeight = map?['loose weight'];
-  improveCondition = map?['improve condition'];
-  mon = map?['workouts amount'][0];
-  tue = map?['workouts amount'][1];
-  wed = map?['workouts amount'][2];
-  thur = map?['workouts amount'][3];
-  fri = map?['workouts amount'][4];
-  sat = map?['workouts amount'][5];
-  sun = map?['workouts amount'][6];
-}
-
 class PersonalDataState extends State<PersonalData> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
