@@ -68,6 +68,15 @@ void deleteWeight(String toDelete) async {
   });
 }
 
+void updateWeightUserPref(double _weight) async {
+  await FirebaseFirestore.instance
+      .collection("UsersPref")
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .update({
+    'weight': _weight,
+  });
+}
+
 class _WeightPageState extends State<WeightPage> {
   /*final dane = FirebaseFirestore.instance
       .collection("Weights")
@@ -272,6 +281,8 @@ class _WeightPageState extends State<WeightPage> {
                             print(myController.text);
                             setState(() {
                               addWeight(double.parse(myController.text));
+                              updateWeightUserPref(
+                                  double.parse(myController.text));
                             });
 
                             //deleteWeight();
