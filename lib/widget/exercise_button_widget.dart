@@ -16,8 +16,8 @@ class ExButtonWidget extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           onPrimary: Colors.white,
-          primary: Color(0xFFF5CEB8),
-          padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          primary: const Color(0xFFF5CEB8),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
           fixedSize: const Size(420, 100),
         ),
         child: Text(text,

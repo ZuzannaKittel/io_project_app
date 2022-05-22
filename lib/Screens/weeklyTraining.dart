@@ -266,32 +266,63 @@ class Day extends StatelessWidget {
       : super(key: key);
 
   Widget icon = Icon(Icons.radio_button_unchecked);
-  Color? color = Colors.blue[200];
+  Color? col = neonBlue;
   @override
   Widget build(BuildContext context) {
     if (m_isDone == true) {
       icon = Icon(Icons.check_circle_outline);
-      color = Colors.green[300];
+      col = neonGreen;
     }
     if (isTrue == true) {
       return Column(
         children: [
-          InkWell(
-              onTap: () {},
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)),
+                onPrimary: kShadowColor,
+                primary: col,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              ),
+              onPressed: () {},
               child: Container(
-                color: color,
+                //margin: const EdgeInsets.all(10.0),
+                //color: color,
                 width: 300,
                 height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    icon,
-                    Text(text),
-                    Text(
-                      day,
-                      style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
-                    )
-                  ],
+
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(
+                      20,
+                    ),
+                  ),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      icon,
+                      Text(
+                        text,
+                        style:
+                            const TextStyle(fontSize: 18, fontFamily: "Cairo"),
+                      ),
+                      Text(
+                        day,
+                        style:
+                            const TextStyle(fontSize: 20, fontFamily: "Cairo"),
+                      )
+                    ],
+                  ),
                 ),
               )),
           const SizedBox(
@@ -302,22 +333,55 @@ class Day extends StatelessWidget {
     } else {
       return Column(
         children: [
-          Container(
-            color: Colors.red[300],
-            width: 300,
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                icon,
-                Text('Break'),
-                Text(
-                  day,
-                  style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
-                )
-              ],
-            ),
-          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)),
+                onPrimary: kShadowColor,
+                primary: kBlueColor,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              ),
+              onPressed: () {},
+              child: Container(
+                //margin: const EdgeInsets.all(10.0),
+                //color: color,
+                width: 300,
+                height: 50,
+
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(
+                      20,
+                    ),
+                  ),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                ),
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      icon,
+                      Text(
+                        'Break',
+                        style:
+                            const TextStyle(fontSize: 18, fontFamily: "Cairo"),
+                      ),
+                      Text(
+                        day,
+                        style:
+                            const TextStyle(fontSize: 20, fontFamily: "Cairo"),
+                      )
+                    ],
+                  ),
+                ),
+              )),
           const SizedBox(
             height: 10,
           )

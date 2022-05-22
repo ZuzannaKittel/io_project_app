@@ -28,7 +28,7 @@ bool male = false;
 bool fmale = true;
 bool gainMuscles = false;
 bool looseWeight = false;
-bool improveCondition = true;
+bool improveCondition = false;
 bool mon = false;
 bool tue = false;
 bool wed = false;
@@ -150,7 +150,7 @@ void setData(
     'difficulty': multp,
     'workouts amount': [mon, tue, wed, thur, fri, sat, sun],
     'height': _height,
-    'weight': _weight as double,
+    'weight': _weight,
     'gain muscles': gainMuscles,
     'loose weight': looseWeight,
     'improve condition': improveCondition,
@@ -176,6 +176,7 @@ class PersonalDataState extends State<PersonalData> {
 
   @override
   Widget build(BuildContext context) {
+    getData();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context, "Your Preferences"),
@@ -558,12 +559,14 @@ class PersonalDataState extends State<PersonalData> {
                       } else {
                         sex = 'Female';
                       }
-                      bmi(heightValue, weightValue);
-                      setMultiplier(diffLvl, BMI, sex, tp);
-                      addData(weightValue);
-                      setData(
-                          sex, workoutsAmount, heightValue, tp, weightValue);
-                      setWorkout();
+                      setState(() {
+                        bmi(heightValue, weightValue);
+                        setMultiplier(diffLvl, BMI, sex, tp);
+                        addData(weightValue);
+                        setData(
+                            sex, workoutsAmount, heightValue, tp, weightValue);
+                        setWorkout();
+                      });
                     }),
               ],
             )),
