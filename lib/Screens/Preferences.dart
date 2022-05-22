@@ -16,36 +16,16 @@ import '../Login_Pages/registration.dart';
 import '../widget/appbar_widget.dart';
 import '../widget/bottom_nav_bar.dart';
 
+String tp = 'avg';
 double? diffLvl = 5;
 double? multp;
+double? BMI;
+
 int workoutsAmount = 2;
-double oldDifficulty = 0.5;
-
-void changeDiflvl(double lvl) {
-  diffLvl = lvl;
-}
-
-void updateDifficulty() {
-  print(oldDifficulty);
-  multp = (oldDifficulty * (diffLvl! * 0.15));
-}
-
-void setDifficulty() async {
-  await FirebaseFirestore.instance
-      .collection("UsersPref")
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .update({
-    'difficulty': multp,
-  });
-}
-
-class Preferences extends StatefulWidget {
-  const Preferences({Key? key}) : super(key: key);
-
-  @override
-  State<Preferences> createState() => PreferencesState();
-}
-
+int weightValue = 65;
+int heightValue = 170;
+bool male = false;
+bool fmale = true;
 bool gainMuscles = false;
 bool looseWeight = false;
 bool improveCondition = true;
@@ -56,13 +36,77 @@ bool thur = false;
 bool fri = false;
 bool sat = false;
 bool sun = false;
+
+void changeDiflvlPref(double lvl) {
+  diffLvl = lvl;
+}
+
+void bmi(int _height, int _weight) {
+  BMI = ((_weight) / ((_height) * (_height))) * 10000;
+  BMI = ((BMI! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
+}
+
+void setMultiplier(double? diffLvl, double? bmi, String sex, String type) {
+  double bmiScale = 0.5;
+  if (bmi! > 18.5 && bmi < 29 && type == 'average' || type == 'muscular') {
+    bmiScale = 1;
+  }
+  if (sex == "Male") {
+    multp = (diffLvl! / 10) + bmiScale;
+  } else if (sex == 'Female') {
+    multp = (diffLvl! / 15) + bmiScale;
+  }
+  multp = ((multp! * pow(10.0, 2)).roundToDouble() / pow(10.0, 2));
+}
+
+void getData() async {
+  final data = await FirebaseFirestore.instance
+      .collection('UsersPref')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  Map<String, dynamic>? map = data.data();
+  weightValue = map?['weight'];
+  heightValue = map?['height'];
+  if (map?['sex'] == "Male") {
+    male = true;
+    fmale = false;
+  } else {
+    male = false;
+    fmale = true;
+  }
+
+  gainMuscles = map?['gain muscles'];
+  looseWeight = map?['loose weight'];
+  improveCondition = map?['improve condition'];
+  mon = map?['workouts amount'][0];
+  tue = map?['workouts amount'][1];
+  wed = map?['workouts amount'][2];
+  thur = map?['workouts amount'][3];
+  fri = map?['workouts amount'][4];
+  sat = map?['workouts amount'][5];
+  sun = map?['workouts amount'][6];
+
+  diffLvl = map?['level'];
+  multp = map?['difficulty'];
+
+  print(diffLvl);
+}
+
+class Preferences extends StatefulWidget {
+  const Preferences({Key? key}) : super(key: key);
+
+  @override
+  State<Preferences> createState() => PreferencesState();
+}
+
 //int workoutsAmount = 2;
 
 var now = DateTime.now().toUtc().add(const Duration(hours: 2));
 
 String date = DateFormat('yyyy-MM-dd').format(now);
 
-void setData() async {
+void setDataTest() async {
+  print(diffLvl);
   await FirebaseFirestore.instance
       .collection("UsersPref")
       .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -76,31 +120,24 @@ void setData() async {
   });
 }
 
-void getData() async {
-  final data = await FirebaseFirestore.instance
-      .collection('UsersPref')
+void addData(int _weight) async {
+  await FirebaseFirestore.instance
+      .collection('Weights')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .get();
-  Map<String, dynamic>? map = data.data();
-
-  gainMuscles = map?['gain muscles'];
-  looseWeight = map?['loose weight'];
-  improveCondition = map?['improve condition'];
-  mon = map?['workouts amount'][0];
-  tue = map?['workouts amount'][1];
-  wed = map?['workouts amount'][2];
-  thur = map?['workouts amount'][3];
-  fri = map?['workouts amount'][4];
-  sat = map?['workouts amount'][5];
-  sun = map?['workouts amount'][6];
-
-  oldDifficulty = map?['difficulty'];
+      .update({
+    'array': FieldValue.arrayUnion(['$_weight kg, $date'])
+  });
 }
 
 class PreferencesState extends State<Preferences> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     getData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context, "Your Preferences"),
@@ -149,7 +186,7 @@ class PreferencesState extends State<Preferences> {
                       const Text("Select difficulty level",
                           textAlign: TextAlign.left,
                           style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
-                      SliderLevel(),
+                      SliderLevelPref(),
                     ],
                   ),
                 ),
@@ -397,10 +434,17 @@ class PreferencesState extends State<Preferences> {
                           ],
                         ),
                       );
-                      updateDifficulty();
-
-                      setDifficulty();
-                      setData();
+                      String sex;
+                      if (male) {
+                        sex = 'Male';
+                      } else {
+                        sex = 'Female';
+                      }
+                      setState(() {
+                        bmi(heightValue, weightValue);
+                        setMultiplier(diffLvl, BMI, sex, tp);
+                        setDataTest();
+                      });
                     }),
               ],
             )),
