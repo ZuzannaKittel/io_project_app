@@ -25,6 +25,50 @@ String getDay(int index) {
   }
 }
 
+List<bool>? isDone = [false, false, false, false, false, false, false];
+//Ustawianie warytosci true or false zgodnie z baza
+void setData(DocumentSnapshot<Map<String, dynamic>> value) {
+  isDone?[0] = value.get('Monday');
+  isDone?[1] = value.get('Tuesday');
+  isDone?[2] = value.get('Wednesday');
+  isDone?[3] = value.get('Thursday');
+  isDone?[4] = value.get('Friday');
+  isDone?[5] = value.get('Saturday');
+  isDone?[6] = value.get('Sunday');
+}
+
+//Sprawdzanie czy baza istnieje
+void checkIfDatabase() async {
+  bool ok = false;
+  FirebaseFirestore.instance
+      .collection("Week")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get()
+      .then((value) {
+    value.exists ? ok = true : ok = false;
+    if (ok) {
+      setData(value);
+    } else {
+      createDatabase();
+    }
+  });
+}
+
+void createDatabase() {
+  final snapshot = FirebaseFirestore.instance
+      .collection("Week")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .set({
+    'Monday': false,
+    'Tuesday': false,
+    'Wednesday': false,
+    'Thursday': false,
+    'Friday': false,
+    'Saturday': false,
+    'Sunday': false,
+  });
+}
+
 class WeeklyTraining extends StatefulWidget {
   const WeeklyTraining({Key? key}) : super(key: key);
 
@@ -35,6 +79,7 @@ class WeeklyTraining extends StatefulWidget {
 class _WeeklyTrainingState extends State<WeeklyTraining> {
   @override
   Widget build(BuildContext context) {
+    checkIfDatabase();
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("UsersPref")
@@ -84,14 +129,17 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
                               if (list?.length != 0) {
                                 if (list?[index] == true) {
                                   return Day(
-                                      day: getDay(index), isTrue: list?[index]);
+                                      day: getDay(index),
+                                      isTrue: list?[index],
+                                      m_isDone: isDone?[index]);
                                 }
                               } else {
                                 return Text("Brak Danych");
                               }
                               return Day(
-                                  day: getDay(index), isTrue: list?[index]);
-                              ;
+                                  day: getDay(index),
+                                  isTrue: list?[index],
+                                  m_isDone: isDone?[index]);
                             }))
                   ],
                 ),
@@ -134,12 +182,17 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
 
 class Day extends StatelessWidget {
   final bool isTrue;
+  final bool? m_isDone;
   final String day;
-  const Day({Key? key, required this.day, required this.isTrue})
+  Day({Key? key, required this.day, required this.isTrue, this.m_isDone})
       : super(key: key);
 
+  Widget icon = Icon(Icons.radio_button_unchecked);
   @override
   Widget build(BuildContext context) {
+    if (m_isDone == true) {
+      icon = Icon(Icons.check_circle_outline);
+    }
     if (isTrue == true) {
       return Column(
         children: [
@@ -150,6 +203,7 @@ class Day extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                icon,
                 Text(
                   day,
                   style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
