@@ -188,10 +188,12 @@ class Day extends StatelessWidget {
       : super(key: key);
 
   Widget icon = Icon(Icons.radio_button_unchecked);
+  Color? color = Colors.blue[200];
   @override
   Widget build(BuildContext context) {
     if (m_isDone == true) {
       icon = Icon(Icons.check_circle_outline);
+      color = Colors.green[300];
     }
     if (isTrue == true) {
       return Column(
@@ -199,7 +201,7 @@ class Day extends StatelessWidget {
           InkWell(
               onTap: () {},
               child: Container(
-                color: Colors.blue[200],
+                color: color,
                 width: 300,
                 height: 50,
                 child: Row(
