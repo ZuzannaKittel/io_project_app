@@ -196,21 +196,23 @@ class Day extends StatelessWidget {
     if (isTrue == true) {
       return Column(
         children: [
-          Container(
-            color: Colors.blue[200],
-            width: 300,
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                icon,
-                Text(
-                  day,
-                  style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
-                )
-              ],
-            ),
-          ),
+          InkWell(
+              onTap: () {},
+              child: Container(
+                color: Colors.blue[200],
+                width: 300,
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    icon,
+                    Text(
+                      day,
+                      style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
+                    )
+                  ],
+                ),
+              )),
           const SizedBox(
             height: 10,
           )
@@ -224,8 +226,9 @@ class Day extends StatelessWidget {
             width: 300,
             height: 50,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                icon,
                 Text(
                   day,
                   style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
