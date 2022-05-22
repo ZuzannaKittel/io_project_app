@@ -115,7 +115,7 @@ void setData(
     'difficulty': multp,
     'workouts amount': [mon, tue, wed, thur, fri, sat, sun],
     'height': _height,
-    'weight': _weight,
+    'weight': _weight as double,
     'gain muscles': gainMuscles,
     'loose weight': looseWeight,
     'improve condition': improveCondition,
