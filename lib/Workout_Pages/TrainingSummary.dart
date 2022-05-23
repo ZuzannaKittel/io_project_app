@@ -34,7 +34,7 @@ class TrainingSummary extends StatefulWidget {
 class _TrainingSummaryState extends State<TrainingSummary> {
   late bool issDone = false;
   double difficultyRating = 0;
-  double sthRating = 0;
+  double exSelectionRating = 0;
   bool isSubmitClicked = false;
 
   void addSummaryData() async {
@@ -42,11 +42,25 @@ class _TrainingSummaryState extends State<TrainingSummary> {
         .collection('summary')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({
+      'ex selection rating ' + date: exSelectionRating,
       'difficulty rating ' + date: difficultyRating,
-      'sth rating ' + date: sthRating,
       'training name ' + date: widget.trainingName,
       'training type ' + date: widget.trainingType,
     }, SetOptions(merge: true)).then((value) {});
+  }
+
+  void addSummaryDataArray() async {
+    await FirebaseFirestore.instance
+        .collection('Summary')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      date: FieldValue.arrayUnion([
+        'ex selection rating: $exSelectionRating',
+        'difficulty rating: $difficultyRating',
+        'training name: ${widget.trainingName}',
+        'training type: ${widget.trainingType}'
+      ])
+    });
   }
 
   Future<void> addNotes(String n) async {
@@ -107,7 +121,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Sth',
+                            const Text('Exercise Selection',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Cairo',
@@ -118,7 +132,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                   Icons.star,
                                   color: kBackgroundColor),
                               onRatingUpdate: (rat) => setState(() {
-                                sthRating = rat;
+                                exSelectionRating = rat;
                               }),
                             ),
                             const SizedBox(height: 20),
@@ -140,7 +154,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                 text: 'Submit',
                                 onClicked: () {
                                   isSubmitClicked = true;
-                                  addSummaryData();
+                                  addSummaryDataArray();
                                   if (difficultyRating == 1 ||
                                       difficultyRating == 5) {
                                     showDialog<String>(
@@ -240,7 +254,8 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                         child: ButtonWidget(
                             text: 'End training',
                             onClicked: () {
-                              if (difficultyRating == 0 || sthRating == 0) {
+                              if (difficultyRating == 0 ||
+                                  exSelectionRating == 0) {
                                 showDialog<String>(
                                   context: context,
                                   builder: (BuildContext context) =>

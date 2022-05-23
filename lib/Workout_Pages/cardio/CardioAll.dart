@@ -17,13 +17,13 @@ class _CardioAllState extends State<CardioAll> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildAppBar(context, "Cardio Workouts"),
-        bottomNavigationBar: BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(),
         body: ListView(
             physics: const BouncingScrollPhysics(),
             addAutomaticKeepAlives: true,
             children: [
               Padding(
-                  padding: EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {
@@ -40,7 +40,7 @@ class _CardioAllState extends State<CardioAll> {
                     onClicked: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => cTrainingAPage()),
+                            builder: (context) => const cTrainingAPage()),
                       );
                     },
                   )),

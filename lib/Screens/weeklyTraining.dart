@@ -130,6 +130,7 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
   int counter = -1;
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection("Workout")
@@ -157,61 +158,55 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
                     return Scaffold(
                       bottomNavigationBar: const BottomNavBar(),
                       appBar: buildAppBar(context, "This week"),
-                      body: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 40),
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade200,
-                              offset: const Offset(2, 4),
-                              blurRadius: 5,
-                              spreadRadius: 2,
-                            ),
-                          ],
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              mBackgroundColor,
-                              Color(0xFF817DC0),
-                            ],
+                      body: Stack(children: <Widget>[
+                        Container(
+                          height: size.height * .30,
+                          decoration: const BoxDecoration(
+                            color: kBlueLightColor,
                           ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                                child: ListView.builder(
-                                    itemCount: list?.length,
-                                    itemBuilder:
-                                        (BuildContext ctxt, int index) {
-                                      if (list?.length != 0) {
-                                        if (list?[index] == true) {
-                                          counter++;
+                        Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Container(
+                                /*margin: EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 40.0),
+                                    */
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 20),
+                                Expanded(
+                                    child: ListView.builder(
+                                        itemCount: list?.length,
+                                        itemBuilder:
+                                            (BuildContext ctxt, int index) {
+                                          if (list?.length != 0) {
+                                            if (list?[index] == true) {
+                                              counter++;
+                                              return Day(
+                                                day: getDay(index),
+                                                isTrue: list?[index],
+                                                m_isDone: isDone?[index],
+                                                text: workouts?[counter],
+                                              );
+                                            }
+                                          } else {
+                                            return Center(
+                                                child: const Text('Brak Danych',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Cairo',
+                                                        fontSize: 20)));
+                                          }
                                           return Day(
                                             day: getDay(index),
                                             isTrue: list?[index],
                                             m_isDone: isDone?[index],
-                                            text: workouts?[counter],
+                                            text: 'None',
                                           );
-                                        }
-                                      } else {
-                                        return Text("Brak Danych");
-                                      }
-                                      return Day(
-                                        day: getDay(index),
-                                        isTrue: list?[index],
-                                        m_isDone: isDone?[index],
-                                        text: 'None',
-                                      );
-                                    }))
-                          ],
-                        ),
-                      ),
+                                        }))
+                              ],
+                            ))),
+                      ]),
                     );
                   } else {
                     return Scaffold(
