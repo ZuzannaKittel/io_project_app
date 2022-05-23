@@ -23,7 +23,7 @@ class _CardioAllState extends State<CardioAll> {
             addAutomaticKeepAlives: true,
             children: [
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {
@@ -34,7 +34,7 @@ class _CardioAllState extends State<CardioAll> {
                     },
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Trening A',
                     onClicked: () {
@@ -45,31 +45,31 @@ class _CardioAllState extends State<CardioAll> {
                     },
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {},
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {},
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {},
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {},
                   )),
               Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
                     text: 'Running',
                     onClicked: () {},

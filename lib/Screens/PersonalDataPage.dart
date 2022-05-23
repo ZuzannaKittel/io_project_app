@@ -184,7 +184,7 @@ class PersonalDataState extends State<PersonalData> {
       body: SingleChildScrollView(
         child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            height: 1025,
+            height: 1050,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(
                 Radius.circular(5),
