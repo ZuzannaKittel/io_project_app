@@ -94,8 +94,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'JumpingJacks',
-                                      imagePath:
-                                          "assets/images/JumpingJacks.gif")),
+                                      trType: 'Cardio')),
                             );
                           },
                           isDone: false,
@@ -110,8 +109,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'BackAndForthSquats',
-                                      imagePath:
-                                          "assets/images/JumpingJacks.gif")),
+                                      trType: 'Cardio')),
                             );
                           },
                         ),
@@ -124,8 +122,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'Jogging in Place',
-                                      imagePath:
-                                          "assets/images/JoggingInPlace.gif")),
+                                      trType: 'Cardio')),
                             );
                           },
                         ),
@@ -138,8 +135,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'JumpingSquats',
-                                      imagePath:
-                                          "assets/images/squat-jump.gif")),
+                                      trType: 'Cardio')),
                             );
                           },
                         ),
@@ -151,9 +147,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
-                                      exName: 'HighKnees',
-                                      imagePath:
-                                          "assets/images/HighKnees.gif")),
+                                      exName: 'HighKnees', trType: 'Cardio')),
                             );
                           },
                         ),
@@ -165,9 +159,7 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
-                                      exName: 'ButtKicks',
-                                      imagePath:
-                                          "assets/images/ButtKicks.gif")),
+                                      exName: 'ButtKicks', trType: 'Cardio')),
                             );
                           },
                         ),

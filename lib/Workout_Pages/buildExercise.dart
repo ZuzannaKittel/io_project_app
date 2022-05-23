@@ -16,23 +16,15 @@ double multiplier = 1;
 // ignore: camel_case_types
 class buildExercise extends StatefulWidget {
   final String exName;
-  final String imagePath;
+  final String trType;
 
   const buildExercise({
     Key? key,
     required this.exName,
-    required this.imagePath,
+    required this.trType,
   }) : super(key: key);
   @override
   _buildExerciseState createState() => _buildExerciseState();
-}
-
-void getDifficulty() async {
-  await FirebaseFirestore.instance
-      .collection("test")
-      .doc(FirebaseAuth.instance.currentUser!.uid)
-      .get()
-      .then((value) => {multiplier = value['difficulty']});
 }
 
 var duration = 60;
@@ -43,14 +35,28 @@ class _buildExerciseState extends State<buildExercise> {
   late bool isCompleted = false;
   //int licznik = 0;
 
+  void getDifficulty() async {
+    await FirebaseFirestore.instance
+        .collection("test")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) => {multiplier = value['difficulty']});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getDifficulty();
+  }
+
   @override
   Widget build(BuildContext context) {
-    getDifficulty();
+    //getDifficulty();
     var size = MediaQuery.of(context).size;
     if (licznik == 0) {
       return FutureBuilder(
           future: FirebaseFirestore.instance
-              .collection("workouts")
+              .collection(widget.trType)
               .doc(widget.exName)
               .get(),
           builder:
@@ -118,7 +124,7 @@ class _buildExerciseState extends State<buildExercise> {
                                 ),
                               ),
                             ),
-                            Image.asset(widget.imagePath),
+                            Image.asset("assets/images/${widget.exName}.gif"),
                             const SizedBox(height: 20),
                             Center(
                               child: Column(
@@ -208,7 +214,7 @@ class _buildExerciseState extends State<buildExercise> {
                         ),
                       ),
                     ),
-                    Image.asset(widget.imagePath),
+                    Image.asset("assets/images/${widget.exName}.gif"),
                     const SizedBox(height: 20),
                     Center(
                       child: Column(

@@ -137,7 +137,7 @@ class _SettingsState extends State<Settings> {
                     MaterialPageRoute(
                       builder: (context) => const buildExercise(
                         exName: "Jakies cw",
-                        imagePath: "assets/images/MJumpingJacks.gif",
+                        trType: 'Cardio',
                       ),
                     ),
                   );

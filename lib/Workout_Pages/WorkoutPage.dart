@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Screens/weeklyTraining.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
+import 'package:io_project/Workout_Pages/buildTraining.dart';
 import 'package:io_project/Workout_Pages/calendar.dart';
 import 'package:io_project/widget/bottom_nav_bar.dart';
 import 'package:io_project/widget/category_card.dart';
@@ -113,7 +114,13 @@ class _MenuPage extends StatelessWidget {
                         CategoryCard(
                           title: "Summary",
                           svgSrc: "assets/images/summary.jpg",
-                          press: () {},
+                          press: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      builderOfTraining(trType: 'Cardio')),
+                            );
+                          },
                         ),
                       ],
                     ),
