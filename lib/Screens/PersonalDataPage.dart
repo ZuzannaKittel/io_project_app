@@ -176,7 +176,6 @@ class PersonalDataState extends State<PersonalData> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: buildAppBar(context, "Your Preferences"),
