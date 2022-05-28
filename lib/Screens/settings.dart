@@ -136,9 +136,9 @@ class _SettingsState extends State<Settings> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const buildExercise(
-                        exName: "Jakies cw",
-                        trType: 'Cardio',
-                      ),
+                          exName: "Jakies cw",
+                          trType: 'Cardio',
+                          isFinal: false),
                     ),
                   );
                 },

@@ -94,7 +94,8 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'JumpingJacks',
-                                      trType: 'Cardio')),
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                           isDone: false,
@@ -109,7 +110,8 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'BackAndForthSquats',
-                                      trType: 'Cardio')),
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -122,7 +124,8 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'Jogging in Place',
-                                      trType: 'Cardio')),
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -135,7 +138,8 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
                                       exName: 'JumpingSquats',
-                                      trType: 'Cardio')),
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -147,7 +151,9 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
-                                      exName: 'HighKnees', trType: 'Cardio')),
+                                      exName: 'HighKnees',
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -159,7 +165,9 @@ class _cTrainingAPageState extends State<cTrainingAPage> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => const buildExercise(
-                                      exName: 'ButtKicks', trType: 'Cardio')),
+                                      exName: 'ButtKicks',
+                                      trType: 'Cardio',
+                                      isFinal: false)),
                             );
                           },
                         ),

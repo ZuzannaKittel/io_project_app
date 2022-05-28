@@ -121,7 +121,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element1, trType: widget.trType)),
+                                      exName: element1,
+                                      trType: widget.trType,
+                                      isFinal: false)),
                             );
                           },
                           isDone: false,
@@ -135,7 +137,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element2, trType: widget.trType)),
+                                      exName: element2,
+                                      trType: widget.trType,
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -147,7 +151,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element3, trType: widget.trType)),
+                                      exName: element3,
+                                      trType: widget.trType,
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -159,7 +165,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element4, trType: widget.trType)),
+                                      exName: element4,
+                                      trType: widget.trType,
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -171,7 +179,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element5, trType: widget.trType)),
+                                      exName: element5,
+                                      trType: widget.trType,
+                                      isFinal: false)),
                             );
                           },
                         ),
@@ -183,7 +193,9 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                   builder: (context) => buildExercise(
-                                      exName: element6, trType: 'Cardio')),
+                                      exName: element6,
+                                      trType: widget.trType,
+                                      isFinal: true)),
                             );
                           },
                         ),

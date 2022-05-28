@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/TrainingSummary.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
@@ -17,12 +18,14 @@ double multiplier = 1;
 class buildExercise extends StatefulWidget {
   final String exName;
   final String trType;
+  final bool isFinal; //if exercise is the last one of the training
 
-  const buildExercise({
-    Key? key,
-    required this.exName,
-    required this.trType,
-  }) : super(key: key);
+  const buildExercise(
+      {Key? key,
+      required this.exName,
+      required this.trType,
+      required this.isFinal})
+      : super(key: key);
   @override
   _buildExerciseState createState() => _buildExerciseState();
 }
@@ -136,7 +139,28 @@ class _buildExerciseState extends State<buildExercise> {
                                 ],
                               ),
                             ),
-                            if (isCompleted == true && seconds != maxSeconds)
+                            if (widget.isFinal == true &&
+                                isCompleted == true &&
+                                seconds != maxSeconds)
+                              //const Text("Done?"),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: SmallButtonWidget(
+                                  onClicked: () {
+                                    print('test widget.isFinal');
+                                    licznik = 0;
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TrainingSummary(
+                                                  trainingName: 'Traning A',
+                                                  trainingType: "cardio test")),
+                                    );
+                                  },
+                                ),
+                              )
+                            else if (isCompleted == true &&
+                                seconds != maxSeconds)
                               //const Text("Done?"),
                               Align(
                                 alignment: Alignment.bottomRight,
@@ -232,11 +256,23 @@ class _buildExerciseState extends State<buildExercise> {
                         alignment: Alignment.bottomRight,
                         child: SmallButtonWidget(
                           onClicked: () {
-                            licznik = 0;
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => const cTrainingAPage()),
-                            );
+                            if (widget.isFinal == true) {
+                              print('test');
+                              licznik = 0;
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => TrainingSummary(
+                                        trainingName: 'Training A',
+                                        trainingType: widget.trType)),
+                              );
+                            } else {
+                              licznik = 0;
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const cTrainingAPage()),
+                              );
+                            }
                           },
                         ),
                       )

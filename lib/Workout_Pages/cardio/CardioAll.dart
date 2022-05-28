@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Workout_Pages/buildTraining.dart';
 import 'package:io_project/widget/appbar_widget.dart';
 import 'package:io_project/Workout_Pages/build_ex.dart';
 import 'package:io_project/widget/exercise_button_widget.dart';
@@ -25,12 +26,13 @@ class _CardioAllState extends State<CardioAll> {
               Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: ExButtonWidget(
-                    text: 'Running',
+                    text: 'Training builder',
                     onClicked: () {
-                      /*Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) => DetailsScreen()),
-                      );*/
+                            builder: (context) =>
+                                builderOfTraining(trType: 'Cardio')),
+                      );
                     },
                   )),
               Padding(
