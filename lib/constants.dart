@@ -13,4 +13,7 @@ const neonBlue = Color(0xFF07D2E0);
 const neonGreen = Color(0xff56FFBA);
 const neonLightGreen = Color(0xff9DFFBA);
 
+const pastelBlue = Color(0xFF81D2E0);
+const pastelGreen = Color(0xFFA6FFBA);
+
 const sthidk = Color(0xFFEFE4CF);

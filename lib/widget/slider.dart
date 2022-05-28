@@ -126,3 +126,32 @@ class _SliderBodyTypeState extends State<SliderBodyType> {
     );
   }
 }
+
+class SliderTimePref extends StatefulWidget {
+  SliderTimePref({Key? key}) : super(key: key);
+
+  @override
+  State<SliderTimePref> createState() => _SliderTimePrefState();
+}
+
+class _SliderTimePrefState extends State<SliderTimePref> {
+  double _currentTime = 5;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slider(
+      activeColor: Color(0xFF817DC0),
+      min: 5,
+      max: 23,
+      divisions: 100,
+      value: _currentTime,
+      label: _currentTime.round().toString(),
+      onChanged: (double value) {
+        setState(() {
+          _currentTime = value;
+          changeTimePref(value);
+        });
+      },
+    );
+  }
+}

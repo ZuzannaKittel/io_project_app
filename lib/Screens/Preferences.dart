@@ -36,9 +36,14 @@ bool thur = false;
 bool fri = false;
 bool sat = false;
 bool sun = false;
+int time = 18;
 
 void changeDiflvlPref(double lvl) {
   diffLvl = lvl;
+}
+
+void changeTimePref(double t) {
+  time = t.toInt();
 }
 
 void bmi(int _height, int _weight) {
@@ -89,6 +94,8 @@ void getData() async {
   diffLvl = map?['level'];
   multp = map?['difficulty'];
 
+  time = map?['time of workout'];
+
   print(diffLvl);
 }
 
@@ -117,6 +124,7 @@ void setDataTest() async {
     'gain muscles': gainMuscles,
     'loose weight': looseWeight,
     'improve condition': improveCondition,
+    'time of workout': time,
   });
 }
 
@@ -401,6 +409,26 @@ class PreferencesState extends State<Preferences> {
                           ),
                         ],
                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(12.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text("Select time of workout",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(fontFamily: 'Cairo', fontSize: 18)),
+                      SliderTimePref(),
                     ],
                   ),
                 ),

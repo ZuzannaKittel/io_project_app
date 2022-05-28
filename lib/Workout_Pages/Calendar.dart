@@ -6,6 +6,20 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../widget/appbar_widget.dart';
 
+int timeOfWorkout = 18;
+
+void getData() async {
+  final data = await FirebaseFirestore.instance
+      .collection('UsersPref')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  Map<String, dynamic>? map = data.data();
+
+  timeOfWorkout = map?['time of workout'];
+
+  print(timeOfWorkout);
+}
+
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
   @override
@@ -15,6 +29,12 @@ class CalendarPage extends StatefulWidget {
 var array;
 
 class _CalendarPageState extends State<CalendarPage> {
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -32,7 +52,26 @@ class _CalendarPageState extends State<CalendarPage> {
             return Scaffold(
               appBar: buildAppBar(context, "Calendar"),
               body: SfCalendar(
-                view: CalendarView.week,
+                view: CalendarView.month,
+                monthViewSettings: const MonthViewSettings(
+                    showAgenda: true,
+                    agendaStyle: AgendaStyle(
+                      backgroundColor: kBackgroundColor,
+                      appointmentTextStyle: TextStyle(
+                          fontSize: 14,
+                          fontStyle: FontStyle.italic,
+                          color: kTextColor),
+                      dateTextStyle: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.black),
+                      dayTextStyle: TextStyle(
+                          fontStyle: FontStyle.normal,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    )),
                 firstDayOfWeek: 1,
                 dataSource: MeetingDataSource(getAppointments()),
               ),
@@ -49,8 +88,8 @@ List<Appointment> getAppointments() {
   List<Appointment> meetings = <Appointment>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 8, 0, 0);
-  final DateTime endTime = startTime.add(const Duration(hours: 6));
+      DateTime(today.year, today.month, today.day, timeOfWorkout, 0, 0);
+  final DateTime endTime = startTime.add(const Duration(minutes: 30));
   List<String> daysArray = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
   String selection = '';
   for (int i = 0; i < 7; i++) {

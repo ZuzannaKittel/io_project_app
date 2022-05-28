@@ -261,12 +261,12 @@ class Day extends StatelessWidget {
       : super(key: key);
 
   Widget icon = Icon(Icons.radio_button_unchecked);
-  Color? col = neonBlue;
+  Color? col = pastelBlue;
   @override
   Widget build(BuildContext context) {
     if (m_isDone == true) {
       icon = Icon(Icons.check_circle_outline);
-      col = neonGreen;
+      col = pastelGreen;
     }
     if (isTrue == true) {
       return Column(
