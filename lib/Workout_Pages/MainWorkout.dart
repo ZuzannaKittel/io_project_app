@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -43,7 +45,52 @@ String dayOfWeek = DateFormat('EEEE').format(now);
 
 String trainingType = 'Cardio';
 
-void getWorkoutForToday() {
+int? dayINT;
+
+bool? isWorkoutDay;
+
+void getWorkoutForToday() async {
+  if (dayOfWeek == 'Monday') {
+    dayINT = 0;
+  } else if (dayOfWeek == 'Tuesday') {
+    dayINT = 1;
+  } else if (dayOfWeek == 'Wednesday') {
+    dayINT = 2;
+  } else if (dayOfWeek == 'Thursday') {
+    dayINT = 3;
+  } else if (dayOfWeek == 'Friday') {
+    dayINT = 4;
+  } else if (dayOfWeek == 'Saturday') {
+    dayINT = 5;
+  } else {
+    dayINT = 6;
+  }
+  List<dynamic>? temp;
+  List<dynamic>? tempWorkout;
+  await FirebaseFirestore.instance
+      .collection("Workout")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get()
+      .then((value) => {tempWorkout = value.get('Week')});
+
+  await FirebaseFirestore.instance
+      .collection("UsersPref")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get()
+      .then((value) => {
+            isWorkoutDay = value.get('workouts amount')[dayINT],
+            temp = value.get('workouts amount'),
+          });
+  int counter = -1;
+  for (int i = 0; i < 7; i++) {
+    if (temp?[i] == true) {
+      counter++;
+      if (i == dayINT) {
+        trainingType = tempWorkout?[counter];
+        break;
+      }
+    }
+  }
 //TODO:
 //porownac zmienna dayOfWeek, zobaczycc jaki jest dzien tygodnia - jezeli firestore mowi, ze dzisiaj nie jest dzien treningowy to nie mozna wejsc w builder cwiczenia (pozniej sie zrobi ekran na zasadzie "dzisiaj nie cwiczyczysz")
 //jezeli jest dobry dzien to szukamy jaki rodzaj treningu przypada na dzis
@@ -69,7 +116,6 @@ class _Home_workoutState extends State<Home_workout> {
 
   @override
   Widget build(BuildContext context) {
-    print(dayOfWeek);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Menu Page',
@@ -130,12 +176,22 @@ class _WorkoutPage extends StatelessWidget {
                                 Radius.circular(10),
                               ),
                             ),
-                            child: Text('Today\'s workout',
+                            child: const Text('Today\'s workout',
                                 style: TextStyle(
                                     fontFamily: 'Cairo', fontSize: 18)),
                           ),
                           SmallButtonWidget(
-                            onClicked: () {},
+                            onClicked: () {
+                              if (isWorkoutDay == true) {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          builderOfTraining(trType: 'Cardio')),
+                                );
+                              } else {
+                                print('ZAKAZ');
+                              }
+                            },
                           ),
                         ],
                       )
