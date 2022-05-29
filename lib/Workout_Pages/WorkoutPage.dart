@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:io_project/Screens/Summary.dart';
 import 'package:io_project/Screens/weeklyTraining.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildTraining.dart';
@@ -117,8 +118,7 @@ class _MenuPage extends StatelessWidget {
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      builderOfTraining(trType: 'Cardio')),
+                                  builder: (context) => Summary()),
                             );
                           },
                         ),

@@ -53,6 +53,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.2
   flutter_sparkline: ^0.1.0
   flutter_datetime_picker: ^1.5.1
+  syncfusion_flutter_charts: ^20.1.57
   #firebase_dynamic_links: ^4.1.1
   #firebase_analytics: ^9.1.2
   #url_launcher: ^6.0.20
