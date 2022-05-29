@@ -50,11 +50,10 @@ class TimerButtonWidget extends StatelessWidget {
 
 class SmallButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
-
-  const SmallButtonWidget({
-    Key? key,
-    required this.onClicked,
-  }) : super(key: key);
+  late Color buttonColor;
+  SmallButtonWidget(
+      {Key? key, required this.onClicked, this.buttonColor = kLightOrangeColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
@@ -62,7 +61,7 @@ class SmallButtonWidget extends StatelessWidget {
           shape: MaterialStateProperty.all(const CircleBorder()),
           padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
           backgroundColor:
-              MaterialStateProperty.all(kLightOrangeColor), // <-- Button color
+              MaterialStateProperty.all(buttonColor), // <-- Button color
           overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
             if (states.contains(MaterialState.pressed))
               return kActiveIconColor; // <-- Splash color
