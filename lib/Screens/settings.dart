@@ -10,6 +10,7 @@ import '../Profile_Pages/WeightPage.dart';
 import '../Workout_Pages/TrainingSummary.dart';
 import '../widget/bottom_nav_bar.dart';
 import '../Workout_Pages/buildExercise.dart';
+import '../Workout_Pages/DatePicker.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -135,11 +136,7 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const buildExercise(
-                          exName: "Jakies cw",
-                          trType: 'Cardio',
-                          isFinal: false),
-                    ),
+                        builder: (context) => DatePicker(title: 'Choose date')),
                   );
                 },
                 child: Container(
