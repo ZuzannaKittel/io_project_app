@@ -315,39 +315,62 @@ class _WeightPageState extends State<WeightPage> {
                           text: "Submit",
                           onClicked: () {
                             //const Text('tescior');
-                            /* showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) => AlertDialog(
-                                    contentPadding: const EdgeInsets.all(30),
-                                    title: const Text('Submit',
-                                        style: TextStyle(
-                                            fontSize: 18, fontFamily: "Cairo")),
-                                    content: const Text(
-                                        'Your preferences have been saved correctly',
-                                        style: TextStyle(
-                                            fontSize: 18, fontFamily: "Cairo")),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'OK'),
-                                        child: const Text('OK',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Cairo',
-                                                fontSize: 18)),
-                                      ),
-                                    ],
-                                  ),
-                                
-                                );
-                                */
-                            print(myController.text);
-                            setState(() {
-                              addWeight(double.parse(myController.text));
-                              updateWeightUserPref(
-                                  double.parse(myController.text));
-                            });
-
+                            if (date == ' ') {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  contentPadding: const EdgeInsets.all(30),
+                                  title: const Text('Submit',
+                                      style: TextStyle(
+                                          fontSize: 18, fontFamily: "Cairo")),
+                                  content: const Text('Please select a date',
+                                      style: TextStyle(
+                                          fontSize: 18, fontFamily: "Cairo")),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Cairo',
+                                              fontSize: 18)),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  contentPadding: const EdgeInsets.all(30),
+                                  title: const Text('Submit',
+                                      style: TextStyle(
+                                          fontSize: 18, fontFamily: "Cairo")),
+                                  content: const Text(
+                                      'A date has been selected correctly',
+                                      style: TextStyle(
+                                          fontSize: 18, fontFamily: "Cairo")),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Cairo',
+                                              fontSize: 18)),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              print(myController.text);
+                              setState(() {
+                                addWeight(double.parse(myController.text));
+                                updateWeightUserPref(
+                                    double.parse(myController.text));
+                              });
+                            }
                             //deleteWeight();
                           }),
                     ],
