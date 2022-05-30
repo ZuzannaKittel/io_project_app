@@ -75,7 +75,7 @@ class _CalendarPageState extends State<CalendarPage> {
                           color: Colors.black),
                     )),
                 firstDayOfWeek: 1,
-                dataSource: MeetingDataSource(_getDataSource()),
+                dataSource: MeetingDataSource(getAppointments()),
               ),
             );
           }
@@ -110,30 +110,61 @@ List<Appointment> getAppointments() {
   return meetings;
 }
 
-/*
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<Appointment> source) {
     appointments = source;
   }
 }
-*/
+
 //ponizej test
+/*
 List<Meeting> _getDataSource() {
   final List<Meeting> meetings = <Meeting>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
       DateTime(today.year, today.month, today.day, 9, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 2));
+  final DateTime idk = startTime.add(const Duration(minutes: 30));
+  List<dynamic>? dates;
+  List<dynamic>? kgs; //kilograms
+  int j = 0;
+  int k = 0;
+  int poStringuList = 0;
+  int poStringuDates = 0;
+  int poStringuKgs = 0;
+
   for (int i = 0; i < list!.length; i++) {
-    meetings.add(Meeting(list![i], startTime, endTime, neonBlue, false));
+    while (list![i][poStringuList + 1] != ',') {
+      kgs![k][poStringuKgs] = list![i][poStringuList];
+      poStringuKgs++;
+      poStringuList++;
+    }
+    poStringuList = poStringuList + 2;
+    while (list![i]) {
+      dates![j][poStringuDates] = list![i];
+      poStringuDates++;
+      poStringuList++;
+    }
+
+    k++;
+    j++;
+    //meetings.add(Meeting(list![i], startTime, endTime, neonBlue, false));
+  }
+  print(kgs);
+  print(kgs!.length);
+  print('test');
+  for (int k = 0; k < kgs!.length; k++) {
+    meetings.add(Meeting(kgs[k], startTime, idk, neonBlue, false));
+    j++;
   }
   meetings.add(Meeting(
       'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+
   return meetings;
 }
 
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Meeting> source) {
+class MeetingDataSource2 extends CalendarDataSource {
+  MeetingDataSource2(List<Meeting> source) {
     appointments = source;
   }
 
@@ -172,3 +203,4 @@ class Meeting {
   Color background;
   bool isAllDay;
 }
+*/
