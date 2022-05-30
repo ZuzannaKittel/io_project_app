@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:io_project/Screens/NoWorkout.dart';
 import 'package:io_project/Workout_Pages/buildTraining.dart';
 import 'package:io_project/Workout_Pages/other/OtherAll.dart';
 import 'package:io_project/Workout_Pages/strength/StrengthAll.dart';
@@ -189,7 +190,10 @@ class _WorkoutPage extends StatelessWidget {
                                           builderOfTraining(trType: 'Cardio')),
                                 );
                               } else {
-                                print('ZAKAZ');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => const NoWorkout()),
+                                );
                               }
                             },
                           ),
