@@ -7,7 +7,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../widget/appbar_widget.dart';
 
 int timeOfWorkout = 18;
-List<dynamic>? list;
+List<dynamic>? array;
 
 void getData() async {
   final data = await FirebaseFirestore.instance
@@ -27,7 +27,7 @@ class CalendarPage extends StatefulWidget {
   _CalendarPageState createState() => _CalendarPageState();
 }
 
-var array;
+//var array;
 
 class _CalendarPageState extends State<CalendarPage> {
   String calkiemDlugiString = ' ';
@@ -41,7 +41,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: FirebaseFirestore.instance
-            .collection("Weights")
+            .collection("UsersPref")
             .doc(FirebaseAuth.instance.currentUser?.uid)
             .get(),
         builder:
@@ -50,7 +50,7 @@ class _CalendarPageState extends State<CalendarPage> {
             return const Text("Error");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            list = snapshot.data?.get("array");
+            array = snapshot.data?.get("workouts amount");
             return Scaffold(
               appBar: buildAppBar(context, "Calendar"),
               body: SfCalendar(
@@ -95,7 +95,7 @@ List<Appointment> getAppointments() {
   List<String> daysArray = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
   String selection = '';
   for (int i = 0; i < 7; i++) {
-    if (array[i] == true) {
+    if (array?[i] == true) {
       selection += daysArray[i].toString() + ',';
     }
   }
