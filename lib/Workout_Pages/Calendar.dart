@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../widget/appbar_widget.dart';
 
 int timeOfWorkout = 18;
+List<dynamic>? list;
 
 void getData() async {
   final data = await FirebaseFirestore.instance
@@ -29,6 +30,7 @@ class CalendarPage extends StatefulWidget {
 var array;
 
 class _CalendarPageState extends State<CalendarPage> {
+  String calkiemDlugiString = ' ';
   @override
   void initState() {
     super.initState();
@@ -39,7 +41,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: FirebaseFirestore.instance
-            .collection("UsersPref")
+            .collection("Weights")
             .doc(FirebaseAuth.instance.currentUser?.uid)
             .get(),
         builder:
@@ -48,7 +50,7 @@ class _CalendarPageState extends State<CalendarPage> {
             return const Text("Error");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            array = snapshot.data?.get('workouts amount');
+            list = snapshot.data?.get("array");
             return Scaffold(
               appBar: buildAppBar(context, "Calendar"),
               body: SfCalendar(
@@ -73,7 +75,7 @@ class _CalendarPageState extends State<CalendarPage> {
                           color: Colors.black),
                     )),
                 firstDayOfWeek: 1,
-                dataSource: MeetingDataSource(getAppointments()),
+                dataSource: MeetingDataSource(_getDataSource()),
               ),
             );
           }
@@ -108,8 +110,65 @@ List<Appointment> getAppointments() {
   return meetings;
 }
 
+/*
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<Appointment> source) {
     appointments = source;
   }
+}
+*/
+//ponizej test
+List<Meeting> _getDataSource() {
+  final List<Meeting> meetings = <Meeting>[];
+  final DateTime today = DateTime.now();
+  final DateTime startTime =
+      DateTime(today.year, today.month, today.day, 9, 0, 0);
+  final DateTime endTime = startTime.add(const Duration(hours: 2));
+  for (int i = 0; i < list!.length; i++) {
+    meetings.add(Meeting(list![i], startTime, endTime, neonBlue, false));
+  }
+  meetings.add(Meeting(
+      'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+  return meetings;
+}
+
+class MeetingDataSource extends CalendarDataSource {
+  MeetingDataSource(List<Meeting> source) {
+    appointments = source;
+  }
+
+  @override
+  DateTime getStartTime(int index) {
+    return appointments![index].from;
+  }
+
+  @override
+  DateTime getEndTime(int index) {
+    return appointments![index].to;
+  }
+
+  @override
+  String getSubject(int index) {
+    return appointments![index].eventName;
+  }
+
+  @override
+  Color getColor(int index) {
+    return appointments![index].background;
+  }
+
+  @override
+  bool isAllDay(int index) {
+    return appointments![index].isAllDay;
+  }
+}
+
+class Meeting {
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+
+  String eventName;
+  DateTime from;
+  DateTime to;
+  Color background;
+  bool isAllDay;
 }
