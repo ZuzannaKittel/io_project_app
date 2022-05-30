@@ -41,17 +41,34 @@ class _SummaryState extends State<Summary> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 400,
-              child: SfCartesianChart(
-                primaryXAxis: CategoryAxis(),
-                series: <ChartSeries<ChartData, dynamic>>[
-                  ColumnSeries<ChartData, String>(
-                      dataSource: chartData,
-                      xValueMapper: (ChartData data, _) => data.x,
-                      yValueMapper: (ChartData data, _) => data.y)
-                ],
-              ),
-            ),
+                height: 400,
+                child: ListView(
+                    itemExtent: 400,
+                    reverse: true,
+                    scrollDirection: Axis.horizontal,
+                    physics: PageScrollPhysics(),
+                    children: [
+                      SfCartesianChart(
+                        title: ChartTitle(text: '30/05/2022'),
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries<ChartData, dynamic>>[
+                          ColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y)
+                        ],
+                      ),
+                      SfCartesianChart(
+                        title: ChartTitle(text: '23/05/2022'),
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries<ChartData, dynamic>>[
+                          ColumnSeries<ChartData, String>(
+                              dataSource: chartData,
+                              xValueMapper: (ChartData data, _) => data.x,
+                              yValueMapper: (ChartData data, _) => data.y)
+                        ],
+                      ),
+                    ])),
           ],
         ),
       );
