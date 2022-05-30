@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:io_project/Profile_Pages/WeightPage.dart';
 import 'package:io_project/Screens/Preferences.dart';
 import 'package:io_project/model/user.dart';
 import 'package:io_project/utils/user_preferences.dart';
@@ -64,6 +65,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const SizedBox(height: 48),
                   buildAbout(snapshot.data?.get('about')),
+                  const SizedBox(height: 24),
+                  Center(child: buildWeightButton()),
                 ],
               ),
             );
@@ -140,5 +143,14 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ],
         ),
+      );
+
+  Widget buildWeightButton() => ButtonWidget(
+        text: 'Your weight',
+        onClicked: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const WeightPage()),
+          );
+        },
       );
 }

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Workout_Pages/TrainingSummary.dart';
+import 'package:io_project/Workout_Pages/buildTraining.dart';
 import 'package:io_project/Workout_Pages/cardio/cTrainingA.dart';
 import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
@@ -70,6 +71,7 @@ class _buildExerciseState extends State<buildExercise> {
             if (snapshot.connectionState == ConnectionState.done) {
               name = snapshot.data?.get('name');
               duration = snapshot.data?.get('duration');
+
               licznik = 1;
               return Scaffold(
                 appBar: AppBar(
@@ -488,6 +490,7 @@ class _buildExerciseState extends State<buildExercise> {
   */
 
   int seconds = (duration * multiplier).round();
+
   int maxSeconds = (duration * multiplier).round();
 
   //int seconds = duration;
@@ -501,6 +504,7 @@ class _buildExerciseState extends State<buildExercise> {
   void resetTimer() => setState(() => seconds = maxSeconds);
 
   void StartTimer({bool reset = true}) {
+    timeOfWorkout = timeOfWorkout + seconds;
     if (reset) {
       resetTimer();
     }

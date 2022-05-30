@@ -10,6 +10,9 @@ import '../widget/bottom_nav_bar.dart';
 import '../widget/exercise.dart';
 import 'buildExercise.dart';
 
+double timeOfWorkout = 0;
+double amountOfReps = 0;
+
 class builderOfTraining extends StatefulWidget {
   late String trType;
   builderOfTraining({Key? key, required this.trType}) : super(key: key);
