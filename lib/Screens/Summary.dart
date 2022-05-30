@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../widget/appbar_widget.dart';
+import '../widget/bottom_nav_bar.dart';
+
 class Summary extends StatefulWidget {
   const Summary({Key? key}) : super(key: key);
 
@@ -12,16 +15,18 @@ class Summary extends StatefulWidget {
 
 class ChartData {
   ChartData(this.x, this.y);
-  final int x;
-  final double y;
+  final String x;
+  final int y;
 }
 
 final List<ChartData> chartData = [
-  ChartData(1, 35),
-  ChartData(2, 23),
-  ChartData(3, 34),
-  ChartData(4, 25),
-  ChartData(5, 40)
+  ChartData('Mon', 0),
+  ChartData('Tue', 30),
+  ChartData('Wed', 0),
+  ChartData('Thu', 25),
+  ChartData('Fri', 45),
+  ChartData('Sat', 0),
+  ChartData('Sun', 30)
 ];
 
 class _SummaryState extends State<Summary> {
@@ -30,12 +35,23 @@ class _SummaryState extends State<Summary> {
     return FutureBuilder(builder:
         (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
       return Scaffold(
-        body: SfCartesianChart(
-          series: <ChartSeries<ChartData, int>>[
-            ColumnSeries<ChartData, int>(
-                dataSource: chartData,
-                xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y)
+        bottomNavigationBar: const BottomNavBar(),
+        appBar: buildAppBar(context, "Summary"),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 400,
+              child: SfCartesianChart(
+                primaryXAxis: CategoryAxis(),
+                series: <ChartSeries<ChartData, dynamic>>[
+                  ColumnSeries<ChartData, String>(
+                      dataSource: chartData,
+                      xValueMapper: (ChartData data, _) => data.x,
+                      yValueMapper: (ChartData data, _) => data.y)
+                ],
+              ),
+            ),
           ],
         ),
       );
