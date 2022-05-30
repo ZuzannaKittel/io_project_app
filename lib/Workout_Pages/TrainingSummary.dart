@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
+import 'package:io_project/Workout_Pages/buildTraining.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/ButtKicks.dart';
 import 'package:io_project/Workout_Pages/cardio/exercises/JoggingInPlace.dart';
 import 'package:io_project/Workout_Pages/strength/exercises/Deadlift.dart';
@@ -46,7 +47,9 @@ class _TrainingSummaryState extends State<TrainingSummary> {
       'difficulty rating ' + date: difficultyRating,
       'training name ' + date: widget.trainingName,
       'training type ' + date: widget.trainingType,
+      'time of workout ' + date: timeOfWorkout,
     }, SetOptions(merge: true)).then((value) {});
+    timeOfWorkout = 0;
   }
 
   void addSummaryDataArray() async {
@@ -58,9 +61,16 @@ class _TrainingSummaryState extends State<TrainingSummary> {
         'ex selection rating: $exSelectionRating',
         'difficulty rating: $difficultyRating',
         'training name: ${widget.trainingName}',
-        'training type: ${widget.trainingType}'
+        'training type: ${widget.trainingType}',
+        'time of workout : ${timeOfWorkout + 120}',
       ])
     });
+    timeOfWorkout = 0;
+  }
+
+  void przeliczanieRepsNaSekundy() async {
+    timeOfWorkout = amountOfReps * 2;
+    amountOfReps = 0;
   }
 
   Future<void> addNotes(String n) async {
