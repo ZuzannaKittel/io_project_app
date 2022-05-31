@@ -172,11 +172,7 @@ class _buildExerciseState extends State<buildExercise> {
                                 child: SmallButtonWidget(
                                   onClicked: () {
                                     licznik = 0;
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const cTrainingAPage()),
-                                    );
+                                    Navigator.pop(context);
                                   },
                                 ),
                               )
@@ -316,11 +312,7 @@ class _buildExerciseState extends State<buildExercise> {
                               );
                             } else {
                               licznik = 0;
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const cTrainingAPage()),
-                              );
+                              Navigator.pop(context);
                             }
                           },
                         ),

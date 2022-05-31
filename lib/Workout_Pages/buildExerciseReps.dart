@@ -221,11 +221,7 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
                               alignment: Alignment.bottomRight,
                               child: SmallButtonWidget(
                                 onClicked: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const cTrainingAPage()),
-                                  );
+                                  Navigator.pop(context);
                                 },
                               ),
                             )

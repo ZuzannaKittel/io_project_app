@@ -38,13 +38,13 @@ class _builderOfTrainingState extends State<builderOfTraining> {
     print(list);
     final _random = Random();
     final List<int> randomPicker =
-        List<int>.generate((list.length - 1), (i) => i + 1)..shuffle();
-    element1 = list[randomPicker.removeLast()];
-    element2 = list[randomPicker.removeLast()];
-    element3 = list[randomPicker.removeLast()];
-    element4 = list[randomPicker.removeLast()];
-    element5 = list[randomPicker.removeLast()];
-    element6 = list[randomPicker.removeLast()];
+        List<int>.generate((list.length), (i) => i + 1)..shuffle();
+    element1 = list[_random.nextInt(list.length)];
+    element2 = list[_random.nextInt(list.length)];
+    element3 = list[_random.nextInt(list.length)];
+    element4 = list[_random.nextInt(list.length)];
+    element5 = list[_random.nextInt(list.length)];
+    element6 = list[_random.nextInt(list.length)];
     print(element1);
     print(element2);
     print(element3);
