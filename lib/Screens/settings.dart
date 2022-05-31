@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:io_project/Login_Pages/LoginPage.dart';
 import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
+import 'package:io_project/Workout_Pages/buildExerciseReps.dart';
 import 'package:io_project/constants.dart';
 
 import '../Login_Pages/registration.dart';
 import '../Profile_Pages/WeightPage.dart';
 import '../Workout_Pages/TrainingSummary.dart';
+import '../Workout_Pages/buildTraining.dart';
 import '../widget/bottom_nav_bar.dart';
 import '../Workout_Pages/buildExercise.dart';
 import '../Workout_Pages/DatePicker.dart';
@@ -97,7 +99,10 @@ class _SettingsState extends State<Settings> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DatePicker(title: 'Choose date')),
+                        builder: (context) => const buildExerciseReps(
+                            exName: 'Deadlift',
+                            trType: 'Strength',
+                            isFinal: true)),
                   );
                 },
                 child: Container(
@@ -209,4 +214,6 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
+  builderOfTrainingReps({required String trType}) {}
 }

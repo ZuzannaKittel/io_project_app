@@ -13,6 +13,9 @@ import 'package:io_project/Workout_Pages/buildExDescription.dart';
 import 'package:io_project/widget/buttons_widget.dart';
 import 'package:io_project/constants.dart';
 
+import '../widget/appbar_widget.dart';
+import '../widget/bottom_nav_bar.dart';
+
 double multiplier = 1;
 
 // ignore: camel_case_types
@@ -185,7 +188,51 @@ class _buildExerciseState extends State<buildExercise> {
                 ),
               );
             }
-            return const Text('Error 404');
+            return Scaffold(
+                appBar: buildAppBar(context, "Ex builder"),
+                bottomNavigationBar: const BottomNavBar(),
+                body: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 40),
+                    height: 800,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade200,
+                          offset: const Offset(2, 4),
+                          blurRadius: 5,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          mBackgroundColor,
+                          Color(0xFF817DC0),
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.all(12.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                            child: Center(
+                                child: const Text('Loading',
+                                    style: TextStyle(
+                                        fontFamily: 'Cairo', fontSize: 20)))),
+                      ],
+                    )));
           });
     } else {
       return Scaffold(

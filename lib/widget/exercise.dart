@@ -64,7 +64,7 @@ class Exercise extends StatelessWidget {
                     const SizedBox(width: 10),
                     Text(
                       exerciseName,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: const TextStyle(fontSize: 18, fontFamily: "Cairo"),
                     )
                   ],
                 ),

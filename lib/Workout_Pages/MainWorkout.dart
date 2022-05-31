@@ -88,6 +88,7 @@ void getWorkoutForToday() async {
       counter++;
       if (i == dayINT) {
         trainingType = tempWorkout?[counter];
+        print('test type of workout for today-> ${tempWorkout?[i]}');
         break;
       }
     }
@@ -186,8 +187,8 @@ class _WorkoutPage extends StatelessWidget {
                               if (isWorkoutDay == true) {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          builderOfTraining(trType: 'Cardio')),
+                                      builder: (context) => builderOfTraining(
+                                          trType: trainingType)),
                                 );
                               } else {
                                 Navigator.of(context).push(
