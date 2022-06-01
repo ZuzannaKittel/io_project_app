@@ -92,7 +92,7 @@ class _WeightPageState extends State<WeightPage> {
 
   //late DateTime dateee;
 
-  void setDate() {
+  void setDate() async {
     date = DateFormat('yyyy-MM-dd').format(dateee);
   }
 
@@ -289,8 +289,8 @@ class _WeightPageState extends State<WeightPage> {
                                 ButtonWidget(
                                     text: getText(),
                                     onClicked: () {
-                                      pickDate(context);
                                       setDate();
+                                      pickDate(context);
                                     }),
                               ],
                             ),

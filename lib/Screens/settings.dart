@@ -95,16 +95,7 @@ class _SettingsState extends State<Settings> {
                 height: 20,
               ),
               InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const buildExerciseReps(
-                            exName: 'Deadlift',
-                            trType: 'Strength',
-                            isFinal: true)),
-                  );
-                },
+                onTap: () {},
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.symmetric(
@@ -123,7 +114,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'buildExercise test',
+                    'For future development',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,
@@ -136,16 +127,7 @@ class _SettingsState extends State<Settings> {
                 height: 20,
               ),
               InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const TrainingSummary(
-                              trainingName: "Training A",
-                              trainingType: 'cardio',
-                            )),
-                  );
-                },
+                onTap: () {},
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.symmetric(
@@ -164,7 +146,7 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   child: const Text(
-                    'rating training test',
+                    'For Future development',
                     style: TextStyle(
                       fontFamily: "Cairo",
                       fontSize: 20,

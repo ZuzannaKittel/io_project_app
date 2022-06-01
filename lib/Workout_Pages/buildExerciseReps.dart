@@ -137,6 +137,7 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 20),
                           Image.asset("assets/images/${widget.exName}.gif"),
                           const SizedBox(height: 20),
                           Center(

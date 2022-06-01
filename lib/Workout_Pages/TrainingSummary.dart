@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:io_project/Screens/PersonalDataPage.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
@@ -79,6 +80,17 @@ class _TrainingSummaryState extends State<TrainingSummary> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .set({
       'notes ' + widget.trainingName + ' ' + date: n,
+    }, SetOptions(merge: true)).then((value) {});
+  }
+
+  Future<void> updateWeekArray() async {
+    DateTime date = DateTime.now();
+    String dateFormat = DateFormat('EEEE').format(date);
+    await FirebaseFirestore.instance
+        .collection("Week")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({
+      dateFormat: true,
     }, SetOptions(merge: true)).then((value) {});
   }
 
@@ -165,6 +177,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                 onClicked: () {
                                   isSubmitClicked = true;
                                   addSummaryDataArray();
+                                  updateWeekArray();
                                   if (difficultyRating == 1 ||
                                       difficultyRating == 5) {
                                     showDialog<String>(

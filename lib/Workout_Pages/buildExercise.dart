@@ -132,6 +132,7 @@ class _buildExerciseState extends State<buildExercise> {
                                 ),
                               ),
                             ),
+                            const SizedBox(height: 20),
                             Image.asset("assets/images/${widget.exName}.gif"),
                             const SizedBox(height: 20),
                             Center(
