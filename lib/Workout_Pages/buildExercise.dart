@@ -544,7 +544,7 @@ class _buildExerciseState extends State<buildExercise> {
   void resetTimer() => setState(() => seconds = maxSeconds);
 
   void StartTimer({bool reset = true}) {
-    timeOfWorkout = timeOfWorkout + seconds;
+    workoutTime = workoutTime + seconds;
     if (reset) {
       resetTimer();
     }

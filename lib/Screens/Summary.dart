@@ -21,6 +21,11 @@ class ChartData {
   final int y;
 }
 
+int minutes = 0;
+void secondsToMinutes(double s) async {
+  minutes = (s * (1 / 60)).toInt as int;
+}
+
 class _SummaryState extends State<Summary> {
   @override
   Widget build(BuildContext context) {
@@ -40,6 +45,8 @@ class _SummaryState extends State<Summary> {
               var weeks = snapshot.data?.data()?.keys;
               var numberOfArrays = snapshot.data?.data()?.length;
               var listOFweeks = weeks?.toList();
+              var days = snapshot.data?.data()?.keys;
+              var listOfDays = days?.toList();
               return Scaffold(
                 bottomNavigationBar: const BottomNavBar(),
                 appBar: buildAppBar(context, "Summary"),
@@ -55,8 +62,14 @@ class _SummaryState extends State<Summary> {
                           scrollDirection: Axis.horizontal,
                           physics: PageScrollPhysics(),
                           itemBuilder: (BuildContext context, int i) {
+                            var workoutTime =
+                                snapshot.data?.get('${listOfDays![1]}');
+                            print(workoutTime[4].substring(18));
                             final List<ChartData> chartData = [
-                              ChartData('Mon', 0),
+                              ChartData(
+                                  listOfDays![1],
+                                  int.parse(workoutTime[4].substring(
+                                      18))), //tutaj probowalam, zeby sie chociaz dla jednego dnia wyswietlal sie dobyr czas treningu; ale mam problem z konwersja string na int; ide spac pa
                               ChartData('Tue', 30),
                               ChartData('Wed', 0),
                               ChartData('Thu', 25),

@@ -33,12 +33,22 @@ class TrainingSummary extends StatefulWidget {
   State<TrainingSummary> createState() => _TrainingSummaryState();
 }
 
+var now = DateTime.now().toUtc().add(const Duration(hours: 2));
+DateTime dateee = now;
+String date = ' ';
+
 class _TrainingSummaryState extends State<TrainingSummary> {
   late bool issDone = false;
   double difficultyRating = 0;
   double exSelectionRating = 0;
   bool isSubmitClicked = false;
 
+  void setDate() async {
+    date = DateFormat('yyyy-MM-dd').format(dateee);
+  }
+
+  //below unused
+/*
   void addSummaryData() async {
     await FirebaseFirestore.instance
         .collection('summary')
@@ -52,7 +62,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
     }, SetOptions(merge: true)).then((value) {});
     timeOfWorkout = 0;
   }
-
+*/
   void addSummaryDataArray() async {
     await FirebaseFirestore.instance
         .collection('Summary')
@@ -63,14 +73,14 @@ class _TrainingSummaryState extends State<TrainingSummary> {
         'difficulty rating: $difficultyRating',
         'training name: ${widget.trainingName}',
         'training type: ${widget.trainingType}',
-        'time of workout : ${timeOfWorkout + 120}',
+        'time of workout : ${workoutTime + 300}',
       ])
     });
-    timeOfWorkout = 0;
+    workoutTime = 0;
   }
 
   void przeliczanieRepsNaSekundy() async {
-    timeOfWorkout = amountOfReps * 2;
+    workoutTime = amountOfReps * 2;
     amountOfReps = 0;
   }
 
@@ -277,6 +287,8 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                         child: ButtonWidget(
                             text: 'End training',
                             onClicked: () {
+                              przeliczanieRepsNaSekundy();
+                              setDate();
                               if (difficultyRating == 0 ||
                                   exSelectionRating == 0) {
                                 showDialog<String>(

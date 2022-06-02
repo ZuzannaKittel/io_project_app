@@ -38,6 +38,41 @@ bool sat = false;
 bool sun = false;
 int time = 18;
 
+void setWorkout() async {
+  List<String>? workoutArray = [];
+  List<String>? typeArray = [];
+  int counter = 0; // [GM,LW,IC]
+  await FirebaseFirestore.instance
+      .collection("UsersPref")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get()
+      .then((value) async {
+    if (value.get('gain muscles')) {
+      typeArray.add('Strength');
+    }
+    if (value.get('loose weight')) {
+      typeArray.add('HIIT');
+    }
+    if (value.get('improve condition')) {
+      typeArray.add('Cardio');
+    }
+
+    for (int i = 0; i < 7; i++) {
+      if (value.get('workouts amount')[i] == true) {
+        workoutArray.add(typeArray[counter]);
+        counter++;
+        if (counter == typeArray.length) {
+          counter = 0;
+        }
+      }
+    }
+    await FirebaseFirestore.instance
+        .collection("Workout")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .set({'Week': workoutArray});
+  });
+}
+
 void changeDiflvlPref(double lvl) {
   diffLvl = lvl;
 }
@@ -472,6 +507,7 @@ class PreferencesState extends State<Preferences> {
                         bmi(heightValue, weightValue);
                         setMultiplier(diffLvl, BMI, sex, tp);
                         setDataTest();
+                        setWorkout();
                       });
                     }),
               ],

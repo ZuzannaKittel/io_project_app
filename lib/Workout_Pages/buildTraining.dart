@@ -11,7 +11,7 @@ import '../widget/appbar_widget.dart';
 import '../widget/bottom_nav_bar.dart';
 import '../widget/exercise.dart';
 
-double timeOfWorkout = 0;
+double workoutTime = 0;
 int amountOfReps = 0;
 
 class builderOfTraining extends StatefulWidget {

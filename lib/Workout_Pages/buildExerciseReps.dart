@@ -157,7 +157,7 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
                                       ),
                                       child: Column(
                                         children: [
-                                          Text("Amount of reps: $reps",
+                                          Text("Amount of reps: ${reps}",
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                   fontFamily: 'Cairo',
@@ -176,7 +176,7 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
                                       ),
                                       child: Column(
                                         children: [
-                                          Text("Amount of sets: $sets",
+                                          Text("Amount of sets: ${sets}",
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                   fontFamily: 'Cairo',
