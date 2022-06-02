@@ -88,7 +88,7 @@ void getWorkoutForToday() async {
       counter++;
       if (i == dayINT) {
         trainingType = tempWorkout?[counter];
-        print('test type of workout for today-> ${tempWorkout?[i]}');
+        // print('test type of workout for today-> ${tempWorkout?[i]}');
         break;
       }
     }
