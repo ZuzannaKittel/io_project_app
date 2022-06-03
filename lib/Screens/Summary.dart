@@ -48,21 +48,22 @@ Map daysOfWorkout = {};
 List<String>? listOfKeys;
 Map mainMap = {};
 void setDataList() async {
-  int counter = 0;
   var keysFromFirestore = await FirebaseFirestore.instance
       .collection("SummaryWeeks")
       .doc(FirebaseAuth.instance.currentUser?.uid)
       .get();
-
+//Zapisanie do listy naglowkow z bazy danych
   listOfKeys = keysFromFirestore.data()?.keys.toList();
-
+/*Niepotrzebny kod (zakladamy, ze osoba moze cwiczyc w inne dni niz wybrane)
   daysOfWorkout.forEach((key, value) {
     if (value) {
       counter++;
     }
-  });
+  });*/
+  //Pętla od 0 do liczby wpisanych treningow w bazie danych
   for (int i = 0; i < listOfKeys!.length; i++) {
     List<ChartData> dane = [];
+    //Wpisywanie danych do Listy tymczasowej zgodnie z dniami tygodnia
     for (int j = 0; j < 7; j++) {
       if (keysFromFirestore.get(listOfKeys![i])[getDay(j)] != null) {
         dane.add(ChartData(
@@ -71,6 +72,7 @@ void setDataList() async {
         dane.add(ChartData(getDay(j), 0));
       }
     }
+    //Zapisywanie Listy w mapie <int,List>
     mainMap[i] = dane;
   }
 }
@@ -107,12 +109,6 @@ class _SummaryState extends State<Summary> {
                 setDataList();
                 if (snapshot.connectionState == ConnectionState.done &&
                     listOfKeys?.isNotEmpty == true) {
-                  setDataList();
-                  var weeks = snapshot.data?.data()?.keys;
-                  var numberOfArrays = snapshot.data?.data()?.length;
-                  var listOFweeks = weeks?.toList();
-                  var days = snapshot.data?.data()?.keys;
-                  var listOfDays = days?.toList();
                   return Scaffold(
                     bottomNavigationBar: const BottomNavBar(),
                     appBar: buildAppBar(context, "Summary"),
@@ -128,19 +124,6 @@ class _SummaryState extends State<Summary> {
                               scrollDirection: Axis.horizontal,
                               physics: PageScrollPhysics(),
                               itemBuilder: (BuildContext context, int i) {
-                                var workoutTime =
-                                    snapshot.data?.get('${listOfDays![1]}');
-                                print(workoutTime[4].substring(18));
-                                final List<ChartData> chartData = [
-                                  ChartData('Mon', 30),
-                                  ChartData('Tue', 30),
-                                  ChartData('Wed', 0),
-                                  ChartData('Thu', 25),
-                                  ChartData('Fri', 45),
-                                  ChartData('Sat', 0),
-                                  ChartData('Sun', 30)
-                                ];
-
                                 return SfCartesianChart(
                                   title: ChartTitle(
                                       text: listOfKeys?[i] as String),
@@ -160,7 +143,48 @@ class _SummaryState extends State<Summary> {
                     ),
                   );
                 } else {
-                  return Scaffold();
+                  return Scaffold(
+                    bottomNavigationBar: const BottomNavBar(),
+                    appBar: buildAppBar(context, "Summary"),
+                    body: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            height: 400,
+                            child: ListView.builder(
+                              itemCount: 1,
+                              itemExtent: 400,
+                              reverse: true,
+                              scrollDirection: Axis.horizontal,
+                              physics: PageScrollPhysics(),
+                              itemBuilder: (BuildContext context, int i) {
+                                final List<ChartData> chartData = [
+                                  ChartData('Mon', 0),
+                                  ChartData('Tue', 0),
+                                  ChartData('Wed', 0),
+                                  ChartData('Thu', 0),
+                                  ChartData('Fri', 0),
+                                  ChartData('Sat', 0),
+                                  ChartData('Sun', 0)
+                                ];
+
+                                return SfCartesianChart(
+                                  title: ChartTitle(text: 'Brak Treningow'),
+                                  primaryXAxis: CategoryAxis(),
+                                  series: <ChartSeries<ChartData, dynamic>>[
+                                    ColumnSeries<ChartData, String>(
+                                        dataSource: chartData,
+                                        xValueMapper: (ChartData data, _) =>
+                                            data.x,
+                                        yValueMapper: (ChartData data, _) =>
+                                            data.y)
+                                  ],
+                                );
+                              },
+                            )),
+                      ],
+                    ),
+                  );
                 }
               });
         });
