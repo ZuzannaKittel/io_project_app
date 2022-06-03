@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:io_project/Screens/PersonalDataPage.dart';
+import 'package:io_project/Workout_Pages/Calendar.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
 import 'package:io_project/Workout_Pages/buildTraining.dart';
@@ -34,8 +35,19 @@ class TrainingSummary extends StatefulWidget {
 }
 
 var now = DateTime.now().toUtc().add(const Duration(hours: 2));
+
 DateTime dateee = now;
 String date = ' ';
+String date_day = '';
+
+final test = DateTime.now();
+final DateFormat formatter = DateFormat('EEE');
+final String formatted = formatter.format(test);
+
+DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
+final fd = getDate(test.subtract(Duration(days: test.weekday - 1)));
+final DateFormat fd_formatter = DateFormat('yyyy-MM-dd');
+final String fd_formatted = fd_formatter.format(fd);
 
 class _TrainingSummaryState extends State<TrainingSummary> {
   late bool issDone = false;
@@ -45,6 +57,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
 
   void setDate() async {
     date = DateFormat('yyyy-MM-dd').format(dateee);
+    date_day = DateFormat('EEE').format(now);
   }
 
   //below unused
@@ -77,6 +90,35 @@ class _TrainingSummaryState extends State<TrainingSummary> {
       ])
     });
     workoutTime = 0;
+  }
+
+  void addTimeToSummary() async {
+    await FirebaseFirestore.instance
+        .collection('SummaryWeeks')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) => {
+              if (value.data()!.containsKey(fd_formatted))
+                {
+                  FirebaseFirestore.instance
+                      .collection('SummaryWeeks')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .update({
+                    fd_formatted:
+                        FieldValue.arrayUnion([formatted + '${timeOfWorkout}'])
+                  })
+                }
+              else
+                {
+                  FirebaseFirestore.instance
+                      .collection('SummaryWeeks')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .set({
+                    fd_formatted:
+                        FieldValue.arrayUnion([formatted + '${timeOfWorkout}'])
+                  })
+                }
+            });
   }
 
   void przeliczanieRepsNaSekundy() async {
@@ -187,6 +229,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                 onClicked: () {
                                   isSubmitClicked = true;
                                   addSummaryDataArray();
+                                  addTimeToSummary();
                                   updateWeekArray();
                                   if (difficultyRating == 1 ||
                                       difficultyRating == 5) {

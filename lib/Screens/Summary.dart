@@ -46,9 +46,6 @@ String getDay(int index) {
 
 Map daysOfWorkout = {};
 List<ChartData>? dane;
-void devOnWeeks(
-  int count,
-) {}
 
 class _SummaryState extends State<Summary> {
   @override
