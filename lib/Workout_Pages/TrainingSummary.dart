@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:io_project/Screens/PersonalDataPage.dart';
+import 'package:io_project/Screens/Preferences.dart';
 import 'package:io_project/Workout_Pages/Calendar.dart';
 import 'package:io_project/Workout_Pages/MainWorkout.dart';
 import 'package:io_project/Workout_Pages/buildExercise.dart';
@@ -103,10 +104,9 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                   FirebaseFirestore.instance
                       .collection('SummaryWeeks')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .update({
-                    fd_formatted:
-                        FieldValue.arrayUnion([formatted + '${timeOfWorkout}'])
-                  })
+                      .set({
+                    fd_formatted: {formatted: timeOfWorkout + 300}
+                  }, SetOptions(merge: true)).then((value) {}),
                 }
               else
                 {
@@ -114,9 +114,8 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                       .collection('SummaryWeeks')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .set({
-                    fd_formatted:
-                        FieldValue.arrayUnion([formatted + '${timeOfWorkout}'])
-                  })
+                    fd_formatted: {formatted: timeOfWorkout + 300}
+                  }, SetOptions(merge: true)).then((value) {}),
                 }
             });
   }

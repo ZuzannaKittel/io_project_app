@@ -45,7 +45,35 @@ String getDay(int index) {
 }
 
 Map daysOfWorkout = {};
-List<ChartData>? dane;
+List<String>? listOfKeys;
+Map mainMap = {};
+void setDataList() async {
+  int counter = 0;
+  var keysFromFirestore = await FirebaseFirestore.instance
+      .collection("SummaryWeeks")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get();
+
+  listOfKeys = keysFromFirestore.data()?.keys.toList();
+
+  daysOfWorkout.forEach((key, value) {
+    if (value) {
+      counter++;
+    }
+  });
+  for (int i = 0; i < listOfKeys!.length; i++) {
+    List<ChartData> dane = [];
+    for (int j = 0; j < 7; j++) {
+      if (keysFromFirestore.get(listOfKeys![i])[getDay(j)] != null) {
+        dane.add(ChartData(
+            getDay(j), keysFromFirestore.get(listOfKeys![i])[getDay(j)]));
+      } else {
+        dane.add(ChartData(getDay(j), 0));
+      }
+    }
+    mainMap[i] = dane;
+  }
+}
 
 class _SummaryState extends State<Summary> {
   @override
@@ -76,7 +104,10 @@ class _SummaryState extends State<Summary> {
                 if (snapshot.hasError) {
                   return const Text("Error");
                 }
-                if (snapshot.connectionState == ConnectionState.done) {
+                setDataList();
+                if (snapshot.connectionState == ConnectionState.done &&
+                    listOfKeys?.isNotEmpty == true) {
+                  setDataList();
                   var weeks = snapshot.data?.data()?.keys;
                   var numberOfArrays = snapshot.data?.data()?.length;
                   var listOFweeks = weeks?.toList();
@@ -91,7 +122,7 @@ class _SummaryState extends State<Summary> {
                         Container(
                             height: 400,
                             child: ListView.builder(
-                              itemCount: numberOfArrays,
+                              itemCount: listOfKeys?.length,
                               itemExtent: 400,
                               reverse: true,
                               scrollDirection: Axis.horizontal,
@@ -112,11 +143,11 @@ class _SummaryState extends State<Summary> {
 
                                 return SfCartesianChart(
                                   title: ChartTitle(
-                                      text: listOFweeks?[i] as String),
+                                      text: listOfKeys?[i] as String),
                                   primaryXAxis: CategoryAxis(),
                                   series: <ChartSeries<ChartData, dynamic>>[
                                     ColumnSeries<ChartData, String>(
-                                        dataSource: chartData,
+                                        dataSource: mainMap[i],
                                         xValueMapper: (ChartData data, _) =>
                                             data.x,
                                         yValueMapper: (ChartData data, _) =>
