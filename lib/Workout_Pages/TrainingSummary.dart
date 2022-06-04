@@ -87,10 +87,9 @@ class _TrainingSummaryState extends State<TrainingSummary> {
         'difficulty rating: $difficultyRating',
         'training name: ${widget.trainingName}',
         'training type: ${widget.trainingType}',
-        'time of workout : ${workoutTime + 300}',
+        'time of workout : ${workoutTime + 5}',
       ])
     });
-    workoutTime = 0;
   }
 
   void addTimeToSummary() async {
@@ -105,7 +104,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                       .collection('SummaryWeeks')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .set({
-                    fd_formatted: {formatted: timeOfWorkout + 300}
+                    fd_formatted: {formatted: workoutTime + 5}
                   }, SetOptions(merge: true)).then((value) {}),
                 }
               else
@@ -114,14 +113,20 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                       .collection('SummaryWeeks')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
                       .set({
-                    fd_formatted: {formatted: timeOfWorkout + 300}
+                    fd_formatted: {formatted: workoutTime + 5}
                   }, SetOptions(merge: true)).then((value) {}),
                 }
             });
+    workoutTime = 0;
+    amountOfReps = 0;
+    print(workoutTime);
+    print(amountOfReps);
   }
 
-  void przeliczanieRepsNaSekundy() async {
-    workoutTime = amountOfReps * 2;
+  void przeliczanieRepsNaMinuty() async {
+    workoutTime = amountOfReps * 3;
+    workoutTime = workoutTime * (1 / 60);
+    //worT = workoutTime;
     amountOfReps = 0;
   }
 
@@ -227,9 +232,7 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                                 text: 'Submit',
                                 onClicked: () {
                                   isSubmitClicked = true;
-                                  addSummaryDataArray();
-                                  addTimeToSummary();
-                                  updateWeekArray();
+
                                   if (difficultyRating == 1 ||
                                       difficultyRating == 5) {
                                     showDialog<String>(
@@ -329,7 +332,10 @@ class _TrainingSummaryState extends State<TrainingSummary> {
                         child: ButtonWidget(
                             text: 'End training',
                             onClicked: () {
-                              przeliczanieRepsNaSekundy();
+                              przeliczanieRepsNaMinuty();
+                              addSummaryDataArray();
+                              addTimeToSummary();
+                              updateWeekArray();
                               setDate();
                               if (difficultyRating == 0 ||
                                   exSelectionRating == 0) {

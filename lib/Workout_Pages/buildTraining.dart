@@ -118,7 +118,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                       runSpacing: 20,
                       children: <Widget>[
                         Exercise(
-                          exerciseName: element1,
+                          exerciseName: 'Exercise 1',
                           exerciseNum: 1,
                           //isDone: getState(),
                           press: () {
@@ -144,7 +144,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                           isDone: false,
                         ),
                         Exercise(
-                          exerciseName: element2,
+                          exerciseName: 'Exercise 2',
                           exerciseNum: 2,
                           isDone: false,
                           press: () {
@@ -169,7 +169,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                           },
                         ),
                         Exercise(
-                          exerciseName: element3,
+                          exerciseName: 'Exercise 3',
                           exerciseNum: 3,
                           press: () {
                             if (widget.trType == 'Cardio') {
@@ -193,7 +193,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                           },
                         ),
                         Exercise(
-                          exerciseName: element4,
+                          exerciseName: 'Exercise 4',
                           exerciseNum: 4,
                           press: () {
                             if (widget.trType == 'Cardio') {
@@ -217,7 +217,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                           },
                         ),
                         Exercise(
-                          exerciseName: element5,
+                          exerciseName: 'Exercise 5',
                           exerciseNum: 5,
                           press: () {
                             if (widget.trType == 'Cardio') {
@@ -241,7 +241,7 @@ class _builderOfTrainingState extends State<builderOfTraining> {
                           },
                         ),
                         Exercise(
-                          exerciseName: element6,
+                          exerciseName: 'Exercise 6',
                           exerciseNum: 6,
                           press: () {
                             if (widget.trType == 'Cardio') {

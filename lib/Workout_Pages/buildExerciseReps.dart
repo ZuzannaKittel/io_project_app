@@ -192,10 +192,12 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
                                 ButtonWidget(
                                     text: 'Done',
                                     onClicked: () {
+                                      amountOfReps =
+                                          amountOfReps + (reps * sets);
                                       setState(() {
                                         isCompleted = true;
-                                        amountOfReps = (reps * sets);
                                       });
+                                      print(amountOfReps);
                                     }),
                               ],
                             ),
