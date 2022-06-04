@@ -160,7 +160,7 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
                       appBar: buildAppBar(context, "This week"),
                       body: Stack(children: <Widget>[
                         Container(
-                          height: size.height * .30,
+                          height: size.height,
                           decoration: const BoxDecoration(
                             color: kBlueLightColor,
                           ),
@@ -183,6 +183,9 @@ class _WeeklyTrainingState extends State<WeeklyTraining> {
                                           if (list?.length != 0) {
                                             if (list?[index] == true) {
                                               counter++;
+                                              if (counter >= workouts!.length) {
+                                                counter = 0;
+                                              }
                                               return Day(
                                                 day: getDay(index),
                                                 isTrue: list?[index],
