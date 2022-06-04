@@ -61,19 +61,21 @@ void setDataList() async {
     }
   });*/
   //Pętla od 0 do liczby wpisanych treningow w bazie danych
-  for (int i = 0; i < listOfKeys!.length; i++) {
-    List<ChartData> dane = [];
-    //Wpisywanie danych do Listy tymczasowej zgodnie z dniami tygodnia
-    for (int j = 0; j < 7; j++) {
-      if (keysFromFirestore.get(listOfKeys![i])[getDay(j)] != null) {
-        dane.add(ChartData(
-            getDay(j), keysFromFirestore.get(listOfKeys![i])[getDay(j)]));
-      } else {
-        dane.add(ChartData(getDay(j), 0));
+  if (listOfKeys != null) {
+    for (int i = 0; i < listOfKeys!.length; i++) {
+      List<ChartData> dane = [];
+      //Wpisywanie danych do Listy tymczasowej zgodnie z dniami tygodnia
+      for (int j = 0; j < 7; j++) {
+        if (keysFromFirestore.get(listOfKeys![i])[getDay(j)] != null) {
+          dane.add(ChartData(
+              getDay(j), keysFromFirestore.get(listOfKeys![i])[getDay(j)]));
+        } else {
+          dane.add(ChartData(getDay(j), 0));
+        }
       }
+      //Zapisywanie Listy w mapie <int,List>
+      mainMap[i] = dane;
     }
-    //Zapisywanie Listy w mapie <int,List>
-    mainMap[i] = dane;
   }
 }
 
