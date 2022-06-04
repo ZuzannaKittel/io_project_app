@@ -84,7 +84,7 @@ class _MenuPage extends StatelessWidget {
                       children: <Widget>[
                         CategoryCard(
                           title: "Workout",
-                          svgSrc: "assets/images/workout.jpg",
+                          svgSrc: "assets/images/workout-min.jpg",
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -94,7 +94,7 @@ class _MenuPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Week",
-                          svgSrc: "assets/images/week.jpg",
+                          svgSrc: "assets/images/week-min.jpg",
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -104,7 +104,7 @@ class _MenuPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Calendar",
-                          svgSrc: "assets/images/calendar.jpg",
+                          svgSrc: "assets/images/calendar-min.jpg",
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
@@ -114,7 +114,7 @@ class _MenuPage extends StatelessWidget {
                         ),
                         CategoryCard(
                           title: "Summary",
-                          svgSrc: "assets/images/summary.jpg",
+                          svgSrc: "assets/images/summary-min.jpg",
                           press: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
