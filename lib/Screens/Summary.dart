@@ -18,7 +18,7 @@ class Summary extends StatefulWidget {
 class ChartData {
   ChartData(this.x, this.y);
   final String x;
-  final int y;
+  final double y;
 }
 
 int minutes = 0;
@@ -67,8 +67,8 @@ void setDataList() async {
       //Wpisywanie danych do Listy tymczasowej zgodnie z dniami tygodnia
       for (int j = 0; j < 7; j++) {
         if (keysFromFirestore.get(listOfKeys![i])[getDay(j)] != null) {
-          dane.add(ChartData(
-              getDay(j), keysFromFirestore.get(listOfKeys![i])[getDay(j)]));
+          dane.add(ChartData(getDay(j),
+              (keysFromFirestore.get(listOfKeys![i])[getDay(j)]).toDouble()));
         } else {
           dane.add(ChartData(getDay(j), 0));
         }
