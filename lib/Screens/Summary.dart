@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:io_project/constants.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../widget/appbar_widget.dart';
@@ -128,7 +129,8 @@ class _SummaryState extends State<Summary> {
                               itemBuilder: (BuildContext context, int i) {
                                 return SfCartesianChart(
                                   title: ChartTitle(
-                                      text: listOfKeys?[i] as String),
+                                      text:
+                                          'Week beginning: ${listOfKeys?[i] as String}'),
                                   primaryXAxis: CategoryAxis(),
                                   primaryYAxis: NumericAxis(
                                       title: AxisTitle(
@@ -137,6 +139,7 @@ class _SummaryState extends State<Summary> {
                                               fontStyle: FontStyle.italic))),
                                   series: <ChartSeries<ChartData, dynamic>>[
                                     ColumnSeries<ChartData, String>(
+                                        color: neonGreen,
                                         yAxisName: 'min',
                                         dataSource: mainMap[i],
                                         xValueMapper: (ChartData data, _) =>
