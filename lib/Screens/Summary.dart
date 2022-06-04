@@ -130,8 +130,14 @@ class _SummaryState extends State<Summary> {
                                   title: ChartTitle(
                                       text: listOfKeys?[i] as String),
                                   primaryXAxis: CategoryAxis(),
+                                  primaryYAxis: NumericAxis(
+                                      title: AxisTitle(
+                                          text: 'min',
+                                          textStyle: const TextStyle(
+                                              fontStyle: FontStyle.italic))),
                                   series: <ChartSeries<ChartData, dynamic>>[
                                     ColumnSeries<ChartData, String>(
+                                        yAxisName: 'min',
                                         dataSource: mainMap[i],
                                         xValueMapper: (ChartData data, _) =>
                                             data.x,
