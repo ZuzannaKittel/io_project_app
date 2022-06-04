@@ -46,7 +46,7 @@ class _buildExerciseRepsState extends State<buildExerciseReps> {
 
   void getDifficulty() async {
     await FirebaseFirestore.instance
-        .collection("test")
+        .collection("UsersPref")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) => {multiplier = value['difficulty']});
